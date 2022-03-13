@@ -1,0 +1,3 @@
+/home/user/Projects/SPBU/Semestr_6/C++/the_program/Build/CMakeFiles/exe.dir
+/home/user/Projects/SPBU/Semestr_6/C++/the_program/Build/CMakeFiles/edit_cache.dir
+/home/user/Projects/SPBU/Semestr_6/C++/the_program/Build/CMakeFiles/rebuild_cache.dir

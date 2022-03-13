@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/exe.dir/main.cpp.o CMakeFiles/exe.dir/negative_binomial_table.cpp.o CMakeFiles/exe.dir/negative_binomial_bernoulli.cpp.o CMakeFiles/exe.dir/chi_square_test.cpp.o CMakeFiles/exe.dir/distribution.cpp.o -o exe 

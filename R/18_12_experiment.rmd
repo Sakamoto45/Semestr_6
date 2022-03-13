@@ -1,0 +1,178 @@
+---
+title: "18_12_experiments"
+output: html_document
+---
+
+## Подготовления
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+library(Rssa)
+library(tidyr)
+library(lattice)
+library(rlist)
+library(plotrix) # for draw.ellipse()
+library(abind)
+```
+
+### Функция, прогнозирующая ряды c шумом и считающая ошибку для MSSA и SSA
+
+```{r}
+errors <- function(slopes, Ls, group, N, sd) {
+    # signal1 <- func(slopes[1])
+    # signal2 <- func(slopes[i])
+    # clear_signal <- cbind(signal1, signal2)
+    # # signal1 <- signal1[1:N] * rnorm(N, mean = 1, sd = sd)
+    # # signal2 <- signal2[1:N] * rnorm(N, mean = 1, sd = sd)
+    # signal1 <- signal1[1:N] * noise
+    # signal2 <- signal2[1:N] * noise
+    # signal <- cbind(signal1, signal2)
+
+
+    err.mssa <- array(numeric(length(Ls) * length(slopes)),
+        dim = c(length(Ls), length(slopes), 1))
+    dimnames(err.mssa) <- list(Ls, slopes, "MSSA")
+    err.ssa <- array(numeric(length(Ls) * length(slopes)),
+        dim = c(length(Ls), length(slopes), 1))
+    dimnames(err.ssa) <- list(Ls, slopes, "SSA")
+    base_first <- array(numeric(length(Ls) * length(slopes)),
+        dim = c(length(Ls), length(slopes), 1))
+    dimnames(base_first) <- list(Ls, slopes, "base_first")
+    part_second <- array(numeric(length(Ls) * length(slopes)),
+        dim = c(length(Ls), length(slopes), 1))
+    dimnames(part_second) <- list(Ls, slopes, "part_second")
+
+
+    noise1 <- rnorm(N, mean = 1, sd = sd)
+    noise2 <- rnorm(N, mean = 1, sd = sd)
+
+
+    for (l in seq_along(Ls)) {
+        for (i in seq_along(slopes)) {
+            signal1 <- func(slopes[1])
+            signal2 <- func(slopes[i])
+            clear_signal <- cbind(signal1, signal2)
+            signal <- cbind(signal1[1:N] * noise1, signal2[1:N] * noise2)
+
+            mssa_ <- ssa(signal, L = Ls[l], kind = "mssa")
+            err.mssa[l, i,] <- mean((rforecast(mssa_,
+                groups = list(group), direction = "row", len = len)[, 1]
+                - clear_signal[-(1:N), 1])^2)
+            err.ssa[l, i,] <- mean((rforecast(ssa(signal[, 1], L = Ls[l]),
+                groups = list(group), direction = "row", len = len)
+                - clear_signal[-(1:N), 1])^2)
+
+
+            base_first[l, i,] <- parestimate(mssa_, groups = list(1:10))$rates[1]
+            sigma <- mssa_$sigma
+            part_second[l, i,] <- sigma[2] / sum(sigma)
+        }
+    }
+
+    abind(err.mssa, err.ssa, base_first, part_second, along = 3)
+    # abind("MSSA" = err.mssa, "SSA" = err.ssa, "base_first" = base_first, "part_second" = part_second, along = 3)
+}
+
+```
+
+### Функция, выбирающая лучшие результатыт из экспериментов
+
+```{r}
+best <- function(res) {
+data.frame(
+    SSA_L = apply(res, 2, function(x) Ls[which.min(x[, "SSA"])]),
+    SSA_error = apply(res, 2, function(x) min(x[, "SSA"])),
+    MSSA_L = apply(res, 2, function(x) Ls[which.min(x[, "MSSA"])]),
+    MSSA_error = apply(res, 2, function(x) min(x[, "MSSA"])),
+    base_first = apply(res, 2, function(x)
+        x[as.character(Ls[which.min(x[, "MSSA"])]), "base_first"]),
+    part_second = apply(res, 2, function(x)
+        x[as.character(Ls[which.min(x[, "MSSA"])]), "part_second"]))
+}
+```
+
+## Эксперимент
+
+```{r}
+N <- 96
+Ls <- c(12, 24, 36, 48, 60)
+len <- 24
+R <- 3
+group <- 1:2
+```
+
+### ax+b
+
+```{r}
+
+func <- function(a, b = 100 - a * n / 2, n = N + len)
+    a * (1:n) + b
+
+a <- c(0.1, 0.05, -0.05, -0.1, -0.2, -0.5)
+n <- length(a)
+
+# res <- array(numeric(length(Ls) * 4 * n), dim = c(length(Ls), 4, n))
+# dimnames(res) <- list(Ls, c("MSSA", "SSA", "base_first", "part_second"), 1:n)
+
+
+
+# parestimate(ssa(cbind(a[1], a[2]), L = 48, kind = "mssa"), groups = 1,
+#     subspace = "column")
+
+
+df <- expand.grid(slope = a, L = Ls)
+df$second_part <- mapply(function(i, l) {
+        sigma <- ssa(func(i, n = N), L = l)$sigma
+        sigma[2] / sum(sigma)
+    }, df$slope, df$L)
+
+df$second_part <- mapply(function(i, l) {
+        sigma <- ssa(func(i, n = N), L = l)$sigma
+        sigma[2] / sum(sigma)
+    }, df$slope, df$L)
+
+print(spread(df, L, second_part))
+
+sd <- 1
+
+tmp <- replicate(R, errors(a, Ls, group, N, sd))
+res <- apply(tmp, c(1, 2, 3), mean)
+
+print(best(res))
+
+ts.plot(list.cbind(lapply(a, function(x) ts(func(x)))),
+    gpars = list(col = c(rainbow(n))))
+legend("topleft", col = c(rainbow(n)), lty = 1, legend = paste("a =", a))
+```
+
+
+```{r}
+
+# df <- expand.grid(slope = a, L = Ls)
+# df$second_part <- mapply(function(i, l) {
+#         sigma <- ssa(func(i, n = N), L = l)$sigma
+#         sigma[2] / sum(sigma)
+#     }, df$slope, df$L)
+
+# print(spread(df, L, second_part))
+
+# noise <- min(df$second_part)
+
+tmp <- replicate(R, errors(a, Ls, 1, N, sd))
+res <- apply(tmp, c(1, 2, 3), mean)
+
+print(best(res))
+
+# print(res[, "base_first",])
+```
+
+
+очевидно, чем больше доля второй компоненты, тем больше ошибка при аппроксимации одной компонентой.
+
+связь ошибки с показателем экспоненты не так очевидна
+
+
+```{r}
+spectrum(rnorm(N, mean = 1, sd = sd))
+spectrum(func(a[1], n = N))
+```
