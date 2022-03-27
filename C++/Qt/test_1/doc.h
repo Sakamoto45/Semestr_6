@@ -6,6 +6,7 @@ class doc
 {
 public:
     doc();
+    int num;
 };
 
 #endif // DOC_H
