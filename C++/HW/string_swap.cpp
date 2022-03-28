@@ -18,6 +18,14 @@ public:
     String() {
         n=-1; str=0;
     }
+    void swap(String& other) {
+        int tmp_n = n;
+        n = other.n;
+        other.n = tmp_n;
+        char *tmp_str = str;
+        str = other.str;
+        other.str = tmp_str;
+    }
     String(int nstr) {
         n = nstr < 0 ? 0 : nstr;
         str = new char[n+1];
@@ -30,14 +38,10 @@ public:
     }
     String(const String& s) {
         n = s.n;
-        str = new char[n+1];
-        strcpy(str, s.str);
+        str = strdup(s.str);
     }
     String(String&& s) {
-        n = s.n;
-        str = s.str;
-        s.n = 0;
-        s.str = nullptr;
+        this->swap(s);
     }
     ~String() {
         delete[] str;
@@ -48,27 +52,15 @@ public:
     const char& operator[](int i) const {
         return str[i];
     }
-    String& operator = (const String& s) {
-        if (this != &s) {
-            n = s.n;
-            delete[] str;
-            str = new char[n+1];
-            strcpy(str, s.str);
-        }
+    String& operator = (String s) {
+        this->swap(s);
         return *this;
     }
-    String& operator = (String&& s) {
-        n = s.n;
-        str = s.str;
-        s.n = 0;
-        s.str = nullptr;
-        return *this;
-    }
-    String& operator += (const String& s) {
+    String& operator += (String& s) {
         String res = String(n + s.n);
         strcpy(res.str, str);
         strcpy(res.str + n, s.str);
-        *this = move(res);
+        *this = res;
         return *this;
     }
     String operator () (int i, int j) {
@@ -125,12 +117,14 @@ int main() {
     String d(move(c));
     cout << "d = " << d << endl;
     cout << "c = " << c << endl;
+
     a += b;
     cout << "a = " << a << endl;
     
     cout << "a(2, 4) = " << a(2, 4) << endl;
 
     cout << "a+b = " << a+b << endl;
+
 
 
 

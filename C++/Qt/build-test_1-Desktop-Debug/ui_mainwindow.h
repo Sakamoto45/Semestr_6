@@ -11,10 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include <movable_lable.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -22,7 +23,9 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QLabel *label;
+    movable_lable *label;
+    QPushButton *LeftButton;
+    QPushButton *RightButton;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -32,9 +35,15 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        label = new QLabel(centralwidget);
+        label = new movable_lable(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(170, 240, 76, 19));
+        LeftButton = new QPushButton(centralwidget);
+        LeftButton->setObjectName(QString::fromUtf8("LeftButton"));
+        LeftButton->setGeometry(QRect(170, 380, 91, 29));
+        RightButton = new QPushButton(centralwidget);
+        RightButton->setObjectName(QString::fromUtf8("RightButton"));
+        RightButton->setGeometry(QRect(410, 390, 91, 29));
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -49,6 +58,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "label text", nullptr));
+        LeftButton->setText(QCoreApplication::translate("MainWindow", "left", nullptr));
+        RightButton->setText(QCoreApplication::translate("MainWindow", "right", nullptr));
     } // retranslateUi
 
 };

@@ -9,18 +9,29 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    doc.cpp \
+    about.cpp \
+    generatesample.cpp \
     main.cpp \
     mainwindow.cpp \
-    movable_lable.cpp
+    math.cpp \
+    probdist.cpp \
+    pvalues.cpp \
+    random.cpp
 
 HEADERS += \
-    doc.h \
+    about.h \
+    generatesample.h \
     mainwindow.h \
-    movable_lable.h
+    math.h \
+    probdist.h \
+    pvalues.h \
+    random.h
 
 FORMS += \
-    mainwindow.ui
+    about.ui \
+    generatesample.ui \
+    mainwindow.ui \
+    pvalues.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
