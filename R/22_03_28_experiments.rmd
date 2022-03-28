@@ -40,9 +40,13 @@ plot(signal)
 plot(noise)
 plot(signal_noise)
 
-plot(spectrum(signal))
-plot(spectrum(noise))
-plot(spectrum(signal_noise))
+
+
+spec <-spectrum(noise, detrend = FALSE, log = "no")
+plot(sss <- spectrum(signal, detrend = FALSE, log = "no"), type = "b", symbols = "o")
+# plot(spectrum(signal, ))
+lines(spec$freq, spec$spec, log = "no")
+# plot(spectrum(signal_noise))
 
 signal_ssa <- ssa(signal)
 noise_ssa <- ssa(noise)
