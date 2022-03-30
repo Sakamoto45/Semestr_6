@@ -71,7 +71,9 @@
         "cfenv": "cpp",
         "typeindex": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "future": "cpp",
+        "*.rh": "cpp"
     },
     "cSpell.ignoreWords": [
         "ligf",
