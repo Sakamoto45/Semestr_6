@@ -1,2 +1,3 @@
 from math import floor
-print(floor((int(input()) * 3 - 2) / 4))
+n = int(input())
+print(-1 if (n % 2 == 1 or n < 4) else floor((n * 3 - 2) / 4))

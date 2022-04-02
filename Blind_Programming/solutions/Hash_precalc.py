@@ -31,4 +31,4 @@ for n in range(1, 12):
 
     # permutation(lambda x: print(x, hash(x)), list(range(n)))
     permutation(find_min, list(range(1, n+1)))
-    print("{}: {},".format(n, min_a))
+    print("        {}: {},".format(n, min_a))

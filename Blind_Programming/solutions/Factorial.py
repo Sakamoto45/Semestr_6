@@ -1,10 +1,7 @@
-n = int(input())
-a = int(input())
-
 def factorise(n):
     res = {}
     d = 2
-    while d*d < n:
+    while d*d <= n:
         if n % d == 0:
             res[d] = 0
             while n % d == 0:
@@ -23,4 +20,5 @@ def count(n, prime):
         res += n
     return res
 
+n, a = map(int, input().split())
 print(min([count(n, prime) // power for prime, power in factorise(a).items()]))
