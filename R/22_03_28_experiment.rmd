@@ -119,11 +119,6 @@ df$second_part <- mapply(function(i, l) {
         sigma[2] / sum(sigma)
     }, df$slope, df$L)
 
-df$second_part <- mapply(function(i, l) {
-        sigma <- ssa(func(i, n = N), L = l)$sigma
-        sigma[2] / sum(sigma)
-    }, df$slope, df$L)
-
 print(spread(df, L, second_part))
 
 
@@ -148,9 +143,8 @@ first_components <- lapply(a, function(x) {
 })
 
 
-
-tmp <- replicate(R, errors(first_components, Ls, group, N, noise1, noise2))
-res <- apply(tmp, c(1, 2, 3), mean)
+res <- apply(replicate(R, errors(first_components, Ls, group, N, noise1, noise2)),
+    c(1, 2, 3), mean)
 print(best(res))
 
 
