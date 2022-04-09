@@ -15,9 +15,6 @@ class String
     }
 
 public:
-    String() {
-        n=-1; str=0;
-    }
     void swap(String& other) {
         int tmp_n = n;
         n = other.n;
@@ -26,7 +23,7 @@ public:
         str = other.str;
         other.str = tmp_str;
     }
-    String(int nstr) {
+    String(int nstr = 0) {
         n = nstr < 0 ? 0 : nstr;
         str = new char[n+1];
         str[n] = 0;
@@ -38,10 +35,12 @@ public:
     }
     String(const String& s) {
         n = s.n;
-        str = strdup(s.str);
+        str = new char[n+1];
+        strcpy(str, s.str);
     }
     String(String&& s) {
         this->swap(s);
+        s.str = nullptr;
     }
     ~String() {
         delete[] str;
@@ -94,12 +93,7 @@ public:
     friend istream&  operator >> (istream& in, String& S) {
         char buffer[256];
         cin >> setw(256) >> buffer;
-        S.n = strlen(buffer);
-        if (S.n) {
-            delete[] S.str;
-        }
-        S.str = new char[S.n + 1];
-        strcpy(S.str, buffer);
+        S = buffer;
         return in;
     }
 };
@@ -109,6 +103,7 @@ int main() {
     String a(10);
     cout << "input a >> ";
     cin >> a;
+    a = "1234";
     cout << "a = " << a << endl;
     String b("12345");
     cout << "b = " << b << endl;
@@ -117,7 +112,6 @@ int main() {
     String d(move(c));
     cout << "d = " << d << endl;
     cout << "c = " << c << endl;
-
     a += b;
     cout << "a = " << a << endl;
     
@@ -125,8 +119,12 @@ int main() {
 
     cout << "a+b = " << a+b << endl;
 
-
-
+    
+    cout << b << endl;    
+    b = b;
+    cout << b << endl;
+    b = a;
+    cout << b << endl;
 
 
     return 0;

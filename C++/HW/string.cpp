@@ -15,10 +15,7 @@ class String
     }
 
 public:
-    String() {
-        n=-1; str=0;
-    }
-    String(int nstr) {
+    String(int nstr = 0) {
         n = nstr < 0 ? 0 : nstr;
         str = new char[n+1];
         str[n] = 0;
@@ -58,10 +55,13 @@ public:
         return *this;
     }
     String& operator = (String&& s) {
-        n = s.n;
-        str = s.str;
-        s.n = 0;
-        s.str = nullptr;
+        if (this != &s) {
+            n = s.n;
+            delete[] str;
+            str = s.str;
+            s.n = 0;
+            s.str = nullptr;
+        }
         return *this;
     }
     String& operator += (const String& s) {
@@ -102,12 +102,7 @@ public:
     friend istream&  operator >> (istream& in, String& S) {
         char buffer[256];
         cin >> setw(256) >> buffer;
-        S.n = strlen(buffer);
-        if (S.n) {
-            delete[] S.str;
-        }
-        S.str = new char[S.n + 1];
-        strcpy(S.str, buffer);
+        S = buffer;
         return in;
     }
 };
@@ -117,6 +112,7 @@ int main() {
     String a(10);
     cout << "input a >> ";
     cin >> a;
+    a = "1234";
     cout << "a = " << a << endl;
     String b("12345");
     cout << "b = " << b << endl;
@@ -132,7 +128,12 @@ int main() {
 
     cout << "a+b = " << a+b << endl;
 
-
+    
+    cout << b << endl;    
+    b = b;
+    cout << b << endl;
+    b = a;
+    cout << b << endl;
 
 
     return 0;
