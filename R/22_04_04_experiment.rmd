@@ -1,5 +1,5 @@
 ---
-title: "22_03_28_experiments"
+title: "22_04_04_experiments"
 output: html_document
 ---
 
@@ -89,34 +89,6 @@ data.frame(
 периодограммы шума и сигнала (spectrum)
 отдельно разложить сигнал и шум, посмотреть на собственные числа
 лучше выбрать шум
-```{r, include=FALSE}
-# signal <- get_signal(type = "linear", slope = 0.1)
-# noise <- get_signal(type = "noise")
-# signal_noise <- signal + noise
-
-# plot(signal)
-# plot(noise)
-# plot(signal_noise)
-
-# spec <-spectrum(noise, detrend = FALSE, log = "no")
-# plot(sss <- spectrum(signal, detrend = FALSE, log = "no"), type = "b", symbols = "o")
-# # plot(spectrum(signal, ))
-# lines(spec$freq, spec$spec, log = "no")
-# # plot(spectrum(signal_noise))
-
-# signal_ssa <- ssa(signal)
-# noise_ssa <- ssa(noise)
-# signal_noise_ssa <- ssa(signal_noise)
-
-# signal_ssa$sigma
-# noise_ssa$sigma
-# signal_noise_ssa$sigma
-
-# plot(signal_noise_ssa, type = "wcor")
-# plot(signal_noise_ssa, type = "vectors", idx = 1:15)
-# plot(reconstruct(signal_noise_ssa, group = list(1, 2:15)))
-```
-
 
 ```{r}
 
@@ -124,7 +96,8 @@ exp_ <- function(base, const, n = N + forecast_len) const * base**(1:n)
 
 dif <- function(x, base, const) MSE(x, exp_(base, const))
 
-exp_approx <- function(x, base = 1, const = 1, d_base = 0.00001, d_const = 0.01) {
+exp_approx <- function(x, base = 1, const = 100, d_base = 0.00001, d_const = 0.1) {
+    # x <- as.numeric(x)
     while(TRUE) {
         tmp1 <- dif(x, base, const) - dif(x, base + d_base, const)
         tmp2 <- dif(x, base, const) - dif(x, base, const + d_const)
@@ -133,6 +106,8 @@ exp_approx <- function(x, base = 1, const = 1, d_base = 0.00001, d_const = 0.01)
         }
         base <- base + d_base * tmp1
         const <- const + d_const * tmp2
+        # print(base)
+        # print(const)
     }
     return(c(base, const))
 }
@@ -148,36 +123,31 @@ exp__ <- function(param, n = N + forecast_len) param[2] * param[1]**(1:n)
 
 ```{r}
 get_linear_signal <- function(len, slope = 0, start = 10) {
-    return(ts(slope * (1:len) + start))
+    ts(slope * (1:len) + start)
 }
 
-get_first_approx_signal <- function(len, slope = 0, start = 10) {
-    line <- slope * (1:len) + start
-    ts(exp__(exp_approx(line,
-        base = parestimate(ssa(line), groups = 1)$moduli[1], d_base = 0)))
+get_first_comp_signal <- function(signal) {
+    ts(reconstruct(ssa(signal), groups = 1)$F1)
 }
 
-get_approx_signal <- function(len, slope = 0, start = 10) {
-    line <- slope * (1:len) + start
-    ts(exp__(exp_approx(line)))
+get_first_approx_signal <- function(signal) {
+    ts(exp__(exp_approx(signal,
+        base = parestimate(ssa(signal), groups = 1)$moduli[1], d_base = 0)))
 }
 
-get_random_signal <- function(len, mean = 0, sd = 1) {
+get_approx_signal <- function(signal) {
+    ts(exp__(exp_approx(signal)))
+}
+
+get_noise_signal <- function(len, mean = 0, sd = 1) {
     return(ts(rnorm(len, mean, sd)))
 }
-
-get_signal <- function(len = 100, type = "linear", ...) {
-    return(switch(type,
-    "linear" = get_linear_signal(len, ...),
-    "noise" = get_random_signal(len, ...)
-    ))
-}
-
 ```
 
 
 ```{r}
-slope <- c(0.1, 0.05, -0.05, -0.1, -0.2, -0.5)
+slope <- c(0.1, 0.2, 0.3, 0.4)
+# slope <- c(0.1, 0.05, -0.05, -0.1, -0.2, -0.5)
 start <- 100 - slope * N / 2
 
 
@@ -185,34 +155,81 @@ start <- 100 - slope * N / 2
 linear_signals <- mapply(get_linear_signal, SIMPLIFY = FALSE,
     len = N + forecast_len, slope = slope, start = start)
 
+first_comp_signals <- mapply(get_first_comp_signal, SIMPLIFY = FALSE,
+    linear_signals)
+
 first_approx_signals <- mapply(get_first_approx_signal, SIMPLIFY = FALSE,
-    len = N + forecast_len, slope = slope, start = start)
+    linear_signals)
 
 approx_signals <- mapply(get_approx_signal, SIMPLIFY = FALSE,
-    len = N + forecast_len, slope = slope, start = start)
+    linear_signals)
 
-noises <- mapply(get_signal, SIMPLIFY = FALSE,
-    len = N, type = "noise", mean = c(1, 1), sd = c(0.01, 0.01))
+noises <- mapply(get_noise_signal, SIMPLIFY = FALSE,
+    len = N, mean = c(1, 1), sd = c(0.001, 0.001))
  
-plot(linear_signals[[1]], col="green")
+plot(linear_signals[[1]], col="black")
+lines(first_comp_signals[[1]], col="red")
 lines(first_approx_signals[[1]], col="blue")
-lines(approx_signals[[1]], col="red")
+lines(approx_signals[[1]], col="green")
 
+```
 
-
-res <- replicate(R, errors(linear_signals, noises, 1))
+```{r}
+res <- replicate(R, errors(linear_signals, noises, 1:2))
 print("linear_signals")
 print(best(res))
 
-res <- replicate(R, errors(first_approx_signals, noises, 1))
+res <- replicate(R, errors(first_comp_signals, noises, 1:2))
+print("first_comp_signals")
+print(best(res))
+
+res <- replicate(R, errors(first_approx_signals, noises, 1:2))
 print("first_approx_signals")
 print(best(res))
 
-res <- replicate(R, errors(approx_signals, noises, 1))
+res <- replicate(R, errors(approx_signals, noises, 1:2))
 print("approx_signals")
 print(best(res))
 ```
 
+
+```{r}
+signal <- linear_signals[[1]]
+noise <- noises[[1]]
+signal_noise <- signal + noise
+
+msignal <- cbind(linear_signals[[1]] * noises[[1]], linear_signals[[2]] * noises[[2]])
+
+signal_mssa <- ssa(msignal, kind = "mssa")
+
+
+plot(signal)
+plot(noise)
+plot(signal_noise)
+
+# spec <-spectrum(noise, detrend = FALSE, log = "no")
+# plot(sss <- spectrum(signal, detrend = FALSE, log = "no"), type = "b", symbols = "o")
+# # plot(spectrum(signal, ))
+# lines(spec$freq, spec$spec, log = "no")
+# # plot(spectrum(signal_noise))
+
+signal_ssa <- ssa(signal)
+noise_ssa <- ssa(noise)
+signal_noise_ssa <- ssa(signal_noise)
+
+signal_ssa$sigma
+noise_ssa$sigma
+signal_noise_ssa$sigma
+
+plot(linear_signals[[1]] * noises[[1]], col="red")
+lines(linear_signals[[2]] * noises[[2]], col="blue")
+
+plot(signal_mssa, type = "vectors", idx = 1:15)
+
+plot(signal_noise_ssa, type = "wcor")
+plot(signal_noise_ssa, type = "vectors", idx = 1:15)
+plot(reconstruct(signal_noise_ssa, group = list(1, 2:15)))
+```
 
 
 вместо линейного сигнала использовать:

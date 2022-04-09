@@ -15,13 +15,20 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-    QString text;
-
+//    QString text;
+    int width;
+    QColor color;
 
 private slots:
     void on_buttonBox_rejected();
 
     void on_buttonBox_accepted();
+
+    void on_Green_clicked();
+
+    void on_Red_clicked();
+
+    void on_Blue_clicked();
 
 private:
     Ui::Dialog *ui;

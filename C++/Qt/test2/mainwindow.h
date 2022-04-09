@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPainter>
 #include "document.h"
 #include "dialog.h"
 
@@ -30,5 +31,10 @@ private:
     Ui::MainWindow *ui;
     Dialog *dialog;
     Document *doc;
+    QPolygon polyline;
+
+protected:
+    void paintEvent(QPaintEvent*) override;
+//    void mouse
 };
 #endif // MAINWINDOW_H
