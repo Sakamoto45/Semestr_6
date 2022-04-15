@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -g
 LDFLAGS=
-SOURCES=string_swap.cpp
+SOURCES=shape.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=exe
 
