@@ -25,25 +25,60 @@
    </property>
    <widget class="QMenu" name="menuH_i">
     <property name="title">
-     <string>H&amp;i</string>
+     <string>Help</string>
     </property>
+    <addaction name="actionH_i"/>
    </widget>
-   <widget class="QMenu" name="menumenu">
+   <widget class="QMenu" name="menuDraw">
     <property name="title">
-     <string>menu</string>
+     <string>Draw</string>
     </property>
-    <addaction name="actionsubmenu"/>
+    <addaction name="actionChange"/>
    </widget>
+   <addaction name="menuDraw"/>
    <addaction name="menuH_i"/>
-   <addaction name="menumenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionsubmenu">
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionH_i"/>
+   <addaction name="actionChange"/>
+  </widget>
+  <action name="actionH_i">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/hi.png</normaloff>:/icons/hi.png</iconset>
+   </property>
    <property name="text">
-    <string>submenu</string>
+    <string>H&amp;i</string>
+   </property>
+   <property name="toolTip">
+    <string>Say hi</string>
+   </property>
+  </action>
+  <action name="actionChange">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/change.png</normaloff>:/icons/change.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change</string>
+   </property>
+   <property name="toolTip">
+    <string>move &quot;Hello&quot;</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

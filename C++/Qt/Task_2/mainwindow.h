@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QPainter>
+#include "document.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +18,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_actionH_i_triggered();
+
+    void on_actionChange_triggered();
+
 private:
     Ui::MainWindow *ui;
+    Document *document;
+
+protected:
+    void paintEvent(QPaintEvent*) override;
 };
 #endif // MAINWINDOW_H

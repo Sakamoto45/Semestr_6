@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>change.png</file>
+        <file>hi.png</file>
+    </qresource>
+</RCC>
