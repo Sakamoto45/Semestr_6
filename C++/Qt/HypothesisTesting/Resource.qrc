@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/menu">
+        <file>blank.png</file>
+        <file>repeat.png</file>
+    </qresource>
+</RCC>

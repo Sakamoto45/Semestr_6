@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGenerate">
+    <property name="title">
+     <string>Generate</string>
+    </property>
+    <addaction name="actionSample"/>
+   </widget>
+   <widget class="QMenu" name="menuDisplay">
+    <property name="title">
+     <string>Display</string>
+    </property>
+    <addaction name="actionHistogram_sample"/>
+   </widget>
+   <addaction name="menuGenerate"/>
+   <addaction name="menuDisplay"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionSample"/>
+   <addaction name="actionHistogram_sample"/>
+  </widget>
+  <action name="actionSample">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/menu/blank.png</normaloff>:/menu/blank.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sample</string>
+   </property>
+  </action>
+  <action name="actionHistogram_sample">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/menu/repeat.png</normaloff>:/menu/repeat.png</iconset>
+   </property>
+   <property name="text">
+    <string>Histogram (sample)</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="Resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
