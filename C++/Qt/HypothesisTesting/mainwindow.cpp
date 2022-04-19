@@ -33,15 +33,26 @@ void MainWindow::DrawHistogram(std::vector<double> density)
     int x_0 = 100;
     int y_0 = height() - 100;
     double scale_x = width() - 200;
-    double scale_y = height() - 280;
+    double scale_y = -(height() - 280);
 
 
-    painter.drawText(x_0, y_0, "0");
-    painter.drawRect(x_0, y_0, 1*scale_x, -1*scale_y);
+//    painter.drawText(x_0+scale_x, y_0, QString::number(x_max));
+//    painter.drawText(x_0, y_0+scale_y, QString::number(y_max));
+
+    for (double i = 0; i < y_max; i += 0.01) {
+        painter.drawText(x_0+3, y_0+i/y_max*scale_y, QString::number(i));
+    }
+
+    painter.drawRect(x_0, y_0, 1*scale_x, 1*scale_y);
     int n = (int)density.size();
     for (int i = 0; i < n; ++i) {
-        painter.drawRect(x_0 + (double)i/n*scale_x, y_0, 1.0/n*scale_x, -density[i]/y_max*scale_y);
+        painter.drawRect(x_0 + (double)i/n*scale_x, y_0, 1.0/n*scale_x, density[i]/y_max*scale_y);
+        if (i % 5 == 0) {
+            painter.drawText(x_0+(double)i/n*scale_x, y_0+12, QString::number(i));
+        }
     }
+
+
 
 
 //    int i = document->getI();

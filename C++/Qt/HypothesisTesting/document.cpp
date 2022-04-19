@@ -32,12 +32,12 @@ void Document::generateEmpericalDencity()
 {
     std::vector<int> sample = generator->GenerateSample(sample_size);
     emperical_density.clear();
-    emperical_density.resize(*max_element(sample.begin(), sample.end()));
+    emperical_density.resize(*max_element(sample.begin(), sample.end()) + 1);
     for (auto i : sample) {
         emperical_density[i]++;
     }
-    for (auto i : emperical_density) {
-        i /= sample_size;
+    for (auto& i : emperical_density) {
+        i = i / sample_size;
     }
 }
 
