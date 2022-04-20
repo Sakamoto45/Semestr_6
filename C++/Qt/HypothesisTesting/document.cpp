@@ -2,7 +2,17 @@
 
 Document::Document()
 {
+    srand(time(nullptr));
+    generator = NULL;
+    p_0 = 0.2;
+    k_0 = 10;
+    p_1 = 0.2;
+    k_1 = 10;
+    method = Method::Bernulli;
+    sample_size = 1000;
+    p_sample_size = 10000;
 
+    resetGenerator();
 }
 
 Document::~Document()
@@ -15,17 +25,7 @@ Document::~Document()
 
 void Document::setup()
 {
-    srand(time(nullptr));
-    generator = NULL;
-    p_0 = 0.2;
-    k_0 = 10;
-    p_1 = 0.2;
-    k_1 = 10;
-    method = Method::Bernulli;
-    sample_size = 1000;
-    p_sample_size = 10000;
 
-    resetGenerator();
 }
 
 void Document::generateEmpericalDencity()

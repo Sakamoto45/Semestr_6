@@ -14,7 +14,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     negativebinomialbernoulli.cpp \
-    negativebinomialtable.cpp
+    negativebinomialtable.cpp \
+    r32m.cpp
 
 HEADERS += \
     dialog.h \
@@ -22,7 +23,8 @@ HEADERS += \
     document.h \
     mainwindow.h \
     negativebinomialbernoulli.h \
-    negativebinomialtable.h
+    negativebinomialtable.h \
+    r32m.h
 
 FORMS += \
     dialog.ui \

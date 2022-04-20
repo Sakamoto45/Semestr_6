@@ -47,6 +47,7 @@ public:
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QString::fromUtf8("Dialog"));
+        Dialog->resize(225, 318);
         verticalLayout_2 = new QVBoxLayout(Dialog);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         H0 = new QGroupBox(Dialog);
@@ -92,7 +93,7 @@ public:
         H1_input_sample_size = new QSpinBox(H1);
         H1_input_sample_size->setObjectName(QString::fromUtf8("H1_input_sample_size"));
         H1_input_sample_size->setMinimum(1);
-        H1_input_sample_size->setMaximum(10000);
+        H1_input_sample_size->setMaximum(100000);
 
         gridLayout->addWidget(H1_input_sample_size, 2, 1, 1, 1);
 
