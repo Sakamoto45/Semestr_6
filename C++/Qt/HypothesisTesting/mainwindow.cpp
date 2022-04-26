@@ -5,12 +5,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , document(new Document)
-    , dialog(new Dialog(this))
+    , dialog(new Dialog(document, this))
 {
     ui->setupUi(this);
-    document->setup();
+//    document->setup();
     displayed = Displayed::None;
-    dialog->setup(document);
+//    dialog->setup(document);
 
 }
 

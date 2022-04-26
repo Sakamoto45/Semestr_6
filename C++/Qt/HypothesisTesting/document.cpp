@@ -3,7 +3,7 @@
 Document::Document()
 {
     srand(time(nullptr));
-    generator = NULL;
+    generator = nullptr;
     p_0 = 0.2;
     k_0 = 10;
     p_1 = 0.2;
@@ -17,15 +17,10 @@ Document::Document()
 
 Document::~Document()
 {
-    if(generator != NULL) {
+    if(generator != nullptr) {
         delete generator;
-        generator = NULL;
+        generator = nullptr;
     }
-}
-
-void Document::setup()
-{
-
 }
 
 void Document::generateEmpericalDencity()
@@ -43,9 +38,9 @@ void Document::generateEmpericalDencity()
 
 void Document::resetGenerator()
 {
-    if(generator != NULL) {
+    if(generator != nullptr) {
         delete generator;
-        generator = NULL;
+        generator = nullptr;
     }
     switch (method) {
     case Method::Bernulli:

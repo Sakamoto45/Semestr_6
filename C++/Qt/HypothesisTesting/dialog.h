@@ -13,9 +13,9 @@ class Dialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit Dialog(QWidget *parent = nullptr);
+    explicit Dialog(Document* doc, QWidget *parent = nullptr);
     ~Dialog();
-    void setup(Document* doc);
+//    void setup();
 
 private slots:
     void on_buttonBox_accepted();

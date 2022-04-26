@@ -17,7 +17,7 @@ private:
 public:
     Document();
     ~Document();
-    void setup();
+//    void setup();
 
     void generateEmpericalDencity();
     void resetGenerator();
