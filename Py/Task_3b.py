@@ -47,15 +47,13 @@ def TriangleRandom(triangle):
     return((1-a-b) * triangle[0] + a * triangle[1] + b * triangle[2])
 
 
-
-
 polygon = [np.array(list(map(float, line.split(",")))) for line in fileinput.input(files ='Py/polygon.txt')]
 triangles = triangulate(polygon)
 
 areas = np.array(list(map(area, triangles)))
 areas = areas / sum(areas)
 
-randomPoints = [TriangleRandom(triangles[k]) for k in np.random.choice(len(triangles), 10000, p=areas)]
+randomPoints = [TriangleRandom(triangles[k]) for k in np.random.choice(len(triangles), 100, p=areas)]
 
 
 for triangle in triangles:
