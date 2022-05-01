@@ -1,0 +1,137 @@
+```{r}
+
+# library(maps)
+# library(mapdata)
+# https://github.com/paskn/map-of-russia
+
+# install.packages("devtools")
+# devtools::install_github("akondrashov96/rusmaps")
+library(rusmaps) # map
+library(ggplot2) # plot
+library(sp) # plot
+library(jsonlite) # parse json
+library(dplyr) # df operations 
+# library(tidyr) # 
+
+# library(zoo) # time format
+# library(RColorBrewer) # colors in plots
+# library(scales)
+
+# cards <- read.table(file = "R/__tmp__/saferoads/cards_short.tsv", sep = "\t", header = TRUE)
+# regions <- read.table(file = "R/__tmp__/saferoads/regions.tsv", sep = "\t", header = TRUE)
+
+# cards <- read.table(file = "cards_short.tsv", sep = "\t", header = TRUE)
+# regions <- read.table(file = "regions.tsv", sep = "\t", header = TRUE)
+
+
+
+accidents <- data.frame()
+participants <- data.frame()
+vehicles <- data.frame()
+road_drawbacks <- data.frame()
+vehicle_damage <- data.frame()
+vehicle_failure <- data.frame()
+
+parse_vehicle <- function(vehicle) {
+    id <- nrow(vehicles) + 1
+    # vehicle$vehicle_id <- id
+    if (length(vehicle$parts) > 0)
+        vehicle_damage <<- bind_rows(vehicle_damage,
+            data.frame(damage = factor(vehicle$parts), vehicle_id = id))
+    if (length(vehicle$failures) > 0)
+        vehicle_failure <<- bind_rows(vehicle_failure,
+            data.frame(damage = factor(vehicle$failures), vehicle_id = id))
+
+    vehicle$parts <- NULL
+    vehicle$failures <- NULL
+
+    vehicle <- as.data.frame(vehicle) %>% mutate(
+        # parts <- NULL,
+        # failures <- NULL,
+        type = as.factor(type),
+        privod = as.factor(privod),
+        tyres = as.factor(tyres),
+        vehicle_id = id
+    )
+    vehicles <<- bind_rows(vehicles, vehicle)
+}
+
+parse_accident <- function(accident) {
+    accident <- fromJSON(accident)
+    id <- nrow(accidents) + 1
+    accident$participants_count <- nrow(accident$participants)
+    accident$participants$accident_id <- id
+    participants <<- bind_rows(participants,
+        as.data.frame(accident$participants) %>% mutate(
+            gender = factor(gender),
+            type = factor(type),
+            birthdate = as.POSIXlt(birthdate)
+        ))
+    accident$participants <- NULL
+
+    accident$vehicles$accident_id <- id
+    apply(accident$vehicles, 1, parse_vehicle)
+    accident$vehicles <- NULL
+
+    road_drawbacks <<- bind_rows(road_drawbacks,
+        data.frame(drawback = factor(accident$road$drawbacks),
+            accident_id = id))
+    accident$road$drawbacks <- NULL
+
+
+
+    accident <- as.data.frame(accident) %>% mutate(
+        id = id,
+        timestamp = as.POSIXlt(timestamp),
+        mia = NULL,
+        type = as.factor(type),
+        light = as.factor(light),
+        long = coordinates.longitude,
+        lat = coordinates.latitude
+    )
+
+    accidents <<- bind_rows(accidents, accident)
+}
+
+# lines <- readLines("R/__tmp__/saferoads/saferoads_short.jsonl")
+lines <- readLines("saferoads_short.jsonl")
+
+x <- lapply(lines, parse_accident)
+
+
+
+# accidents <- data.frame(bind_rows(mapply(parse_accident, lines)))
+
+# lines <- lapply(readLines("R/__tmp__/saferoads/saferoads_short.jsonl"), fromJSON)
+
+
+plot_russia <- function()
+    ggplot() +
+        geom_polygon(data = map_data(rus_sub),
+            aes(x = long, y = lat, group = group),
+            color = "black", fill = "white") +
+        coord_fixed(2)
+
+
+
+print(str(accidents))
+print(str(participants))
+print(str(vehicles))
+print(str(vehicle_damage))
+print(str(vehicle_failure))
+print(str(road_drawbacks))
+
+print(levels(participants$type))
+
+
+plot_russia() +
+    geom_point(data = accidents %>% subset(lat > 10),
+        aes(x = long, y = lat),
+        color = "red", alpha = 0.1, size = 1)
+
+```
+
+```{r}
+
+
+```
