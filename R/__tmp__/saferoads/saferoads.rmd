@@ -11,6 +11,7 @@ library(ggplot2) # plot
 library(sp) # plot
 library(jsonlite) # parse json
 library(dplyr) # df operations 
+library(stringr) # str_wrap
 # library(tidyr) # 
 
 # library(zoo) # time format
@@ -29,18 +30,18 @@ accidents <- data.frame()
 participants <- data.frame()
 vehicles <- data.frame()
 road_drawbacks <- data.frame()
-vehicle_damage <- data.frame()
-vehicle_failure <- data.frame()
+vehicle_damages <- data.frame()
+vehicle_failures <- data.frame()
 
 parse_vehicle <- function(vehicle) {
     id <- nrow(vehicles) + 1
     # vehicle$vehicle_id <- id
     if (length(vehicle$parts) > 0)
-        vehicle_damage <<- bind_rows(vehicle_damage,
+        vehicle_damages <<- bind_rows(vehicle_damages,
             data.frame(damage = factor(vehicle$parts), vehicle_id = id))
     if (length(vehicle$failures) > 0)
-        vehicle_failure <<- bind_rows(vehicle_failure,
-            data.frame(damage = factor(vehicle$failures), vehicle_id = id))
+        vehicle_failures <<- bind_rows(vehicle_failures,
+            data.frame(failure = factor(str_wrap(vehicle$failures, 60)), vehicle_id = id))
 
     vehicle$parts <- NULL
     vehicle$failures <- NULL
@@ -58,24 +59,36 @@ parse_vehicle <- function(vehicle) {
 
 parse_accident <- function(accident) {
     accident <- fromJSON(accident)
+    if (accident$mia == FALSE) {
+        return(NULL)
+    }
     id <- nrow(accidents) + 1
     accident$participants_count <- nrow(accident$participants)
-    accident$participants$accident_id <- id
-    participants <<- bind_rows(participants,
-        as.data.frame(accident$participants) %>% mutate(
-            gender = factor(gender),
-            type = factor(type),
-            birthdate = as.POSIXlt(birthdate)
-        ))
+
+
+
+    if (length(accident$participants) > 0) {
+        accident$participants$accident_id <- id
+        participants <<- bind_rows(participants,
+            as.data.frame(accident$participants) %>% mutate(
+                gender = factor(gender),
+                type = factor(type),
+                birthdate = as.Date(birthdate)
+            ))
+    }
     accident$participants <- NULL
 
-    accident$vehicles$accident_id <- id
-    apply(accident$vehicles, 1, parse_vehicle)
+    if (length(accident$vehicles) > 0) {
+        accident$vehicles$accident_id <- id
+        apply(accident$vehicles, 1, parse_vehicle)
+    }
     accident$vehicles <- NULL
 
-    road_drawbacks <<- bind_rows(road_drawbacks,
-        data.frame(drawback = factor(accident$road$drawbacks),
-            accident_id = id))
+    if (length(accident$road$drawbacks) > 0) {
+        road_drawbacks <<- bind_rows(road_drawbacks,
+            data.frame(drawback = factor(accident$road$drawbacks),
+                accident_id = id))
+    }
     accident$road$drawbacks <- NULL
 
 
@@ -83,7 +96,7 @@ parse_accident <- function(accident) {
     accident <- as.data.frame(accident) %>% mutate(
         id = id,
         timestamp = as.POSIXlt(timestamp),
-        mia = NULL,
+        # mia = NULL,
         type = as.factor(type),
         light = as.factor(light),
         long = coordinates.longitude,
@@ -91,10 +104,13 @@ parse_accident <- function(accident) {
     )
 
     accidents <<- bind_rows(accidents, accident)
+    print(paste(as.character(id), "accident parsed"))
+    return(NULL)
 }
 
 # lines <- readLines("R/__tmp__/saferoads/saferoads_short.jsonl")
-lines <- readLines("saferoads_short.jsonl")
+# lines <- readLines("saferoads_short.jsonl")
+lines <- readLines("R/__tmp__/saferoads/saferoads.jsonl")
 
 x <- lapply(lines, parse_accident)
 
@@ -117,17 +133,58 @@ plot_russia <- function()
 print(str(accidents))
 print(str(participants))
 print(str(vehicles))
-print(str(vehicle_damage))
-print(str(vehicle_failure))
+print(str(vehicle_damages))
+print(str(vehicle_failures))
 print(str(road_drawbacks))
 
 print(levels(participants$type))
 
 
 plot_russia() +
-    geom_point(data = accidents %>% subset(lat > 10),
+    geom_point(data = subset(accidents, lat > 10),
         aes(x = long, y = lat),
         color = "red", alpha = 0.1, size = 1)
+
+
+ggplot() +
+    geom_bar(data = subset(participants, type == "Водитель"),
+        aes(gender),
+        fill = c("blue", "pink", "gray")) +
+    labs(title = "Распределение количесва водителей по полам",
+    x = "Пол", y = "Количество водителей")
+
+ggplot() +
+    geom_bar(data = vehicle_damages,
+        aes(damage)) +
+    labs(title = "Распределение повреждений автомобиля",
+        x = "Повреждение", y = "Количество") +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+no_vehicle_failures <- c("Технические неисправности отсутствуют", "Не устанавливались")
+
+vehicle_failures_ <- vehicle_failures
+levels(vehicle_failures_$failure) <- c("Отсутствуют",
+    "Не устанавливались",
+    rep("Присутствуют",
+        length(levels(vehicle_failures_$failure)) - 2))
+
+ggplot() +
+    geom_bar(data = vehicle_failures_,
+        aes(failure)) +
+    labs(title = "Технических неисправности автомобилей",
+        x = "Технические неисправности", y = "Количество") +
+    coord_flip()
+    # theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+# print(levels(vehicle_failures$failure))
+
+
+ggplot() +
+    geom_bar(data = subset(vehicle_failures, !failure %in% no_vehicle_failures),
+        aes(failure)) +
+    labs(title = "Технических неисправности",
+        x = "Вид неисправности", y = "Количество") +
+    coord_flip()
 
 ```
 
