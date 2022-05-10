@@ -1,0 +1,253 @@
+---
+title: "22_05_09_experiments"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+library(Rssa)
+library(tidyr)
+library(lattice)
+library(rlist)
+library(plotrix) # for draw.ellipse()
+library(abind)
+```
+
+
+
+
+```{r}
+N <- 96
+Ls <- c(12, 24, 36, 48, 60)
+forecast_len <- 24
+R <- 1
+group <- 1:2
+```
+
+```{r}
+MSE <- function(a, b) mean((a - b)^2)
+
+ssa_forecast_error <- function(signal, noise, L, N = length(noise),
+    forecast_len = length(signal) - N) {
+
+}
+
+mssa_forecast_error <- function(signals, noises, L, N = length(noise),
+    forecast_len = length(signal) - N) {
+
+}
+
+errors <- function(signals, noises, group) {
+
+    Ls_len <- length(Ls)
+    sig_len <- length(signals)
+    len <- Ls_len * sig_len
+    err.mssa <- array(numeric(len), dim = c(Ls_len, sig_len, 1))
+    dimnames(err.mssa) <- list(Ls, seq_along(signals), "MSSA")
+    err.ssa <- array(numeric(length(Ls) * length(signals)),
+        dim = c(length(Ls), length(signals), 1))
+    dimnames(err.ssa) <- list(Ls, seq_along(signals), "SSA")
+    base_first <- array(numeric(length(Ls) * length(signals)),
+        dim = c(length(Ls), length(signals), 1))
+    dimnames(base_first) <- list(Ls, seq_along(signals), "base_first")
+    part_second <- array(numeric(length(Ls) * length(signals)),
+        dim = c(length(Ls), length(signals), 1))
+    dimnames(part_second) <- list(Ls, seq_along(signals), "part_second")
+
+    for (l in seq_along(Ls)) {
+        for (i in seq_along(signals)) {
+            signal1 <- signals[[1]]
+            signal2 <- signals[[i]]
+            clear_signal <- cbind(signal1, signal2)
+            signal <- cbind(signal1[1:N] * noises[[1]],
+                            signal2[1:N] * noises[[2]])
+
+            mssa_ <- ssa(signal, L = Ls[l], kind = "mssa")
+            err.mssa[l, i,] <- MSE(rforecast(mssa_,
+                groups = list(group), direction = "row", len = forecast_len)[, 1],
+                clear_signal[-(1:N), 1])
+            err.ssa[l, i,] <- MSE(rforecast(ssa(signal[, 1], L = Ls[l]),
+                groups = list(group), direction = "row", len = forecast_len),
+                clear_signal[-(1:N), 1])
+
+
+            base_first[l, i,] <- parestimate(mssa_,
+                groups = list(1:10))$rates[1]
+            sigma <- mssa_$sigma
+            part_second[l, i,] <- sigma[2] / sum(sigma)
+        }
+    }
+
+    abind(err.mssa, err.ssa, base_first, part_second, along = 3)
+
+
+}
+
+best <- function(res) {
+    res <- apply(res, c(1, 2, 3), mean)
+data.frame(
+    SSA_L = apply(res, 2, function(x) Ls[which.min(x[, "SSA"])]),
+    SSA_error = apply(res, 2, function(x) min(x[, "SSA"])),
+    MSSA_L = apply(res, 2, function(x) Ls[which.min(x[, "MSSA"])]),
+    MSSA_error = apply(res, 2, function(x) min(x[, "MSSA"])),
+    base_first = apply(res, 2, function(x)
+        x[as.character(Ls[which.min(x[, "MSSA"])]), "base_first"]),
+    part_second = apply(res, 2, function(x)
+        x[as.character(Ls[which.min(x[, "MSSA"])]), "part_second"])
+    )
+}
+```
+
+
+периодограммы шума и сигнала (spectrum)
+отдельно разложить сигнал и шум, посмотреть на собственные числа
+лучше выбрать шум
+
+```{r}
+
+exp_ <- function(base, const, n = N + forecast_len) const * base**(1:n)
+
+dif <- function(x, base, const) MSE(x, exp_(base, const))
+
+exp_approx <- function(x, base = 1, const = 100, d_base = 0.00001, d_const = 0.1) {
+    # x <- as.numeric(x)
+    while(TRUE) {
+        tmp1 <- dif(x, base, const) - dif(x, base + d_base, const)
+        tmp2 <- dif(x, base, const) - dif(x, base, const + d_const)
+        if (abs(tmp1) < 0.001 && abs(tmp2) < 0.001) {
+            break
+        }
+        base <- base + d_base * tmp1
+        const <- const + d_const * tmp2
+        # print(base)
+        # print(const)
+    }
+    return(c(base, const))
+}
+
+exp__ <- function(param, n = N + forecast_len) param[2] * param[1]**(1:n)
+
+
+
+
+```
+
+
+
+```{r}
+get_linear_signal <- function(len, slope = 0, start = 10) {
+    ts(slope * (1:len) + start)
+}
+
+get_first_comp_signal <- function(signal) {
+    ts(reconstruct(ssa(signal), groups = 1)$F1)
+}
+
+get_first_approx_signal <- function(signal) {
+    ts(exp__(exp_approx(signal,
+        base = parestimate(ssa(signal), groups = 1)$moduli[1], d_base = 0)))
+}
+
+get_approx_signal <- function(signal) {
+    ts(exp__(exp_approx(signal)))
+}
+
+get_noise_signal <- function(len, mean = 0, sd = 1) {
+    return(ts(rnorm(len, mean, sd)))
+}
+```
+
+
+```{r}
+slope <- c(0.1, 0.2, 0.3, 0.4)
+# slope <- c(0.1, 0.05, -0.05, -0.1, -0.2, -0.5)
+start <- 100 - slope * N / 2
+
+
+
+linear_signals <- mapply(get_linear_signal, SIMPLIFY = FALSE,
+    len = N + forecast_len, slope = slope, start = start)
+
+first_comp_signals <- mapply(get_first_comp_signal, SIMPLIFY = FALSE,
+    linear_signals)
+
+first_approx_signals <- mapply(get_first_approx_signal, SIMPLIFY = FALSE,
+    linear_signals)
+
+approx_signals <- mapply(get_approx_signal, SIMPLIFY = FALSE,
+    linear_signals)
+
+noises <- mapply(get_noise_signal, SIMPLIFY = FALSE,
+    len = N, mean = c(1, 1), sd = c(0.001, 0.001))
+ 
+plot(linear_signals[[1]], col="black")
+lines(first_comp_signals[[1]], col="red")
+lines(first_approx_signals[[1]], col="blue")
+lines(approx_signals[[1]], col="green")
+
+```
+
+```{r}
+res <- replicate(R, errors(linear_signals, noises, 1:2))
+print("linear_signals")
+print(best(res))
+
+res <- replicate(R, errors(first_comp_signals, noises, 1:2))
+print("first_comp_signals")
+print(best(res))
+
+res <- replicate(R, errors(first_approx_signals, noises, 1:2))
+print("first_approx_signals")
+print(best(res))
+
+res <- replicate(R, errors(approx_signals, noises, 1:2))
+print("approx_signals")
+print(best(res))
+```
+
+
+```{r}
+signal <- linear_signals[[1]]
+noise <- noises[[1]]
+signal_noise <- signal + noise
+
+msignal <- cbind(linear_signals[[1]] * noises[[1]], linear_signals[[2]] * noises[[2]])
+
+signal_mssa <- ssa(msignal, kind = "mssa")
+
+
+plot(signal)
+plot(noise)
+plot(signal_noise)
+
+# spec <-spectrum(noise, detrend = FALSE, log = "no")
+# plot(sss <- spectrum(signal, detrend = FALSE, log = "no"), type = "b", symbols = "o")
+# # plot(spectrum(signal, ))
+# lines(spec$freq, spec$spec, log = "no")
+# # plot(spectrum(signal_noise))
+
+signal_ssa <- ssa(signal)
+noise_ssa <- ssa(noise)
+signal_noise_ssa <- ssa(signal_noise)
+
+signal_ssa$sigma
+noise_ssa$sigma
+signal_noise_ssa$sigma
+
+plot(linear_signals[[1]] * noises[[1]], col="red")
+lines(linear_signals[[2]] * noises[[2]], col="blue")
+
+plot(signal_mssa, type = "vectors", idx = 1:15)
+
+plot(signal_noise_ssa, type = "wcor")
+plot(signal_noise_ssa, type = "vectors", idx = 1:15)
+plot(reconstruct(signal_noise_ssa, group = list(1, 2:15)))
+```
+
+
+вместо линейного сигнала использовать:
+1 восстанавливать по первой компоненте
+2 брать лучшее приближение экспоненты с полученным показателем (base_first) и подбирать константу
+3 наилучшее линейное приближение линейной функции экспонентой (подбираем и константу и показатель)
+эффект: mssa восстанавливает по одной компоненте неправильно, но лучше.
+останется ли этот эффект при таких заменах сигнала.
