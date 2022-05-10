@@ -10,14 +10,13 @@
 class Document
 {
 private:
-    Distribution<int> *generator;
+    Sample *generator;
 
 
 
 public:
     Document();
     ~Document();
-//    void setup();
 
     void generateEmpericalDencity();
     void resetGenerator();

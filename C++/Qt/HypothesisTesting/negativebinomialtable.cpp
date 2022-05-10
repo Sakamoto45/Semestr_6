@@ -15,7 +15,7 @@ void NegativeBinomialTable::ExtendTable(int len = 100)
 }
 
 NegativeBinomialTable::NegativeBinomialTable(double p, int k) :
-    p_{p}, k_{k}
+    Sample(p, k)
 {
     ExtendTable();
 }

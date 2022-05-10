@@ -1,47 +1,46 @@
 #include "document.h"
 
-Document::Document()
+Document::Document() :
+    generator{nullptr},
+    p_0{0.2}, k_0{10}, p_1{0.2}, k_1{10},
+    method{Method::Bernulli},
+    sample_size{1000}, p_sample_size{10000}
 {
     srand(time(nullptr));
-    generator = nullptr;
-    p_0 = 0.2;
-    k_0 = 10;
-    p_1 = 0.2;
-    k_1 = 10;
-    method = Method::Bernulli;
-    sample_size = 1000;
-    p_sample_size = 10000;
-
     resetGenerator();
 }
 
 Document::~Document()
 {
-    if(generator != nullptr) {
-        delete generator;
-        generator = nullptr;
-    }
+    delete generator;
 }
 
 void Document::generateEmpericalDencity()
 {
-    std::vector<int> sample = generator->GenerateSample(sample_size);
+    int* sample = generator->GenerateSample(sample_size);
     emperical_density.clear();
-    emperical_density.resize(*max_element(sample.begin(), sample.end()) + 1);
-    for (auto i : sample) {
-        emperical_density[i]++;
+
+    int max_elem = 0;
+    for (int i = 0; i < sample_size; ++i) {
+        if (sample[i] > max_elem) {
+            max_elem = sample[i];
+        }
+    }
+
+    emperical_density.resize(max_elem + 1);
+    for (int i = 0; i < sample_size; ++i) {
+        emperical_density[sample[i]]++;
     }
     for (auto& i : emperical_density) {
         i = i / sample_size;
     }
+    delete[] sample;
 }
 
 void Document::resetGenerator()
 {
-    if(generator != nullptr) {
-        delete generator;
-        generator = nullptr;
-    }
+    delete generator;
+
     switch (method) {
     case Method::Bernulli:
         generator = new NegativeBinomialBernoulli(p_1, k_1);

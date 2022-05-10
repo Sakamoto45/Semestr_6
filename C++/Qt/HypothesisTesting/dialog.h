@@ -22,6 +22,12 @@ private slots:
 
     void on_buttonBox_rejected();
 
+    void on_H1_input_p_editingFinished();
+
+    void on_H1_input_p_valueChanged(double arg1);
+
+    void on_H1_input_k_editingFinished();
+
 private:
     Ui::Dialog *ui;
     Document *document;

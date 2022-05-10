@@ -1,13 +1,11 @@
 #ifndef NEGATIVEBINOMIALTABLE_H
 #define NEGATIVEBINOMIALTABLE_H
 
-#include "distribution.h"
+#include "sample.h"
 
-class NegativeBinomialTable : public Distribution<int>
+class NegativeBinomialTable : public Sample
 {
 private:
-    double p_;
-    int k_;
     std::vector<double> table_;
     void ExtendTable(int len);
 

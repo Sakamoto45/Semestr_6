@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>225</width>
-    <height>318</height>
+    <width>366</width>
+    <height>334</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -33,7 +39,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="H1_label_k">
         <property name="text">
-         <string>k</string>
+         <string>1 ≤ k ≤ 50</string>
         </property>
        </widget>
       </item>
@@ -63,34 +69,50 @@
       <item row="0" column="0">
        <widget class="QLabel" name="H1_label_p">
         <property name="text">
-         <string>p</string>
+         <string>0 ≤ p ≤ 1</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="H1_label_sample_size">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
-         <string>Sample size</string>
+         <string>10^2 ≤ Sample size ≤ 10^6</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QSpinBox" name="H1_input_sample_size">
         <property name="minimum">
-         <number>1</number>
+         <number>100</number>
         </property>
         <property name="maximum">
-         <number>100000</number>
+         <number>1000000</number>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSpinBox" name="H1_input_k"/>
+       <widget class="QSpinBox" name="H1_input_k">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>50</number>
+        </property>
+       </widget>
       </item>
       <item row="0" column="1">
        <widget class="QDoubleSpinBox" name="H1_input_p">
+        <property name="decimals">
+         <number>5</number>
+        </property>
         <property name="maximum">
-         <double>1.000000000000000</double>
+         <double>999999.989999999990687</double>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -131,8 +153,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>215</x>
+     <y>320</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -147,11 +169,11 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>215</x>
+     <y>320</y>
     </hint>
     <hint type="destinationlabel">
-     <x>286</x>
+     <x>224</x>
      <y>274</y>
     </hint>
    </hints>

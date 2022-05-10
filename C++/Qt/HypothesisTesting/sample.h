@@ -1,5 +1,5 @@
-#ifndef DISTRIBUTION_H
-#define DISTRIBUTION_H
+#ifndef SAMPLE_H
+#define SAMPLE_H
 
 //#include <iostream>
 #include <vector>
@@ -7,22 +7,21 @@
 #include <ctime>
 #include "math.h"
 
-template<typename T>
-class Distribution
-{
-public:
-    Distribution() {}
-    virtual ~Distribution() {}
+//template<typename T>
 
-    virtual T Generate()=0;
-    std::vector<T> GenerateSample(int sample_size)
-    {
-        std::vector<T> sample;
-        for (int i = 0; i < sample_size; ++i) {
-            sample.push_back(Generate());
-        }
-        return sample;
-    }
+class Sample
+{
+protected:
+    int k_;
+    double p_;
+
+public:
+
+    Sample(double p, int k): p_{p}, k_{k} {}
+    virtual ~Sample() {}
+
+    virtual int Generate()=0;
+    int* GenerateSample(int sample_size);
 };
 
-#endif // DISTRIBUTION_H
+#endif // SAMPLE_H

@@ -3,12 +3,11 @@
 
 Dialog::Dialog(Document* doc, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Dialog)
+    ui(new Ui::Dialog),
+    document(doc)
 {
     ui->setupUi(this);
     setModal(true);
-    document = doc;
-
     ui->H1_input_p->setValue(document->p_1);
     ui->H1_input_k->setValue(document->k_1);
     ui->H1_input_sample_size->setValue(document->sample_size);
@@ -31,10 +30,6 @@ Dialog::~Dialog()
 {
     delete ui;
 }
-
-//void Dialog::setup() {
-
-//}
 
 void Dialog::on_buttonBox_accepted()
 {
@@ -89,5 +84,29 @@ void Dialog::on_buttonBox_rejected()
 
     }
     hide();
+}
+
+void Dialog::on_H1_input_p_editingFinished()
+{
+    double new_p = ui->H1_input_p->value();
+    if (new_p < 0 || new_p > 1) {
+        ui->H1_input_p->setValue(document->p_1);
+    }
+//    ui->H1_input_p->setDecimals(2);
+}
+
+
+void Dialog::on_H1_input_p_valueChanged(double arg1)
+{
+//    ui->H1_input_p->setDecimals(8);
+}
+
+
+void Dialog::on_H1_input_k_editingFinished()
+{
+//    int new_k = ui->H1_input_k->value();
+//    if (new_k < 0 || new_k > 100) {
+//        ui->H1_input_k->setValue(document->k_1);
+//    }
 }
 

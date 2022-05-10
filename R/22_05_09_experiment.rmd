@@ -13,7 +13,13 @@ library(plotrix) # for draw.ellipse()
 library(abind)
 ```
 
+```{r}
 
+normalize <- function(signal, a = 1) signal / mean(signal) * a
+
+
+
+```
 
 
 ```{r}

@@ -1,7 +1,7 @@
 #include "negativebinomialbernoulli.h"
 
 NegativeBinomialBernoulli::NegativeBinomialBernoulli(double p, int k) :
-    p_{p}, k_{k} {}
+    Sample(p, k) {}
 
 NegativeBinomialBernoulli::~NegativeBinomialBernoulli()
 {}

@@ -101,8 +101,8 @@ void cycle_length_test(int sample_size, int shuffle_length, mt19937& generator) 
 int main() {
     mt19937 generator(time(nullptr));
 
-    position_distribution_test(1000000, 10, generator);
-    cycle_length_test(1000000, 10, generator);
+    position_distribution_test(1000, 100, generator);
+    cycle_length_test(1000, 100, generator);
     int x;
 
     return 0;
