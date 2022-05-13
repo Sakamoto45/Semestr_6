@@ -9,14 +9,17 @@ library(Rssa)
 library(tidyr)
 library(lattice)
 library(rlist)
-library(plotrix) # for draw.ellipse()
+# library(plotrix) # for draw.ellipse()
 library(abind)
 ```
 
 ```{r}
+normalize <- function(signal, norm = 1, N = len(signal)) signal / mean(signal[1:N]) * norm
 
-normalize <- function(signal, a = 1) signal / mean(signal) * a
 
+# signal <- (0.1 * (1:20) + 50)
+# # signal$name <- "slope0.1"
+# signal_ssa <- ssa(signal, kind = "mssa")
 
 
 ```
@@ -32,6 +35,8 @@ group <- 1:2
 
 ```{r}
 MSE <- function(a, b) mean((a - b)^2)
+
+# forecast_MSE <- function(a, b) MSE()
 
 ssa_forecast_error <- function(signal, noise, L, N = length(noise),
     forecast_len = length(signal) - N) {
@@ -69,18 +74,18 @@ errors <- function(signals, noises, group) {
                             signal2[1:N] * noises[[2]])
 
             mssa_ <- ssa(signal, L = Ls[l], kind = "mssa")
-            err.mssa[l, i,] <- MSE(rforecast(mssa_,
+            err.mssa[l, i, ] <- MSE(rforecast(mssa_,
                 groups = list(group), direction = "row", len = forecast_len)[, 1],
-                clear_signal[-(1:N), 1])
-            err.ssa[l, i,] <- MSE(rforecast(ssa(signal[, 1], L = Ls[l]),
+                clear_signal[- (1:N), 1])
+            err.ssa[l, i, ] <- MSE(rforecast(ssa(signal[, 1], L = Ls[l]),
                 groups = list(group), direction = "row", len = forecast_len),
-                clear_signal[-(1:N), 1])
+                clear_signal[- (1:N), 1])
 
 
-            base_first[l, i,] <- parestimate(mssa_,
+            base_first[l, i, ] <- parestimate(mssa_,
                 groups = list(1:10))$rates[1]
             sigma <- mssa_$sigma
-            part_second[l, i,] <- sigma[2] / sum(sigma)
+            part_second[l, i, ] <- sigma[2] / sum(sigma)
         }
     }
 
@@ -111,13 +116,13 @@ data.frame(
 
 ```{r}
 
-exp_ <- function(base, const, n = N + forecast_len) const * base**(1:n)
+exp_ <- function(base, const, n = N + forecast_len) const * base ** (1:n)
 
 dif <- function(x, base, const) MSE(x, exp_(base, const))
 
 exp_approx <- function(x, base = 1, const = 100, d_base = 0.00001, d_const = 0.1) {
     # x <- as.numeric(x)
-    while(TRUE) {
+    while (TRUE) {
         tmp1 <- dif(x, base, const) - dif(x, base + d_base, const)
         tmp2 <- dif(x, base, const) - dif(x, base, const + d_const)
         if (abs(tmp1) < 0.001 && abs(tmp2) < 0.001) {
@@ -131,7 +136,7 @@ exp_approx <- function(x, base = 1, const = 100, d_base = 0.00001, d_const = 0.1
     return(c(base, const))
 }
 
-exp__ <- function(param, n = N + forecast_len) param[2] * param[1]**(1:n)
+exp__ <- function(param, n = N + forecast_len) param[2] * param[1] ** (1:n)
 
 
 
