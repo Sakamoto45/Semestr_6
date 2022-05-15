@@ -7,6 +7,7 @@ output: html_document
 knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
 library(Rssa)
 library(tidyr)
+library(dplyr)
 library(lattice)
 library(rlist)
 # library(plotrix) # for draw.ellipse()
@@ -14,7 +15,94 @@ library(abind)
 ```
 
 ```{r}
-normalize <- function(signal, norm = 1, N = len(signal)) signal / mean(signal[1:N]) * norm
+# l_known - length of "known" signal
+# l_fcst - length of forecast
+# l_win - length of window
+# repeats
+
+
+
+
+normalize <- function(signal, norm = 1, len = length(signal)) signal / mean(signal[1:len]) * norm
+
+MSE <- function(a, b) mean((a - b)^2)
+
+
+exp_ <- function(base, len = 150) exp(base * (1:len))
+cos_ <- function(period, phase = 0, len = 150) cospi(2 * ((1:len) / period + phase))
+
+
+repeats <- 1
+
+
+
+# exps <- lapply(c(0, 0.005, 0.015, 0.025), exp_)
+# signals <- exps
+
+signals <- mapply(rep, c(1, 2, 3, 4), rep(150, 4), SIMPLIFY = FALSE)
+noises <- cbind(
+    lapply(rep(150, repeats), rnorm),
+    lapply(rep(150, repeats), rnorm))
+# noises1 <- lapply(rep(150, repeats), rnorm)
+# noises2 <- lapply(rep(150, repeats), rnorm)
+# rnorm(len, mean, sd)
+
+get_signal1 <- function(x) signals[[x$signal_id1]] * noises[x$noise_id, 1]
+
+get_signal2 <- function(x) signals[[x$signal_id2]] * noises[x$noise_id, 2]
+
+
+
+ssa_error_recon <- function(x) {
+    # if (is.na(x$l_win)) x$l_win <- (x$l_known + 1) %/% 2
+    # signal_known <- signals[[x$signal1]] * noises1[[x$noise1]]
+
+
+    # print("ssa_error_fcst called")
+    # rforecast(ssa())
+    return(1)
+}
+
+ssa_error_fcst <- function(x) {
+    # if (is.na(x$l_win)) x$l_win <- (x$l_known + 1) %/% 2
+    # signal_known <- signals[[x$signal1]] * noises[[x$noise1]]
+
+
+    # print("ssa_error_fcst called")
+    # rforecast(ssa())
+    return(1)
+}
+
+
+
+
+df <- expand.grid(
+    signal_id1 = 1:length(signals),
+    signal_id2 = 1:length(signals),
+    # signal_id = expand.grid(
+    #     1:length(signals),
+    #     1:length(signals)),
+    noise_id = 1:nrow(noises),
+    norm = c(0.5, 1, 2),
+    l_known = 100,
+    l_fcst = 20,
+    l_win = c(10, 25, 50),
+    group = list(1, 1:2)
+)
+
+print(df)
+
+df <- df %>%
+    group_by(signal_id1, noise_id, l_known, l_fcst, l_win, group) %>%
+    mutate(
+        ssa_error_recon = ssa_error_recon(slice(1)),
+        ssa_error_fcst = ssa_error_fcst(slice(1))) %>%
+    ungroup()
+
+print(df)
+
+
+
 
 
 # signal <- (0.1 * (1:20) + 50)
@@ -34,7 +122,7 @@ group <- 1:2
 ```
 
 ```{r}
-MSE <- function(a, b) mean((a - b)^2)
+
 
 # forecast_MSE <- function(a, b) MSE()
 
@@ -116,7 +204,7 @@ data.frame(
 
 ```{r}
 
-exp_ <- function(base, const, n = N + forecast_len) const * base ** (1:n)
+
 
 dif <- function(x, base, const) MSE(x, exp_(base, const))
 
