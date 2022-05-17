@@ -13,19 +13,21 @@ SOURCES += \
     document.cpp \
     main.cpp \
     mainwindow.cpp \
-    negativebinomialbernoulli.cpp \
-    negativebinomialtable.cpp \
-    r32m.cpp \
-    sample.cpp
+    nb_bernoulli.cpp \
+    nb_distribution.cpp \
+    nb_generator.cpp \
+    nb_table.cpp \
+    r32m.cpp
 
 HEADERS += \
     dialog.h \
     document.h \
     mainwindow.h \
-    negativebinomialbernoulli.h \
-    negativebinomialtable.h \
-    r32m.h \
-    sample.h
+    nb_bernoulli.h \
+    nb_distribution.h \
+    nb_generator.h \
+    nb_table.h \
+    r32m.h
 
 FORMS += \
     dialog.ui \

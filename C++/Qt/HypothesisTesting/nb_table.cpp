@@ -1,6 +1,6 @@
-#include "negativebinomialtable.h"
+#include "nb_table.h"
 
-void NegativeBinomialTable::ExtendTable(int len = 100)
+void NB_Table::ExtendTable(int len = 100)
 {
     double q = 1 - p_;
     static double l = pow(p_, k_);
@@ -14,16 +14,16 @@ void NegativeBinomialTable::ExtendTable(int len = 100)
     }
 }
 
-NegativeBinomialTable::NegativeBinomialTable(double p, int k) :
-    Sample(p, k)
+NB_Table::NB_Table(double p, int k) :
+    NB_Generator(p, k)
 {
     ExtendTable();
 }
 
-NegativeBinomialTable::~NegativeBinomialTable()
+NB_Table::~NB_Table()
 {}
 
-int NegativeBinomialTable::Generate()
+int NB_Table::Generate()
 {
     double value = rand() / (double)RAND_MAX;
     int result = 0;

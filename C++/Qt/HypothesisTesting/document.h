@@ -1,8 +1,8 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
-#include "negativebinomialbernoulli.h"
-#include "negativebinomialtable.h"
+#include "nb_bernoulli.h"
+#include "nb_table.h"
 #include <ctime>
 #include <algorithm>
 
@@ -10,7 +10,7 @@
 class Document
 {
 private:
-    Sample *generator;
+    NB_Generator *generator;
 
 
 

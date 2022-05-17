@@ -1,14 +1,14 @@
-#ifndef NEGATIVEBINOMIALBERNOULLI_H
-#define NEGATIVEBINOMIALBERNOULLI_H
+#ifndef NB_BERNOULLI_H
+#define NB_BERNOULLI_H
 
-#include "sample.h"
+#include "nb_generator.h"
 
-class NegativeBinomialBernoulli : public Sample
+class NB_Bernoulli : public NB_Generator
 {
 public:
-    NegativeBinomialBernoulli(double p, int k);
-    ~NegativeBinomialBernoulli() override;
+    NB_Bernoulli(NB_Distribution* distribution);
+    ~NB_Bernoulli() override;
     int Generate() override;
 };
 
-#endif // NEGATIVEBINOMIALBERNOULLI_H
+#endif // NB_BERNOULLI_H

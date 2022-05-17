@@ -49,7 +49,7 @@ def cycle_length_test(subplt):
 
     p_value, colors = zip(*sorted(list(zip(p_value, colors)), key=lambda tup: tup[0]))
 
-    subplt.scatter(x, p_value, marker='o', color=colors)
+    subplt.scatter(x, p_value, marker='o', color=colors, s=1)
     subplt.set_title("Cycle length test")
 
 def position_distribution_test(subplt):
@@ -66,7 +66,7 @@ def position_distribution_test(subplt):
 
     p_value, colors = zip(*sorted(list(zip(p_value, colors)), key=lambda tup: tup[0]))
 
-    subplt.scatter(x, p_value, marker='o', color=colors)
+    subplt.scatter(x, p_value, marker='o', color=colors, s=1)
     subplt.set_title("Position distribution test")
 
 

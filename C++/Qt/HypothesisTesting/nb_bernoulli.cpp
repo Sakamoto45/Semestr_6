@@ -1,12 +1,12 @@
-#include "negativebinomialbernoulli.h"
+#include "nb_bernoulli.h"
 
-NegativeBinomialBernoulli::NegativeBinomialBernoulli(double p, int k) :
-    Sample(p, k) {}
+NB_Bernoulli::NB_Bernoulli(NB_Distribution* distribution) :
+    NB_Generator(distribution) {}
 
-NegativeBinomialBernoulli::~NegativeBinomialBernoulli()
+NB_Bernoulli::~NB_Bernoulli()
 {}
 
-int NegativeBinomialBernoulli::Generate() {
+int NB_Bernoulli::Generate() {
     int i = 0;
     int j = 0;
     while (i < k_) {

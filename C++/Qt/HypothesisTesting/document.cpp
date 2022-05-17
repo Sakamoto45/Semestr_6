@@ -43,10 +43,10 @@ void Document::resetGenerator()
 
     switch (method) {
     case Method::Bernulli:
-        generator = new NegativeBinomialBernoulli(p_1, k_1);
+        generator = new NB_Bernoulli(p_1, k_1);
         break;
     case Method::Table:
-        generator = new NegativeBinomialTable(p_1, k_1);
+        generator = new NB_Table(p_1, k_1);
         break;
     default:
         break;

@@ -1,18 +1,18 @@
-#ifndef NEGATIVEBINOMIALTABLE_H
-#define NEGATIVEBINOMIALTABLE_H
+#ifndef NB_TABLE_H
+#define NB_TABLE_H
 
-#include "sample.h"
+#include "nb_generator.h"
 
-class NegativeBinomialTable : public Sample
+class NB_Table : public NB_Generator
 {
 private:
     std::vector<double> table_;
     void ExtendTable(int len);
 
 public:
-    NegativeBinomialTable(double p, int k);
-    ~NegativeBinomialTable() override;
+    NB_Table(double p, int k);
+    ~NB_Table() override;
     int Generate() override;
 };
 
-#endif // NEGATIVEBINOMIALTABLE_H
+#endif // NB_TABLE_H

@@ -14,9 +14,9 @@ vector<int> fisher_yates_shuffle(int n, mt19937& generator) {
     for (int i = n - 1; i >= 0; --i) {
         uniform_int_distribution<int> distribution(0, i);
         int j = distribution(generator);
-        if (i != j) {
-            swap(shuffle[i], shuffle[j]);
-        }
+        // if (i != j) {
+        swap(shuffle[i], shuffle[j]);
+        // }
     }
     return shuffle;
 }

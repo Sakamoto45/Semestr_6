@@ -1,27 +1,31 @@
-#ifndef SAMPLE_H
-#define SAMPLE_H
+#ifndef NB_GENERATOR_H
+#define NB_GENERATOR_H
 
 //#include <iostream>
 #include <vector>
 #include <cstdlib>
 #include <ctime>
 #include "math.h"
+#include "nb_distribution.h"
 
 //template<typename T>
 
-class Sample
+class NB_Generator
 {
 protected:
-    int k_;
-    double p_;
+//    int k_;
+//    double p_;
+    NB_Distribution* distribution_;
+    int* sample_;
 
 public:
 
-    Sample(double p, int k): p_{p}, k_{k} {}
-    virtual ~Sample() {}
+    NB_Generator(NB_Distribution* distribution);
+    virtual ~NB_Generator() {}
 
     virtual int Generate()=0;
     int* GenerateSample(int sample_size);
+    int* GetSample();
 };
 
-#endif // SAMPLE_H
+#endif // NB_GENERATOR_H
