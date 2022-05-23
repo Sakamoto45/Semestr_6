@@ -27,16 +27,18 @@
     <property name="title">
      <string>Generate</string>
     </property>
-    <addaction name="actionSample"/>
+    <addaction name="action_refresh_last"/>
    </widget>
-   <widget class="QMenu" name="menuDisplay">
+   <widget class="QMenu" name="menuSet_data">
     <property name="title">
-     <string>Display</string>
+     <string>Set data</string>
     </property>
-    <addaction name="actionHistogram_sample"/>
+    <addaction name="action_sample_gialog"/>
+    <addaction name="action_p_value_dialog"/>
+    <addaction name="action_power"/>
    </widget>
+   <addaction name="menuSet_data"/>
    <addaction name="menuGenerate"/>
-   <addaction name="menuDisplay"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -49,25 +51,35 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionSample"/>
-   <addaction name="actionHistogram_sample"/>
+   <addaction name="action_sample_gialog"/>
+   <addaction name="action_refresh_last"/>
   </widget>
-  <action name="actionSample">
+  <action name="action_sample_gialog">
    <property name="icon">
     <iconset resource="Resource.qrc">
-     <normaloff>:/menu/blank.png</normaloff>:/menu/blank.png</iconset>
+     <normaloff>:/SampleHistogram.png</normaloff>:/SampleHistogram.png</iconset>
    </property>
    <property name="text">
-    <string>Sample</string>
+    <string>Sample histogram</string>
    </property>
   </action>
-  <action name="actionHistogram_sample">
+  <action name="action_p_value_dialog">
+   <property name="text">
+    <string>p-value distribution</string>
+   </property>
+  </action>
+  <action name="action_power">
+   <property name="text">
+    <string>Power</string>
+   </property>
+  </action>
+  <action name="action_refresh_last">
    <property name="icon">
     <iconset resource="Resource.qrc">
      <normaloff>:/menu/repeat.png</normaloff>:/menu/repeat.png</iconset>
    </property>
    <property name="text">
-    <string>Histogram (sample)</string>
+    <string>Refresh last</string>
    </property>
   </action>
  </widget>

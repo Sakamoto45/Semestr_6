@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPainter>
+//#include <algorithm>
 #include "document.h"
 #include "dialog.h"
 
@@ -23,16 +24,23 @@ private:
     Document *document;
     enum class Displayed {
         None,
-        Histogram
+        SampleHistogram,
+        PvalueDistribution,
+        PowerRelation
     } displayed;
     Dialog *dialog;
 
-    void DrawHistogram(std::vector<double> density);
+    void DrawSampleHistogram(std::vector<int> emperical_frequency,
+                             std::vector<double> theoretical_frequency);
+    void DrawPvalueDistribution();
+    void DrawPowerRelation();
 
 protected:
     void paintEvent(QPaintEvent*) override;
 private slots:
-    void on_actionSample_triggered();
-    void on_actionHistogram_sample_triggered();
+    void on_action_sample_gialog_triggered();
+    void on_action_p_value_dialog_triggered();
+    void on_action_power_triggered();
+    void on_action_refresh_last_triggered();
 };
 #endif // MAINWINDOW_H

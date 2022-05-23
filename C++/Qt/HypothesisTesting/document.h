@@ -3,6 +3,7 @@
 
 #include "nb_bernoulli.h"
 #include "nb_table.h"
+#include "chisquare.h"
 
 #include <ctime>
 #include <algorithm>
@@ -16,18 +17,24 @@ private:
     NB_Distribution *distribution_0;
     NB_Distribution *distribution_1;
     int p_sample_size_;
+    ChiSquare *chi_square;
+
+
 
 public:
     Document();
     ~Document();
 
+    void set_chi_square(int distribution_id);
     void set_generator(int sample_size);
     void set_distribution_0(double p, int k);
     void set_distribution_1(double p, int k, int sample_size);
     void set_p_sample_size(int p_sample_size);
 
 
-    void GenerateEmpericalFrequency();
+    void GenerateSampleHistogram();
+    void GeneratePvalueDistribution();
+    void GeneratePowerRelation();
 
     double get_p0() const;
     int get_k0() const;
@@ -35,11 +42,12 @@ public:
     int get_k1() const;
     int get_sample_size() const;
     int get_p_sample_size() const;
-
-    std::vector<double> get_emperical_frequency() const;
-//    std::vector<double> get_theoretical_density() const;
-
-//    std::vector<double> theoretical_density;
+    std::string get_distribution_name() const;
+    std::vector<int> get_emperical_frequency() const;
+    std::vector<double> get_theoretical_frequency() const;
+    double get_test_stat();
+    int get_degree_of_freedom();
+    double get_p_value();
 
     enum class Method{
         Bernulli,

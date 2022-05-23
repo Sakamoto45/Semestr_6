@@ -11,7 +11,7 @@ private:
     double p_;
 
 public:
-    NB_Bernoulli(NB_Distribution* distribution, int sample_size);
+    NB_Bernoulli(NB_Distribution* distribution, int sample_size, std::mt19937& rand_gen);
     ~NB_Bernoulli() override;
 
     int Generate() override;

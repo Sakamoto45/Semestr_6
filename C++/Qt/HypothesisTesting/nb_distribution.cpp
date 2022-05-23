@@ -30,3 +30,13 @@ std::vector<double> NB_Distribution::get_density() const
 {
     return density_;
 }
+
+std::string NB_Distribution::get_name() const
+{
+    return "Negative Binomial distribution";
+}
+
+int NB_Distribution::get_size() const
+{
+    return density_.size();
+}

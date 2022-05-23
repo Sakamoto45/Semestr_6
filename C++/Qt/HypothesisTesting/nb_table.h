@@ -10,7 +10,7 @@ private:
     std::vector<double> table_;
 
 public:
-    NB_Table(NB_Distribution *distribution, int sample_size);
+    NB_Table(NB_Distribution *distribution, int sample_size, std::mt19937& rand_gen);
     ~NB_Table() override;
     int Generate() override;
 };

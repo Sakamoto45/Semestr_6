@@ -2,6 +2,7 @@
 #define NB_DISTRIBUTION_H
 
 #include <vector>
+#include <string>
 #include "math.h"
 
 
@@ -20,6 +21,9 @@ public:
     double get_p() const;
     int get_k() const;
     std::vector<double> get_density() const;
+    std::string get_name() const;
+    int get_size() const;
+
 
 };
 

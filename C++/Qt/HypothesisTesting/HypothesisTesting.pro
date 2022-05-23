@@ -18,7 +18,7 @@ SOURCES += \
     nb_distribution.cpp \
     nb_generator.cpp \
     nb_table.cpp \
-    r32m.cpp
+    probdist.cpp
 
 HEADERS += \
     chisquare.h \
@@ -29,7 +29,7 @@ HEADERS += \
     nb_distribution.h \
     nb_generator.h \
     nb_table.h \
-    r32m.h
+    probdist.h
 
 FORMS += \
     dialog.ui \
@@ -42,3 +42,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     Resource.qrc
+
+DISTFILES +=

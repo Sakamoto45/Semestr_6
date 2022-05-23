@@ -3,4 +3,7 @@
         <file>blank.png</file>
         <file>repeat.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>SampleHistogram.png</file>
+    </qresource>
 </RCC>
