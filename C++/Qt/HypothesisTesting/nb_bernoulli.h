@@ -2,12 +2,18 @@
 #define NB_BERNOULLI_H
 
 #include "nb_generator.h"
+#include "nb_distribution.h"
 
 class NB_Bernoulli : public NB_Generator
 {
+private:
+    int k_;
+    double p_;
+
 public:
-    NB_Bernoulli(NB_Distribution* distribution);
+    NB_Bernoulli(NB_Distribution* distribution, int sample_size);
     ~NB_Bernoulli() override;
+
     int Generate() override;
 };
 

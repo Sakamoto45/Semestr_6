@@ -2,6 +2,8 @@
 #define NB_DISTRIBUTION_H
 
 #include <vector>
+#include "math.h"
+
 
 class NB_Distribution
 {
@@ -9,13 +11,15 @@ private:
     double p_;
     int k_;
     std::vector<double> density_;
-//    const double EPS = ; //
+    // 10^6 = max sample_size, EPS * sample_size < 5
+    const double EPS = 1e-6;
 
 public:
     NB_Distribution(double p, int k);
-    double GetP();
-    int GetK();
-    std::vector<double> GetDensity();
+    ~NB_Distribution();
+    double get_p() const;
+    int get_k() const;
+    std::vector<double> get_density() const;
 
 };
 

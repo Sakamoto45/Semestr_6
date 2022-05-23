@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>366</width>
-    <height>334</height>
+    <width>383</width>
+    <height>431</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -23,11 +17,50 @@
    <item>
     <widget class="QGroupBox" name="H0">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="title">
       <string>H0</string>
      </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="H0_input_p">
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <double>999999.989999999990687</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="H0_input_k">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="H0_label_p">
+        <property name="text">
+         <string>0 ≤ p ≤ 1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="H0_label_k">
+        <property name="text">
+         <string>1 ≤ k ≤ 100</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -36,10 +69,66 @@
       <string>H1</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="H1_label_p">
+        <property name="text">
+         <string>0 ≤ p ≤ 1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="H1_input_p">
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <double>999999.989999999990687</double>
+        </property>
+        <property name="singleStep">
+         <double>0.100000000000000</double>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="H1_label_k">
         <property name="text">
-         <string>1 ≤ k ≤ 50</string>
+         <string>1 ≤ k ≤ 100</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="H1_input_k">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="H1_label_sample_size">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>10^2 ≤ Sample size ≤ 10^6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="H1_input_sample_size">
+        <property name="minimum">
+         <number>100</number>
+        </property>
+        <property name="maximum">
+         <number>1000000</number>
+        </property>
+        <property name="singleStep">
+         <number>100</number>
         </property>
        </widget>
       </item>
@@ -66,70 +155,36 @@
         </attribute>
        </widget>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="Pvalue">
+     <property name="title">
+      <string>P-value</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="0">
-       <widget class="QLabel" name="H1_label_p">
+       <widget class="QLabel" name="P_label_sample_size">
         <property name="text">
-         <string>0 ≤ p ≤ 1</string>
+         <string>10^2 ≤ P-value sample size ≤ 10^6</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="H1_label_sample_size">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>10^2 ≤ Sample size ≤ 10^6</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="H1_input_sample_size">
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="P_input_sample_size">
         <property name="minimum">
          <number>100</number>
         </property>
         <property name="maximum">
          <number>1000000</number>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="H1_input_k">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>50</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QDoubleSpinBox" name="H1_input_p">
-        <property name="decimals">
-         <number>5</number>
-        </property>
-        <property name="maximum">
-         <double>999999.989999999990687</double>
-        </property>
         <property name="singleStep">
-         <double>0.100000000000000</double>
+         <number>100</number>
         </property>
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="Pvalue">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="title">
-      <string>P-value</string>
-     </property>
     </widget>
    </item>
    <item>
@@ -144,6 +199,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>H0_input_p</tabstop>
+  <tabstop>H0_input_k</tabstop>
+  <tabstop>H1_input_p</tabstop>
+  <tabstop>H1_input_k</tabstop>
+  <tabstop>H1_input_sample_size</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -153,8 +215,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>215</x>
-     <y>320</y>
+     <x>224</x>
+     <y>704</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -169,8 +231,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>215</x>
-     <y>320</y>
+     <x>224</x>
+     <y>704</y>
     </hint>
     <hint type="destinationlabel">
      <x>224</x>

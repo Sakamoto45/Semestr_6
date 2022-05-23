@@ -1,23 +1,12 @@
 #include "nb_table.h"
 
-void NB_Table::ExtendTable(int len = 100)
+NB_Table::NB_Table(NB_Distribution *distribution, int sample_size):
+    NB_Generator(sample_size)
 {
-    double q = 1 - p_;
-    static double l = pow(p_, k_);
-
-    if (table_.empty()) table_.push_back(l);
-
-    len += table_.size();
-    for (int j = table_.size(); j < len; ++j) {
-        l *= (k_ + j - 1) * q / j;
-        table_.push_back(table_.back() + l);
+    table_ = distribution->get_density();
+    for (int i = 1; i < table_.size(); ++i) {
+        table_[i] += table_[i - 1];
     }
-}
-
-NB_Table::NB_Table(double p, int k) :
-    NB_Generator(p, k)
-{
-    ExtendTable();
 }
 
 NB_Table::~NB_Table()
@@ -29,7 +18,6 @@ int NB_Table::Generate()
     int result = 0;
     while (value > table_[result]) {
         ++result;
-        if (result == (int)table_.size()) ExtendTable(10);
     }
     return result;
 }

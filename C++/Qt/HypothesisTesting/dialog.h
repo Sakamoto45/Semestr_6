@@ -15,22 +15,19 @@ class Dialog : public QDialog
 public:
     explicit Dialog(Document* doc, QWidget *parent = nullptr);
     ~Dialog();
-//    void setup();
+
+    int show_part(bool H0, bool H1, bool Pvalue);
 
 private slots:
     void on_buttonBox_accepted();
-
     void on_buttonBox_rejected();
-
+    void on_H0_input_p_editingFinished();
     void on_H1_input_p_editingFinished();
-
-    void on_H1_input_p_valueChanged(double arg1);
-
-    void on_H1_input_k_editingFinished();
 
 private:
     Ui::Dialog *ui;
     Document *document;
+    void reset();
 };
 
 #endif // DIALOG_H

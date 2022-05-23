@@ -2,53 +2,104 @@
 
 Document::Document() :
     generator{nullptr},
-    p_0{0.2}, k_0{10}, p_1{0.2}, k_1{10},
-    method{Method::Bernulli},
-    sample_size{1000}, p_sample_size{10000}
+    distribution_0{nullptr},
+    distribution_1{nullptr},
+    p_sample_size_{10000},
+    method{Method::Bernulli}
 {
     srand(time(nullptr));
-    resetGenerator();
+
+
+    set_distribution_0(0.2, 10);
+    set_distribution_1(0.2, 10, 1000);
+
+//    set_generator(1000);
 }
 
 Document::~Document()
 {
     delete generator;
+    delete distribution_0;
+    delete distribution_1;
 }
 
-void Document::generateEmpericalDencity()
-{
-    int* sample = generator->GenerateSample(sample_size);
-    emperical_density.clear();
-
-    int max_elem = 0;
-    for (int i = 0; i < sample_size; ++i) {
-        if (sample[i] > max_elem) {
-            max_elem = sample[i];
-        }
-    }
-
-    emperical_density.resize(max_elem + 1);
-    for (int i = 0; i < sample_size; ++i) {
-        emperical_density[sample[i]]++;
-    }
-    for (auto& i : emperical_density) {
-        i = i / sample_size;
-    }
-    delete[] sample;
-}
-
-void Document::resetGenerator()
+void Document::set_generator(int sample_size)
 {
     delete generator;
 
     switch (method) {
     case Method::Bernulli:
-        generator = new NB_Bernoulli(p_1, k_1);
+        generator = new NB_Bernoulli(distribution_1, sample_size);
         break;
     case Method::Table:
-        generator = new NB_Table(p_1, k_1);
-        break;
-    default:
+        generator = new NB_Table(distribution_1, sample_size);
         break;
     }
 }
+
+void Document::set_distribution_0(double p, int k)
+{
+    if (!distribution_0 || p != distribution_0->get_p() || k != distribution_0->get_p()) {
+        delete distribution_0;
+        distribution_0 = new NB_Distribution(p, k);
+    }
+}
+
+void Document::set_distribution_1(double p, int k, int sample_size)
+{
+    if (!distribution_1 || p != distribution_1->get_p() || k != distribution_1->get_p()) {
+        delete distribution_1;
+        distribution_1 = new NB_Distribution(p, k);
+    }
+    set_generator(sample_size);
+}
+
+void Document::set_p_sample_size(int p_sample_size)
+{
+    p_sample_size_ = p_sample_size;
+}
+
+void Document::GenerateEmpericalFrequency()
+{
+    generator->GenerateSample();
+}
+
+double Document::get_p0() const
+{
+    return distribution_0->get_p();
+}
+
+int Document::get_k0() const
+{
+    return distribution_0->get_k();
+}
+
+double Document::get_p1() const
+{
+    return distribution_1->get_p();
+}
+
+int Document::get_k1() const
+{
+    return distribution_1->get_k();
+}
+
+int Document::get_sample_size() const
+{
+    return generator->get_sample_size();
+}
+
+int Document::get_p_sample_size() const
+{
+    return p_sample_size_;
+}
+
+std::vector<double> Document::get_emperical_frequency() const
+{
+    return generator->get_frequency();
+}
+
+//std::vector<double> Document::get_theoretical_density() const
+//{
+//    return distribution_0->get_density();
+//}
