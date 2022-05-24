@@ -62,7 +62,7 @@ void MainWindow::DrawSampleHistogram(std::vector<int> emperical_frequency,
     painter.drawText(x_0 - 12, y_0, "0");
     painter.drawText(x_0 + (1 - 0.5 / n) * x_scale, y_0 + 12, QString::number(x_max));
     painter.drawText(x_0 - 20, y_0 + emperical_max / y_max * y_scale, QString::number(emperical_max));
-    painter.drawText(x_0 - 20, y_0 + theoretical_max / y_max * y_scale, QString::number((int)theoretical_max));
+    painter.drawText(x_0 - 20, y_0 + theoretical_max / y_max * y_scale, QString::number(round(theoretical_max)));
 
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::red);
