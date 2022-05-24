@@ -15,11 +15,12 @@ Dialog::~Dialog()
     delete ui;
 }
 
-int Dialog::show_part(bool H0, bool H1, bool Pvalue)
+int Dialog::show_part(bool H0, bool H1, bool Pvalue, bool Power)
 {
     ui->H0->setEnabled(H0);
     ui->H1->setEnabled(H1);
     ui->Pvalue->setEnabled(Pvalue);
+    ui->Power->setEnabled(Power);
     return exec();
 }
 
@@ -43,6 +44,8 @@ void Dialog::reset()
     }
 
     ui->P_input_sample_size->setValue(document->get_p_sample_size());
+
+    ui->Power_input_significance_level->setValue(document->get_significance_level());
 }
 
 void Dialog::on_buttonBox_accepted()
@@ -63,6 +66,9 @@ void Dialog::on_buttonBox_accepted()
     }
     if (ui->Pvalue->isEnabled()) {
         document->set_p_sample_size(ui->P_input_sample_size->value());
+    }
+    if (ui->Power->isEnabled()) {
+        document->set_significance_level(ui->Power_input_significance_level->value());
     }
     done(1);
 }
@@ -90,5 +96,11 @@ void Dialog::on_H1_input_p_editingFinished()
     }
 }
 
-
+void Dialog::on_Power_input_significance_level_editingFinished()
+{
+    double new_significance_level = ui->Power_input_significance_level->value();
+    if (new_significance_level < 0 || new_significance_level > 1) {
+        ui->Power_input_significance_level->setValue(document->get_significance_level());
+    }
+}
 

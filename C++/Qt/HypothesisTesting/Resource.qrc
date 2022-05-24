@@ -5,5 +5,7 @@
     </qresource>
     <qresource prefix="/">
         <file>SampleHistogram.png</file>
+        <file>PvalueDistribution.png</file>
+        <file>Power.png</file>
     </qresource>
 </RCC>

@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QPainter>
-//#include <algorithm>
 #include "document.h"
 #include "dialog.h"
 

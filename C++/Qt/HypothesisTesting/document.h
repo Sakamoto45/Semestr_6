@@ -18,7 +18,9 @@ private:
     NB_Distribution *distribution_1;
     int p_sample_size_;
     ChiSquare *chi_square;
-
+    std::vector<double> p_distribution_;
+    double significance_level_;
+    std::vector<double> power_relation_;
 
 
 public:
@@ -30,6 +32,7 @@ public:
     void set_distribution_0(double p, int k);
     void set_distribution_1(double p, int k, int sample_size);
     void set_p_sample_size(int p_sample_size);
+    void set_significance_level(double significance_level);
 
 
     void GenerateSampleHistogram();
@@ -48,6 +51,10 @@ public:
     double get_test_stat();
     int get_degree_of_freedom();
     double get_p_value();
+    std::vector<double> get_p_distribution();
+    double get_significance_level() const;
+    const std::vector<double>& get_power_relation() const;
+
 
     enum class Method{
         Bernulli,

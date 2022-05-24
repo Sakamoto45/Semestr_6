@@ -7,10 +7,11 @@ Document::Document() :
     distribution_1{nullptr},
     p_sample_size_{10000},
     chi_square{nullptr},
-    method{Method::Bernulli}
+    method{Method::Bernulli},
+    significance_level_{0.05}
 {
     set_distribution_0(0.2, 10);
-    set_distribution_1(0.2, 10, 1000);
+    set_distribution_1(0.2, 10, 100);
     chi_square = new ChiSquare(*distribution_0,
                                generator->get_sample(),
                                generator->get_sample_size());
@@ -68,6 +69,11 @@ void Document::set_p_sample_size(int p_sample_size)
     p_sample_size_ = p_sample_size;
 }
 
+void Document::set_significance_level(double significance_level)
+{
+    significance_level_ = significance_level;
+}
+
 void Document::GenerateSampleHistogram()
 {
     generator->GenerateSample();
@@ -76,12 +82,48 @@ void Document::GenerateSampleHistogram()
 
 void Document::GeneratePvalueDistribution()
 {
+    std::vector<double> p_sample_;
+    p_sample_.resize(p_sample_size_);
+    for (int i = 0; i < p_sample_size_; ++i) {
+        generator->GenerateSample();
+        set_chi_square(0);
+        p_sample_[i] = chi_square->get_p_value();
+    }
 
+//    std::vector<double> p_distribution_(100);
+    p_distribution_.clear();
+    p_distribution_.resize(101);
+    for (auto it : p_sample_) {
+        p_distribution_[1 + int(100 * it)]++;
+    }
+
+    for (int i = 0; i < 100; ++i) {
+        p_distribution_[1 + i] += p_distribution_[i];
+    }
+    for (int i = 0; i < 100; ++i) {
+        p_distribution_[1 + i] /= p_sample_size_;
+    }
 }
 
 void Document::GeneratePowerRelation()
 {
+    int size_num = 10;
+    int rep = 1000;
+    power_relation_.clear();
+    power_relation_.resize(size_num);
 
+    for (int i = 0; i <= size_num; ++i) {
+        int sample_size = 100 * (i + 1);
+        set_generator(sample_size);
+        for (int j = 0; j < rep; ++j) {
+            generator->GenerateSample();
+            set_chi_square(0);
+            if (get_p_value() < significance_level_) {
+                power_relation_[i]++;
+            }
+        }
+        power_relation_[i] /= (double) rep;
+    }
 }
 
 double Document::get_p0() const
@@ -144,7 +186,18 @@ double Document::get_p_value()
     return chi_square->get_p_value();
 }
 
-//std::vector<double> Document::get_theoretical_density() const
-//{
-//    return distribution_0->get_density();
-//}
+std::vector<double> Document::get_p_distribution()
+{
+    return p_distribution_;
+}
+
+double Document::get_significance_level() const
+{
+    return significance_level_;
+}
+
+const std::vector<double>& Document::get_power_relation() const
+{
+    return power_relation_;
+}
+

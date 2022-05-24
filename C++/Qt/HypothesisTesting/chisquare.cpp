@@ -110,7 +110,7 @@ void ChiSquare::calc_p_value()
         test_stat_ += tmp * tmp / theoretical_frequency_grouped_[i];
     }
     degree_of_freedom_ = size - 1;
-    p_value_ = pChi(test_stat_, degree_of_freedom_);
+    p_value_ = 1 - pChi(test_stat_, degree_of_freedom_);
     stats_are_relevant_ = true;
 }
 
