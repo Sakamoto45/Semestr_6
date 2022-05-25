@@ -35,11 +35,12 @@ void Dialog::reset()
     switch (document->method) {
     case Document::Method::Bernulli:
         ui->H1_radio_Bernulli->setChecked(true);
-        ui->H1_radio_Table->setChecked(false);
         break;
     case Document::Method::Table:
-        ui->H1_radio_Bernulli->setChecked(false);
         ui->H1_radio_Table->setChecked(true);
+        break;
+    case Document::Method::Inverse:
+        ui->H1_radio_Inverse->setChecked(true);
         break;
     }
 
@@ -59,6 +60,8 @@ void Dialog::on_buttonBox_accepted()
             document->method = Document::Method::Bernulli;
         } else if (ui->H1_radio_Table->isChecked()) {
             document->method = Document::Method::Table;
+        } else if (ui->H1_radio_Inverse->isChecked()) {
+            document->method = Document::Method::Inverse;
         }
         document->set_distribution_1(ui->H1_input_p->value(),
                                      ui->H1_input_k->value(),

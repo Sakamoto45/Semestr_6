@@ -11,7 +11,7 @@ private:
 
 public:
     NB_Table(NB_Distribution *distribution, int sample_size, std::mt19937& rand_gen);
-    ~NB_Table() override;
+    ~NB_Table();
     int Generate() override;
 };
 

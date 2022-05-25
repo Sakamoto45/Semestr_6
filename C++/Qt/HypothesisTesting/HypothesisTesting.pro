@@ -17,6 +17,7 @@ SOURCES += \
     nb_bernoulli.cpp \
     nb_distribution.cpp \
     nb_generator.cpp \
+    nb_inverse.cpp \
     nb_table.cpp \
     probdist.cpp
 
@@ -28,6 +29,7 @@ HEADERS += \
     nb_bernoulli.h \
     nb_distribution.h \
     nb_generator.h \
+    nb_inverse.h \
     nb_table.h \
     probdist.h
 

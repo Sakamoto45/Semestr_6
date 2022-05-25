@@ -3,6 +3,7 @@
 
 #include "nb_bernoulli.h"
 #include "nb_table.h"
+#include "nb_inverse.h"
 #include "chisquare.h"
 
 #include <ctime>
@@ -58,7 +59,8 @@ public:
 
     enum class Method{
         Bernulli,
-        Table
+        Table,
+        Inverse
     } method;
 };
 

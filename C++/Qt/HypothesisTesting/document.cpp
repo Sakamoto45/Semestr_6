@@ -7,8 +7,8 @@ Document::Document() :
     distribution_1{nullptr},
     p_sample_size_{10000},
     chi_square{nullptr},
-    method{Method::Bernulli},
-    significance_level_{0.05}
+    significance_level_{0.05},
+    method{Method::Bernulli}
 {
     set_distribution_0(0.2, 10);
     set_distribution_1(0.2, 10, 100);
@@ -42,6 +42,9 @@ void Document::set_generator(int sample_size)
         break;
     case Method::Table:
         generator = new NB_Table(distribution_1, sample_size, rand_gen);
+        break;
+    case Method::Inverse:
+        generator = new NB_Inverse(distribution_1, sample_size, rand_gen);
         break;
     }
     generator->GenerateSample();
