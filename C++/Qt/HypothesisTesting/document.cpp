@@ -115,7 +115,7 @@ void Document::GeneratePowerRelation()
     power_relation_.clear();
     power_relation_.resize(size_num);
 
-    for (int i = 0; i <= size_num; ++i) {
+    for (int i = 0; i < size_num; ++i) {
         int sample_size = 100 * (i + 1);
         set_generator(sample_size);
         for (int j = 0; j < rep; ++j) {

@@ -8,7 +8,9 @@ NB_Generator::NB_Generator(int sample_size, std::mt19937& rand_gen):
 {}
 
 NB_Generator::~NB_Generator()
-{}
+{
+    delete[] sample_;
+}
 
 int* NB_Generator::GenerateSample()
 {
