@@ -17,9 +17,10 @@ MainWindow::~MainWindow()
     delete document;
 }
 
-void MainWindow::DrawSampleHistogram(std::vector<int> emperical_frequency,
-                                     std::vector<double> theoretical_frequency)
-{
+void MainWindow::DrawSampleHistogram()
+{             
+    const std::vector<int>& empirical_frequency = document->get_empirical_frequency();
+    const std::vector<double>& theoretical_frequency = document->get_theoretical_frequency();
     QPainter painter;
     QBrush brush;
     QPen pen;
@@ -48,12 +49,12 @@ void MainWindow::DrawSampleHistogram(std::vector<int> emperical_frequency,
 
     painter.drawRect(x_0, y_0, 1*x_scale, 1*y_scale);
 
-    double x_max = emperical_frequency.size();
-    int emperical_max = *max_element(emperical_frequency.begin(),
-                                     emperical_frequency.end());
+    double x_max = empirical_frequency.size();
+    int empirical_max = *max_element(empirical_frequency.begin(),
+                                     empirical_frequency.end());
     double theoretical_max = *max_element(theoretical_frequency.begin(),
                                           theoretical_frequency.end());
-    double y_max = std::max((double) emperical_max,
+    double y_max = std::max((double) empirical_max,
                             theoretical_max) / 0.9;
     int n = theoretical_frequency.size();
 
@@ -61,7 +62,7 @@ void MainWindow::DrawSampleHistogram(std::vector<int> emperical_frequency,
     painter.drawText(x_0 + 0.5 / n * x_scale, y_0 + 12, "0");
     painter.drawText(x_0 - 12, y_0, "0");
     painter.drawText(x_0 + (1 - 0.5 / n) * x_scale, y_0 + 12, QString::number(x_max));
-    painter.drawText(x_0 - 20, y_0 + emperical_max / y_max * y_scale, QString::number(emperical_max));
+    painter.drawText(x_0 - 20, y_0 + empirical_max / y_max * y_scale, QString::number(empirical_max));
     painter.drawText(x_0 - 20, y_0 + theoretical_max / y_max * y_scale, QString::number(round(theoretical_max)));
 
     brush.setStyle(Qt::SolidPattern);
@@ -80,7 +81,7 @@ void MainWindow::DrawSampleHistogram(std::vector<int> emperical_frequency,
     painter.setPen(pen);
     for (int i = 0; i < n; ++i) {
         painter.drawRect(x_0 + (i + 0.2) / n * x_scale, y_0,
-                         0.6 / n * x_scale, emperical_frequency[i] / y_max * y_scale);
+                         0.6 / n * x_scale, empirical_frequency[i] / y_max * y_scale);
 
     }
 
@@ -188,8 +189,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 {
     switch (displayed) {
     case Displayed::SampleHistogram:
-        DrawSampleHistogram(document->get_emperical_frequency(),
-                            document->get_theoretical_frequency());
+        DrawSampleHistogram();
         break;
     case Displayed::PvalueDistribution:
         DrawPvalueDistribution();
@@ -203,7 +203,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 }
 
-void MainWindow::on_action_sample_gialog_triggered()
+void MainWindow::on_action_sample_dialog_triggered()
 {
     if (dialog->show_part(false, true, false, false)) {
         displayed = Displayed::SampleHistogram;

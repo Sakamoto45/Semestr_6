@@ -29,15 +29,14 @@ private:
     } displayed;
     Dialog *dialog;
 
-    void DrawSampleHistogram(std::vector<int> emperical_frequency,
-                             std::vector<double> theoretical_frequency);
+    void DrawSampleHistogram();
     void DrawPvalueDistribution();
     void DrawPowerRelation();
 
 protected:
     void paintEvent(QPaintEvent*) override;
 private slots:
-    void on_action_sample_gialog_triggered();
+    void on_action_sample_dialog_triggered();
     void on_action_p_value_dialog_triggered();
     void on_action_power_triggered();
     void on_action_refresh_last_triggered();

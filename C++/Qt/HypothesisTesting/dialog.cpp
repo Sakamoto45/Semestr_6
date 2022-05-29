@@ -32,7 +32,7 @@ void Dialog::reset()
     ui->H1_input_p->setValue(document->get_p1());
     ui->H1_input_k->setValue(document->get_k1());
     ui->H1_input_sample_size->setValue(document->get_sample_size());
-    switch (document->method) {
+    switch (document->get_method()) {
     case Document::Method::Bernulli:
         ui->H1_radio_Bernulli->setChecked(true);
         break;
@@ -57,11 +57,11 @@ void Dialog::on_buttonBox_accepted()
     }
     if (ui->H1->isEnabled()) {
         if (ui->H1_radio_Bernulli->isChecked()) {
-            document->method = Document::Method::Bernulli;
+            document->set_method(Document::Method::Bernulli);
         } else if (ui->H1_radio_Table->isChecked()) {
-            document->method = Document::Method::Table;
+            document->set_method(Document::Method::Table);
         } else if (ui->H1_radio_Inverse->isChecked()) {
-            document->method = Document::Method::Inverse;
+            document->set_method(Document::Method::Inverse);
         }
         document->set_distribution_1(ui->H1_input_p->value(),
                                      ui->H1_input_k->value(),

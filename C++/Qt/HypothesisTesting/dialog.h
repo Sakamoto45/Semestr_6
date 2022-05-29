@@ -23,7 +23,6 @@ private slots:
     void on_buttonBox_rejected();
     void on_H0_input_p_editingFinished();
     void on_H1_input_p_editingFinished();
-
     void on_Power_input_significance_level_editingFinished();
 
 private:

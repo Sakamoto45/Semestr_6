@@ -33,7 +33,7 @@
     <property name="title">
      <string>Set data</string>
     </property>
-    <addaction name="action_sample_gialog"/>
+    <addaction name="action_sample_dialog"/>
     <addaction name="action_p_value_dialog"/>
     <addaction name="action_power"/>
    </widget>
@@ -51,12 +51,12 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="action_sample_gialog"/>
+   <addaction name="action_sample_dialog"/>
    <addaction name="action_p_value_dialog"/>
    <addaction name="action_power"/>
    <addaction name="action_refresh_last"/>
   </widget>
-  <action name="action_sample_gialog">
+  <action name="action_sample_dialog">
    <property name="icon">
     <iconset resource="Resource.qrc">
      <normaloff>:/SampleHistogram.png</normaloff>:/SampleHistogram.png</iconset>
