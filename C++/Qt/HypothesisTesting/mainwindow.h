@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPainter>
+#include <QMessageBox>
 #include "document.h"
 #include "dialog.h"
 
@@ -40,5 +41,6 @@ private slots:
     void on_action_p_value_dialog_triggered();
     void on_action_power_triggered();
     void on_action_refresh_last_triggered();
+    void on_actionAbout_triggered();
 };
 #endif // MAINWINDOW_H

@@ -39,7 +39,7 @@ void MainWindow::DrawSampleHistogram()
             QString::number(document->get_k1()) +
             " sample size = " +
             QString::number(document->get_sample_size()) +
-            " test statistica = " +
+            " test statistic = " +
             QString::number(document->get_test_stat()) +
             " degree of freedom = " +
             QString::number(document->get_degree_of_freedom()) +
@@ -125,7 +125,7 @@ void MainWindow::DrawPvalueDistribution()
     pen.setColor(Qt::red);
     painter.setPen(pen);
 
-    std::vector<double> distribution = document->get_p_distribution();
+    const std::vector<double>& distribution = document->get_p_distribution();
 
 
     for (int i = 0; i < 100; ++i) {
@@ -248,5 +248,11 @@ void MainWindow::on_action_refresh_last_triggered()
         break;
     }
     repaint();
+}
+
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox::about(this, "About", "Tkachenko Egor 2022");
 }
 
