@@ -1,11 +1,11 @@
 #include "chisquare.h"
 
-ChiSquare::ChiSquare(const NB_Distribution& distribution, const NB_Generator& generator)
+ChiSquare::ChiSquare(NB_Distribution& distribution, const NB_Generator& generator)
 {
     set_data(distribution, generator);
 }
 
-void ChiSquare::set_data(const NB_Distribution& distribution, const NB_Generator& generator)
+void ChiSquare::set_data(NB_Distribution& distribution, const NB_Generator& generator)
 {
     grouped_is_relevant_ = false;
     stats_are_relevant_ = false;

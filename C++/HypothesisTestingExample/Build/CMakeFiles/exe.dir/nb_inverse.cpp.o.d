@@ -1,8 +1,8 @@
 CMakeFiles/exe.dir/nb_inverse.cpp.o: \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_inverse.cpp \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_inverse.cpp \
  /usr/include/stdc-predef.h \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_inverse.h \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_generator.h \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_inverse.h \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_generator.h \
  /usr/include/c++/12.1.0/vector \
  /usr/include/c++/12.1.0/bits/stl_algobase.h \
  /usr/include/c++/12.1.0/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -125,5 +125,5 @@ CMakeFiles/exe.dir/nb_inverse.cpp.o: \
  /usr/include/c++/12.1.0/x86_64-pc-linux-gnu/bits/opt_random.h \
  /usr/include/c++/12.1.0/bits/random.tcc /usr/include/c++/12.1.0/numeric \
  /usr/include/c++/12.1.0/bits/stl_numeric.h /usr/include/c++/12.1.0/bit \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.h \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.h \
  /usr/include/c++/12.1.0/math.h

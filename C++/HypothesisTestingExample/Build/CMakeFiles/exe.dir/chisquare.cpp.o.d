@@ -1,7 +1,7 @@
 CMakeFiles/exe.dir/chisquare.cpp.o: \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/chisquare.cpp \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/chisquare.cpp \
  /usr/include/stdc-predef.h \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/chisquare.h \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/chisquare.h \
  /usr/include/c++/12.1.0/vector \
  /usr/include/c++/12.1.0/bits/stl_algobase.h \
  /usr/include/c++/12.1.0/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -47,7 +47,7 @@ CMakeFiles/exe.dir/chisquare.cpp.o: \
  /usr/include/c++/12.1.0/backward/binders.h \
  /usr/include/c++/12.1.0/bits/range_access.h \
  /usr/include/c++/12.1.0/bits/vector.tcc \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.h \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.h \
  /usr/include/c++/12.1.0/string /usr/include/c++/12.1.0/bits/stringfwd.h \
  /usr/include/c++/12.1.0/bits/char_traits.h \
  /usr/include/c++/12.1.0/bits/postypes.h /usr/include/c++/12.1.0/cwchar \
@@ -121,11 +121,11 @@ CMakeFiles/exe.dir/chisquare.cpp.o: \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_generator.h \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_generator.h \
  /usr/include/c++/12.1.0/random /usr/include/c++/12.1.0/limits \
  /usr/include/c++/12.1.0/bits/random.h \
  /usr/include/c++/12.1.0/bits/uniform_int_dist.h \
  /usr/include/c++/12.1.0/x86_64-pc-linux-gnu/bits/opt_random.h \
  /usr/include/c++/12.1.0/bits/random.tcc /usr/include/c++/12.1.0/numeric \
  /usr/include/c++/12.1.0/bits/stl_numeric.h /usr/include/c++/12.1.0/bit \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/probdist.h
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/probdist.h

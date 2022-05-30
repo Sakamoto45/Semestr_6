@@ -19,8 +19,8 @@ The time class represents a moment of time.
 class ChiSquare
 {
 public:
-    ChiSquare(const NB_Distribution& distribution, const NB_Generator& generator);
-    void set_data(const NB_Distribution& distribution, const NB_Generator& generator);
+    ChiSquare(NB_Distribution& distribution, const NB_Generator& generator);
+    void set_data(NB_Distribution& distribution, const NB_Generator& generator);
 
     std::vector<double> get_theoretical_frequency() const;
     std::vector<int> get_empirical_frequency() const;

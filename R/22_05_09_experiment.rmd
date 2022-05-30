@@ -10,6 +10,8 @@ library(tidyr)
 library(dplyr)
 library(lattice)
 library(rlist)
+library(ggplot2)
+library(RColorBrewer)
 # library(plotrix) # for draw.ellipse()
 library(abind)
 ```
@@ -18,7 +20,7 @@ library(abind)
 # l_known - length of "known" signal
 # l_forecast - length of forecast
 # l_window - length of window
-repeats <- 1
+repeats <- 5
 
 MAX_LEN <- 150
 
@@ -34,16 +36,15 @@ cos_ <- function(period, phase = 0, len = 150) cospi(2 * ((1:len) / period + pha
 
 
 exps <- lapply(c(0, 0.005, 0.015, 0.025), exp_)
-signals <- exps
+coses <- lapply(c(10, 10.1, 10.2), cos_)
+signals <- coses
 
 # signals <- mapply(rep, c(1, 2, 3, 4), rep(MAX_LEN, 4), SIMPLIFY = FALSE)
 noises <- list(
     lapply(rep(MAX_LEN, repeats), rnorm),
     lapply(rep(MAX_LEN, repeats), rnorm))
 
-
-# get_signal1 <- function(x) signals[[x$signal_id1]] * noises[x$noise_id, 1]
-# get_signal2 <- function(x) signals[[x$signal_id2]] * noises[x$noise_id, 2]
+groups <- list(list(1), list(1:2), list(1:4))
 
 get_signal1 <- function(x) signals[[x$signal_id1]][1:(x$l_known + x$l_forecast)]
 get_signal2 <- function(x) signals[[x$signal_id2]][1:(x$l_known + x$l_forecast)]
@@ -54,45 +55,123 @@ get_norm2 <- function(x) x$norm_relative / mean((get_signal2(x) * get_noise2(x))
 get_ssa_error_reconstruct <- function(x)
     MSE(get_signal1(x)[1:x$l_known] * x$norm1,
         reconstruct(ssa((get_signal1(x) * get_noise1(x) * x$norm1)[1:x$l_known], L = x$l_window),
-                    groups = x$group)$F1)
+                    groups = groups[[x$group_ssa_id]])$F1)
 get_ssa_error_forecast <- function(x)
     MSE(get_signal1(x)[x$l_known + (1:x$l_forecast)] * x$norm1,
         rforecast(ssa((get_signal1(x) * get_noise1(x) * x$norm1)[1:x$l_known], L = x$l_window),
-                  groups = x$group, len = x$l_forecast))
+                  groups = groups[[x$group_ssa_id]], len = x$l_forecast))
 get_mssa_error_reconstruct <- function(x) {
+    signal1 <- (get_signal1(x) * get_noise1(x) * x$norm1)[1:x$l_known]
+    signal2 <- (get_signal2(x) * get_noise2(x) * x$norm2)[1:x$l_known]
 
-
-    
     MSE(get_signal1(x)[1:x$l_known] * x$norm1,
-        reconstruct(ssa((get_signal1(x) * get_noise1(x) * x$norm1)[1:x$l_known], L = x$l_window),
-                    groups = x$group)$F1)
+        reconstruct(ssa(cbind(signal1, signal2), L = x$l_window, kind = "mssa"),
+                    groups = groups[[x$group_mssa_id]])$F1[,1])
 }
-    
+get_mssa_error_forecast <- function(x) {
+    signal1 <- (get_signal1(x) * get_noise1(x) * x$norm1)[1:x$l_known]
+    signal2 <- (get_signal2(x) * get_noise2(x) * x$norm2)[1:x$l_known]
+
+    MSE(get_signal1(x)[x$l_known + (1:x$l_forecast)] * x$norm1,
+        rforecast(ssa(cbind(signal1, signal2), L = x$l_window, kind = "mssa"),
+                  groups = groups[[x$group_mssa_id]], len = x$l_forecast)[,1])
+}
+get_relative_error_reconstruct <- function(x) {
+    (x$ssa_error_reconstruct - x$mssa_error_reconstruct) /
+    (x$ssa_error_reconstruct + x$mssa_error_reconstruct)
+}
+get_relative_error_forecast <- function(x) {
+    (x$ssa_error_forecast - x$mssa_error_forecast) /
+    (x$ssa_error_forecast + x$mssa_error_forecast)
+}
+get_errors <- function(df) {
+    df$norm1 <- apply(df, 1, get_norm1)
+    df$norm2 <- apply(df, 1, get_norm2)
+    df$ssa_error_reconstruct <- apply(df, 1, get_ssa_error_reconstruct)
+    df$ssa_error_forecast <- apply(df, 1, get_ssa_error_forecast)
+    df$mssa_error_reconstruct <- apply(df, 1, get_mssa_error_reconstruct)
+    df$mssa_error_forecast <- apply(df, 1, get_mssa_error_forecast)
+    df$relative_error_reconstruct <- apply(df, 1, get_relative_error_reconstruct)
+    df$relative_error_forecast <- apply(df, 1, get_relative_error_forecast)
+    df <- df %>%
+        filter(signal_id1 != signal_id2)
+    #     group_by(across(c(-relative_error_reconstruct,
+    #                       -relative_error_forecast))) %>%
+    #     summarise_all(mean) %>%
+    #     ungroup()
+
+    return(df)
+}
 
 
-
-df <- expand.grid(
+df <- get_errors(expand.grid(
     signal_id1 = 1:length(signals),
     signal_id2 = 1:length(signals),
     noise_id = 1:repeats,
-    noise_norm1 = 0.1,
-    noise_norm2 = 0.1,
+    noise_norm1 = 0.001,
+    noise_norm2 = 0.001,
     norm_relative = c(0.5, 1, 2),
     l_known = 100,
     l_forecast = 20,
-    l_window = c(10, 25, 50),
-    group = list(1, list(1:2))
-)
+    l_window = c(25, 50, 75, 90),
+    group_ssa_id = 2,
+    group_mssa_id = c(2, 3),
+    crutch = list(1)
+))
 
-df$norm1 <- apply(df, 1, get_norm1)
-df$norm2 <- apply(df, 1, get_norm2)
-df$ssa_error_reconstruct <- apply(df, 1, get_ssa_error_reconstruct)
-df$ssa_error_forecast <- apply(df, 1, get_ssa_error_forecast)
+ggplot(df) +
+    geom_boxplot(aes(x = relative_error_reconstruct,
+                     y = as.factor(norm_relative)))
+                   
+ggplot(df) +
+    geom_boxplot(aes(x = as.factor(norm_relative),
+                     y = relative_error_forecast,))
 
+ggplot(df) +
+    geom_point(aes(x = relative_error_reconstruct,
+                   y = relative_error_forecast,
+                   color = as.factor(norm_relative)),
+               alpha = 0.5,
+               size = 5) +
+    scale_color_brewer(palette="Spectral") +
+    theme_dark()
 
+ggplot(df) +
+    geom_point(aes(x = relative_error_reconstruct,
+                   y = relative_error_forecast,
+                   color = as.factor(l_window)),
+               alpha = 0.5,
+               size = 5) +
+    scale_color_brewer(palette="Spectral") +
+    theme_dark()
 
+# ggplot(df) +
+#     geom_point(aes(x = relative_error_forecast,
+#                    y = relative_error_reconstruct,
+#                    color = (ssa_error_reconstruct)),
+#                alpha = 0.5,
+#                size = 5) +
+#     scale_color_gradientn(colours = c("green", "yellow", "red")) +
+#     theme_dark()
 
+ggplot(df) +
+    geom_point(aes(x = relative_error_reconstruct,
+                   y = relative_error_forecast,
+                   color = as.factor(group_mssa_id)),
+               alpha = 0.5,
+               size = 5) +
+    scale_color_manual(values=c("red", "blue")) +
+    theme_dark()
 
+ggplot(df) +
+    geom_point(aes(x = relative_error_reconstruct,
+                   y = relative_error_forecast,
+                   color = as.factor(signal_id1 - signal_id2)),
+               alpha = 0.5,
+               size = 5) +
+    scale_color_brewer(palette="Spectral") +
+    theme_dark()
+               
 
 
 

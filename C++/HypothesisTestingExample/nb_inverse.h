@@ -12,8 +12,7 @@ public:
     int Generate() override;
 
 private:
-    int k_;
-    double p_;
+    NB_Distribution *distribution_;
 };
 
 #endif // NB_INVERSE_H

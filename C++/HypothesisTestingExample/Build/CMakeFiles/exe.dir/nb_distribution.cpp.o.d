@@ -1,7 +1,7 @@
 CMakeFiles/exe.dir/nb_distribution.cpp.o: \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.cpp \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.cpp \
  /usr/include/stdc-predef.h \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.h \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/nb_distribution.h \
  /usr/include/c++/12.1.0/vector \
  /usr/include/c++/12.1.0/bits/stl_algobase.h \
  /usr/include/c++/12.1.0/x86_64-pc-linux-gnu/bits/c++config.h \

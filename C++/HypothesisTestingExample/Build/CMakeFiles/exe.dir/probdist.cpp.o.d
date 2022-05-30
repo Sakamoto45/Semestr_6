@@ -1,5 +1,5 @@
 CMakeFiles/exe.dir/probdist.cpp.o: \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/probdist.cpp \
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/probdist.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/12.1.0/math.h \
  /usr/include/c++/12.1.0/cmath \
  /usr/include/c++/12.1.0/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -39,4 +39,4 @@ CMakeFiles/exe.dir/probdist.cpp.o: \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-float.h \
- /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/probdist.h
+ /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/probdist.h

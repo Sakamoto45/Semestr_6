@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/exe.dir/chisquare.cpp.o"
   "CMakeFiles/exe.dir/chisquare.cpp.o.d"
-  "CMakeFiles/exe.dir/document.cpp.o"
-  "CMakeFiles/exe.dir/document.cpp.o.d"
   "CMakeFiles/exe.dir/main.cpp.o"
   "CMakeFiles/exe.dir/main.cpp.o.d"
   "CMakeFiles/exe.dir/nb_bernoulli.cpp.o"

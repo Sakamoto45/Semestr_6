@@ -13,14 +13,16 @@ public:
     ~NB_Distribution();
     double get_p() const;
     int get_k() const;
-    std::vector<double> get_density() const;
+    std::vector<double> get_density();
     std::string get_name() const;
     int get_size() const;
+    void ExtendDensity(int len = 0);
 
 private:
     double p_;
     int k_;
     std::vector<double> density_;
+    double residual_;
     // 10^6 = max sample_size, EPS * sample_size < 5
     const double EPS = 1e-6;
 };

@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample
+CMAKE_SOURCE_DIR = /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build
+CMAKE_BINARY_DIR = /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build/CMakeFiles /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build/CMakeFiles /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/Projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -152,30 +152,6 @@ chisquare.s: chisquare.cpp.s
 chisquare.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/exe.dir/build.make CMakeFiles/exe.dir/chisquare.cpp.s
 .PHONY : chisquare.cpp.s
-
-document.o: document.cpp.o
-.PHONY : document.o
-
-# target to build an object file
-document.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/exe.dir/build.make CMakeFiles/exe.dir/document.cpp.o
-.PHONY : document.cpp.o
-
-document.i: document.cpp.i
-.PHONY : document.i
-
-# target to preprocess a source file
-document.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/exe.dir/build.make CMakeFiles/exe.dir/document.cpp.i
-.PHONY : document.cpp.i
-
-document.s: document.cpp.s
-.PHONY : document.s
-
-# target to generate assembly for a file
-document.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/exe.dir/build.make CMakeFiles/exe.dir/document.cpp.s
-.PHONY : document.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -357,9 +333,6 @@ help:
 	@echo "... chisquare.o"
 	@echo "... chisquare.i"
 	@echo "... chisquare.s"
-	@echo "... document.o"
-	@echo "... document.i"
-	@echo "... document.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

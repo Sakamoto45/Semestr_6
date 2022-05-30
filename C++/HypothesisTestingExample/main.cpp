@@ -1,73 +1,76 @@
-#include "document.h"
+#include "nb_bernoulli.h"
+#include "nb_table.h"
+#include "nb_inverse.h"
+#include "chisquare.h"
+
+#include <ctime>
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
 
 int main() {
-    Document doc = Document();
-
-    doc.set_distribution_1(0.2, 10, 10000);
-    doc.set_method(Document::Method::Table);
-    doc.GenerateSampleHistogram();
-    cout << "\nSample frequency vs Theoretical frequency";
-    cout<< "\n " << doc.get_distribution_name()
-        << "\n p = " << doc.get_p1()
-        << "\n k = " << doc.get_k1()
-        << "\n sample size = " << doc.get_sample_size()
-        << "\n test statistic = " << doc.get_test_stat()
-        << "\n degree of freedom = " << doc.get_degree_of_freedom()
-        << "\n p-value = " << doc.get_p_value()
-        << endl;
-
-    const std::vector<int>& empirical_frequency = doc.get_empirical_frequency();
-    const std::vector<double>& theoretical_frequency = doc.get_theoretical_frequency();
-    cout << "i\tempir\ttheor\n";
-    for (int i = 0; i < theoretical_frequency.size(); ++i) {
-        cout << i << "\t" << empirical_frequency[i] << "\t" << theoretical_frequency[i] << "\n";
-    }
-
-
-
-
-    doc.set_distribution_0(0.2, 10);
-    doc.set_distribution_1(0.2, 10, 100);
-    doc.set_p_sample_size(10000);
-    doc.GeneratePvalueDistribution();
-    cout << "\nP-value distribution";
-    cout<< "\n p0 = " << doc.get_p0()
-        << "\n k0 = " << doc.get_k0()
-        << "\n p1 = " << doc.get_p1()
-        << "\n k1 = " << doc.get_k1()
-        << "\n sample size = " << doc.get_sample_size()
-        << "\n p sample size = " << doc.get_p_sample_size()
-        << endl;
-
-    const std::vector<double>& distribution = doc.get_p_distribution();
-    cout << "sig-lev\tp-level\n";
-    for (int i = 0; i < distribution.size(); ++i) {
-        cout << i / 100.0 << "\t" << distribution[i] << "\n";
-    }
-
-
-
-
-    doc.set_distribution_0(0.2, 10);
-    doc.set_distribution_1(0.2, 10, 100);
-    doc.set_significance_level(0.1);
-    doc.GeneratePowerRelation();
-    cout << "\nPower relation to sample size";
-    cout<< "\n p0 = " << doc.get_p0()
-        << "\n k0 = " << doc.get_k0()
-        << "\n p1 = " << doc.get_p1()
-        << "\n k1 = " << doc.get_k1()
-        << "\n significance level = " << doc.get_significance_level()
-        << endl;
+    std::mt19937 rand_gen(time(nullptr));
     
-    const std::vector<double>& power = doc.get_power_relation();
-    cout << "size\tpower\n";
-    for (int i = 0; i < power.size(); ++i) {
-        cout << (i + 1) * 100 << "\t" << power[i] << "\n";
-    }
+    vector<double> density;
+    // How to get negative binomial distribution
+    NB_Distribution distribution_0(0.3, 10);
+    density = distribution_0.get_density();
+    
+    // How to get first k probabilities of negative binomial distribution
+    int k = 10;
+    NB_Distribution distribution_1(0.2, 10);
+    distribution_1.ExtendDensity(k);
+    density = distribution_1.get_density();
+    cout << density.size() << endl; // 10
+    // To get full density call ExtendDensity() without args
+    distribution_1.ExtendDensity();
+    density = distribution_1.get_density();
+    cout << density.size() << endl; // 144 
 
+    // How to generate sample
+    NB_Generator *generator;
+    enum class Method{
+        Bernulli,
+        Table,
+        Inverse
+    } method;
+    // choose method
+    method = Method::Bernulli;
+    switch (method)
+    {
+    case Method::Bernulli:
+        generator = new NB_Bernoulli(&distribution_1, 100, rand_gen);
+        break;
+    case Method::Table:
+        generator = new NB_Table(&distribution_1, 100, rand_gen);
+        break;
+    case Method::Inverse:
+        generator = new NB_Inverse(&distribution_1, 100, rand_gen);
+        break;
+    }
+    generator->GenerateSample();
+    // get sample
+    // shallow copy
+    int *sample = generator->get_sample();
+    // use sample
+    for (int i = 0; i < generator->get_sample_size(); ++i) {
+        cout << sample[i] << " ";
+    }
+    cout << endl;
+
+    // How to use chi square test
+    // create object
+    ChiSquare chi_square(distribution_0, *generator);
+    // call needed getters
+    cout << "degree of freedom = " << chi_square.get_degree_of_freedom() << endl;
+    cout << "test statistic = " << chi_square.get_test_stat() << endl;
+    cout << "p-value = " << chi_square.get_p_value() << endl;
+    // reuse object
+    chi_square.set_data(distribution_1, *generator);
+    generator->GenerateSample();
+    cout << "p-value = " << chi_square.get_p_value() << endl;
+
+    delete generator;
     return 0;
 }
