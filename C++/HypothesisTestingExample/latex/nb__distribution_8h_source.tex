@@ -1,0 +1,36 @@
+\hypertarget{nb__distribution_8h_source}{}\doxysection{nb\+\_\+distribution.\+h}
+\label{nb__distribution_8h_source}\index{src/nb\_distribution.h@{src/nb\_distribution.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef NB\_DISTRIBUTION\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define NB\_DISTRIBUTION\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}math.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}}(\textcolor{keywordtype}{double} p, \textcolor{keywordtype}{int} k);}
+\DoxyCodeLine{13     \mbox{\hyperlink{classNB__Distribution}{\string~NB\_Distribution}}();}
+\DoxyCodeLine{14     \textcolor{keywordtype}{double} get\_p() \textcolor{keyword}{const};}
+\DoxyCodeLine{15     \textcolor{keywordtype}{int} get\_k() \textcolor{keyword}{const};}
+\DoxyCodeLine{16     std::vector<double> get\_density();}
+\DoxyCodeLine{17     std::string get\_name() \textcolor{keyword}{const};}
+\DoxyCodeLine{18     \textcolor{keywordtype}{int} get\_size() \textcolor{keyword}{const};}
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} ExtendDensity(\textcolor{keywordtype}{int} len = 0);}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{private}:}
+\DoxyCodeLine{22     \textcolor{keywordtype}{double} p\_;}
+\DoxyCodeLine{23     \textcolor{keywordtype}{int} k\_;}
+\DoxyCodeLine{24     std::vector<double> density\_;}
+\DoxyCodeLine{25     \textcolor{keywordtype}{double} residual\_;}
+\DoxyCodeLine{26     \textcolor{comment}{// 10\string^6 = max sample\_size, EPS * sample\_size < 5}}
+\DoxyCodeLine{27     \textcolor{keyword}{const} \textcolor{keywordtype}{double} EPS = 1e-\/6;}
+\DoxyCodeLine{28 \};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// NB\_DISTRIBUTION\_H}}
+
+\end{DoxyCode}

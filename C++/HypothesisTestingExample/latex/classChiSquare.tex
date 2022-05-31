@@ -1,0 +1,94 @@
+\hypertarget{classChiSquare}{}\doxysection{Chi\+Square Class Reference}
+\label{classChiSquare}\index{ChiSquare@{ChiSquare}}
+
+
+Provides methods for calculating P-\/value for a given distribution and sample.  
+
+
+
+
+{\ttfamily \#include \char`\"{}src/chisquare.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classChiSquare_ae67321e138aa707ad7c2df92ff0c7d23}{Chi\+Square}} (\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} \&distribution, const \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}} \&generator)
+\item 
+void \mbox{\hyperlink{classChiSquare_a2eaceded972facb7988dbac788c12d52}{set\+\_\+data}} (\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} \&distribution, const \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}} \&generator)
+\item 
+\mbox{\Hypertarget{classChiSquare_aa92401a10723f0ba14ca384bf6606c43}\label{classChiSquare_aa92401a10723f0ba14ca384bf6606c43}} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+theoretical\+\_\+frequency} () const
+\item 
+\mbox{\Hypertarget{classChiSquare_a55f6d04247ac4a75c866ca0119c4cf1c}\label{classChiSquare_a55f6d04247ac4a75c866ca0119c4cf1c}} 
+std\+::vector$<$ int $>$ {\bfseries get\+\_\+empirical\+\_\+frequency} () const
+\item 
+\mbox{\Hypertarget{classChiSquare_a33f1b6e492bb836ba27d8c8b96f4b930}\label{classChiSquare_a33f1b6e492bb836ba27d8c8b96f4b930}} 
+std\+::vector$<$ double $>$ {\bfseries get\+\_\+theoretical\+\_\+frequency\+\_\+grouped} ()
+\item 
+\mbox{\Hypertarget{classChiSquare_a1ce1bb9e877553fc3040c4dc2328845d}\label{classChiSquare_a1ce1bb9e877553fc3040c4dc2328845d}} 
+std\+::vector$<$ int $>$ {\bfseries get\+\_\+empirical\+\_\+frequency\+\_\+grouped} ()
+\item 
+\mbox{\Hypertarget{classChiSquare_aaea5119bae680caa1ea7d466903c1151}\label{classChiSquare_aaea5119bae680caa1ea7d466903c1151}} 
+double {\bfseries get\+\_\+test\+\_\+stat} ()
+\item 
+\mbox{\Hypertarget{classChiSquare_aba7fcbc76a4b281edcb0592eac98499f}\label{classChiSquare_aba7fcbc76a4b281edcb0592eac98499f}} 
+int {\bfseries get\+\_\+degree\+\_\+of\+\_\+freedom} ()
+\item 
+\mbox{\Hypertarget{classChiSquare_a1ae4958251e02fa2df4453b0e69fdf50}\label{classChiSquare_a1ae4958251e02fa2df4453b0e69fdf50}} 
+double {\bfseries get\+\_\+p\+\_\+value} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides methods for calculating P-\/value for a given distribution and sample. 
+
+\begin{DoxyAuthor}{Author}
+Egor Tkachenko \href{mailto:tkachenko.egor.a@gmail.com}{\texttt{ tkachenko.\+egor.\+a@gmail.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{main_8cpp-example}{main.\+cpp}}.\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classChiSquare_ae67321e138aa707ad7c2df92ff0c7d23}\label{classChiSquare_ae67321e138aa707ad7c2df92ff0c7d23}} 
+\index{ChiSquare@{ChiSquare}!ChiSquare@{ChiSquare}}
+\index{ChiSquare@{ChiSquare}!ChiSquare@{ChiSquare}}
+\doxysubsubsection{\texorpdfstring{ChiSquare()}{ChiSquare()}}
+{\footnotesize\ttfamily Chi\+Square\+::\+Chi\+Square (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} \&}]{distribution,  }\item[{const \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}} \&}]{generator }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em distribution} & The \mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} object stores distribution function \\
+\hline
+{\em generator} & The \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}} object stores sample \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classChiSquare_a2eaceded972facb7988dbac788c12d52}\label{classChiSquare_a2eaceded972facb7988dbac788c12d52}} 
+\index{ChiSquare@{ChiSquare}!set\_data@{set\_data}}
+\index{set\_data@{set\_data}!ChiSquare@{ChiSquare}}
+\doxysubsubsection{\texorpdfstring{set\_data()}{set\_data()}}
+{\footnotesize\ttfamily void Chi\+Square\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} \&}]{distribution,  }\item[{const \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}} \&}]{generator }\end{DoxyParamCaption})}
+
+Set new distribution and sample 
+\begin{DoxyParams}{Parameters}
+{\em distribution} & The \mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} object stores distribution function \\
+\hline
+{\em generator} & The \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}} object stores sample \\
+\hline
+\end{DoxyParams}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{main_8cpp-example}{main.\+cpp}}.\end{Desc}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/chisquare.\+h\item 
+src/chisquare.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,37 @@
+\begin{theindex}
+
+  \item {ChiSquare}, \hyperpage{7}
+    \subitem {ChiSquare}, \hyperpage{8}
+    \subitem {set\_data}, \hyperpage{8}
+
+  \indexspace
+
+  \item {Generate}
+    \subitem {NB\_Bernoulli}, \hyperpage{9}
+    \subitem {NB\_Inverse}, \hyperpage{11}
+    \subitem {NB\_Table}, \hyperpage{12}
+
+  \indexspace
+
+  \item {NB\_Bernoulli}, \hyperpage{9}
+    \subitem {Generate}, \hyperpage{9}
+  \item {NB\_Distribution}, \hyperpage{9}
+  \item {NB\_Generator}, \hyperpage{10}
+  \item {NB\_Inverse}, \hyperpage{11}
+    \subitem {Generate}, \hyperpage{11}
+  \item {NB\_Table}, \hyperpage{11}
+    \subitem {Generate}, \hyperpage{12}
+
+  \indexspace
+
+  \item {set\_data}
+    \subitem {ChiSquare}, \hyperpage{8}
+  \item {src/chisquare.h}, \hyperpage{13}
+  \item {src/nb\_bernoulli.h}, \hyperpage{13}
+  \item {src/nb\_distribution.h}, \hyperpage{14}
+  \item {src/nb\_generator.h}, \hyperpage{14}
+  \item {src/nb\_inverse.h}, \hyperpage{14}
+  \item {src/nb\_table.h}, \hyperpage{15}
+  \item {src/probdist.h}, \hyperpage{15}
+
+\end{theindex}

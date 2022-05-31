@@ -7,7 +7,6 @@ ChiSquare::ChiSquare(NB_Distribution& distribution, const NB_Generator& generato
 
 void ChiSquare::set_data(NB_Distribution& distribution, const NB_Generator& generator)
 {
-    grouped_is_relevant_ = false;
     stats_are_relevant_ = false;
     const int *sample = generator.get_sample();
     int sample_size = generator.get_sample_size();
@@ -23,6 +22,7 @@ void ChiSquare::set_data(NB_Distribution& distribution, const NB_Generator& gene
         empirical_frequency_[sample[i]]++;
     }
 
+    distribution.ExtendProbabilities();
     theoretical_frequency_ = distribution.get_probabilities();
     for (int i = 0; i < theoretical_frequency_.size(); ++i) {
         theoretical_frequency_[i] *= sample_size;
@@ -42,18 +42,6 @@ std::vector<double> ChiSquare::get_theoretical_frequency() const
 std::vector<int> ChiSquare::get_empirical_frequency() const
 {
     return empirical_frequency_;
-}
-
-std::vector<double> ChiSquare::get_theoretical_frequency_grouped()
-{
-    if (!grouped_is_relevant_) group();
-    return theoretical_frequency_grouped_;
-}
-
-std::vector<int> ChiSquare::get_empirical_frequency_grouped()
-{
-    if (!grouped_is_relevant_) group();
-    return empirical_frequency_grouped_;
 }
 
 double ChiSquare::get_test_stat()
@@ -96,12 +84,11 @@ void ChiSquare::group()
         empirical_frequency_grouped_.pop_back();
         empirical_frequency_grouped_.back() += tmp2;
     }
-    grouped_is_relevant_ = true;
 }
 
 void ChiSquare::calc_p_value()
 {
-    if (!grouped_is_relevant_) group();
+    group();
 
     int size = theoretical_frequency_grouped_.size();
     test_stat_ = 0;

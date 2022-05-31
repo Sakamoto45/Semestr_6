@@ -10,6 +10,8 @@ NB_Inverse::~NB_Inverse()
 
 int NB_Inverse::Generate()
 {
+//    std::vector<double> density = distribution_->get_density();
+
     int i = 0;
     if (distribution_->get_size() < 1) {
         distribution_->ExtendProbabilities(1);

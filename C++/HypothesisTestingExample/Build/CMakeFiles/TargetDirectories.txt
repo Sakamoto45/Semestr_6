@@ -1,3 +1,0 @@
-/home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build/CMakeFiles/exe.dir
-/home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build/CMakeFiles/edit_cache.dir
-/home/sakamoto45/Documents/projects/SPBU/Semestr_6/C++/HypothesisTestingExample/Build/CMakeFiles/rebuild_cache.dir

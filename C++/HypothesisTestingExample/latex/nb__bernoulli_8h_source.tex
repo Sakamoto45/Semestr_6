@@ -1,0 +1,25 @@
+\hypertarget{nb__bernoulli_8h_source}{}\doxysection{nb\+\_\+bernoulli.\+h}
+\label{nb__bernoulli_8h_source}\index{src/nb\_bernoulli.h@{src/nb\_bernoulli.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef NB\_BERNOULLI\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define NB\_BERNOULLI\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}nb\_generator.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}nb\_distribution.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{classNB__Bernoulli}{NB\_Bernoulli}} : \textcolor{keyword}{public} \mbox{\hyperlink{classNB__Generator}{NB\_Generator}}}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9 \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \mbox{\hyperlink{classNB__Bernoulli}{NB\_Bernoulli}}(\mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}}* distribution, \textcolor{keywordtype}{int} sample\_size, std::mt19937\& rand\_gen);}
+\DoxyCodeLine{11     \mbox{\hyperlink{classNB__Bernoulli}{\string~NB\_Bernoulli}}();}
+\DoxyCodeLine{12     \textcolor{keywordtype}{int} Generate() \textcolor{keyword}{override};}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{private}:}
+\DoxyCodeLine{15     \textcolor{keywordtype}{int} k\_;}
+\DoxyCodeLine{16     \textcolor{keywordtype}{double} p\_;}
+\DoxyCodeLine{17 \};}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// NB\_BERNOULLI\_H}}
+
+\end{DoxyCode}

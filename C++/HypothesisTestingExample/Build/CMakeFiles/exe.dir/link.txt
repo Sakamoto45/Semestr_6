@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/exe.dir/main.cpp.o CMakeFiles/exe.dir/chisquare.cpp.o CMakeFiles/exe.dir/nb_bernoulli.cpp.o CMakeFiles/exe.dir/nb_distribution.cpp.o CMakeFiles/exe.dir/nb_generator.cpp.o CMakeFiles/exe.dir/nb_inverse.cpp.o CMakeFiles/exe.dir/nb_table.cpp.o CMakeFiles/exe.dir/probdist.cpp.o -o exe 

@@ -1,0 +1,31 @@
+\hypertarget{nb__generator_8h_source}{}\doxysection{nb\+\_\+generator.\+h}
+\label{nb__generator_8h_source}\index{src/nb\_generator.h@{src/nb\_generator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef NB\_GENERATOR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define NB\_GENERATOR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <random>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{classNB__Generator}{NB\_Generator}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     \mbox{\hyperlink{classNB__Generator}{NB\_Generator}}(\textcolor{keywordtype}{int} sample\_size, std::mt19937\& rand\_gen);}
+\DoxyCodeLine{12     \textcolor{keyword}{virtual} \mbox{\hyperlink{classNB__Generator}{\string~NB\_Generator}}();}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} Generate()=0;}
+\DoxyCodeLine{15     \textcolor{keywordtype}{int}* GenerateSample();}
+\DoxyCodeLine{16     \textcolor{keywordtype}{int}* get\_sample() \textcolor{keyword}{const};}
+\DoxyCodeLine{17     \textcolor{keywordtype}{int} get\_sample\_size() \textcolor{keyword}{const};}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{20     std::mt19937\& rand\_gen\_;}
+\DoxyCodeLine{21     \textcolor{keywordtype}{int}* sample\_;}
+\DoxyCodeLine{22     \textcolor{keywordtype}{int} sample\_size\_;}
+\DoxyCodeLine{23 \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// NB\_GENERATOR\_H}}
+
+\end{DoxyCode}

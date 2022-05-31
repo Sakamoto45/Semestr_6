@@ -1,0 +1,82 @@
+\hypertarget{main_8cpp-example}{}\doxysection{main.\+cpp}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}../src/nb\_bernoulli.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}../src/nb\_table.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}../src/nb\_inverse.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}../src/chisquare.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main() \{}
+\DoxyCodeLine{    std::mt19937 rand\_gen(time(\textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    vector<double> density;}
+\DoxyCodeLine{    \textcolor{comment}{// How to get negative binomial distribution}}
+\DoxyCodeLine{    \mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}} distribution\_0(0.3, 10);}
+\DoxyCodeLine{    density = distribution\_0.get\_density();}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{comment}{// How to get first k probabilities of negative binomial distribution}}
+\DoxyCodeLine{    \textcolor{keywordtype}{int} k = 10;}
+\DoxyCodeLine{    \mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}} distribution\_1(0.2, 10);}
+\DoxyCodeLine{    distribution\_1.ExtendDensity(k);}
+\DoxyCodeLine{    density = distribution\_1.get\_density();}
+\DoxyCodeLine{    cout << density.size() << endl; \textcolor{comment}{// 10}}
+\DoxyCodeLine{    \textcolor{comment}{// To get full density call ExtendDensity() without args}}
+\DoxyCodeLine{    distribution\_1.ExtendDensity();}
+\DoxyCodeLine{    density = distribution\_1.get\_density();}
+\DoxyCodeLine{    cout << density.size() << endl; \textcolor{comment}{// 144 }}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// How to generate sample}}
+\DoxyCodeLine{    \mbox{\hyperlink{classNB__Generator}{NB\_Generator}} *generator;}
+\DoxyCodeLine{    \textcolor{keyword}{enum class} Method\{}
+\DoxyCodeLine{        Bernulli,}
+\DoxyCodeLine{        Table,}
+\DoxyCodeLine{        Inverse}
+\DoxyCodeLine{    \} method;}
+\DoxyCodeLine{    \textcolor{comment}{// choose method}}
+\DoxyCodeLine{    method = Method::Bernulli;}
+\DoxyCodeLine{    \textcolor{keywordflow}{switch} (method)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{case} Method::Bernulli:}
+\DoxyCodeLine{        generator = \textcolor{keyword}{new} \mbox{\hyperlink{classNB__Bernoulli}{NB\_Bernoulli}}(\&distribution\_1, 100, rand\_gen);}
+\DoxyCodeLine{        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{    \textcolor{keywordflow}{case} Method::Table:}
+\DoxyCodeLine{        generator = \textcolor{keyword}{new} \mbox{\hyperlink{classNB__Table}{NB\_Table}}(\&distribution\_1, 100, rand\_gen);}
+\DoxyCodeLine{        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{    \textcolor{keywordflow}{case} Method::Inverse:}
+\DoxyCodeLine{        generator = \textcolor{keyword}{new} \mbox{\hyperlink{classNB__Inverse}{NB\_Inverse}}(\&distribution\_1, 100, rand\_gen);}
+\DoxyCodeLine{        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    generator-\/>GenerateSample();}
+\DoxyCodeLine{    \textcolor{comment}{// get sample}}
+\DoxyCodeLine{    \textcolor{comment}{// shallow copy}}
+\DoxyCodeLine{    \textcolor{keywordtype}{int} *sample = generator-\/>get\_sample();}
+\DoxyCodeLine{    \textcolor{comment}{// use sample}}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < generator-\/>get\_sample\_size(); ++i) \{}
+\DoxyCodeLine{        cout << sample[i] << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    cout << endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// How to use chi square test}}
+\DoxyCodeLine{    \textcolor{comment}{// create object}}
+\DoxyCodeLine{    \mbox{\hyperlink{classChiSquare}{ChiSquare}} chi\_square(distribution\_0, *generator);}
+\DoxyCodeLine{    \textcolor{comment}{// call needed getters}}
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}degree of freedom = "{}} << chi\_square.get\_degree\_of\_freedom() << endl;}
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}test statistic = "{}} << chi\_square.get\_test\_stat() << endl;}
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}p-\/value = "{}} << chi\_square.get\_p\_value() << endl;}
+\DoxyCodeLine{    \textcolor{comment}{// reuse object}}
+\DoxyCodeLine{    chi\_square.\mbox{\hyperlink{classChiSquare_a2eaceded972facb7988dbac788c12d52}{set\_data}}(distribution\_1, *generator);}
+\DoxyCodeLine{    generator-\/>GenerateSample();}
+\DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}p-\/value = "{}} << chi\_square.get\_p\_value() << endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{delete} generator;}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+ 
