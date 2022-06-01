@@ -1,10 +1,18 @@
 \hypertarget{classNB__Distribution}{}\doxysection{NB\+\_\+\+Distribution Class Reference}
 \label{classNB__Distribution}\index{NB\_Distribution@{NB\_Distribution}}
+
+
+Calculates the probability function of negative binomial distribution for given parameters.  
+
+
+
+
+{\ttfamily \#include \char`\"{}src/nb\+\_\+distribution.\+h\char`\"{}}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classNB__Distribution_af9905972e56a9ea0cba919c5a7387f7e}\label{classNB__Distribution_af9905972e56a9ea0cba919c5a7387f7e}} 
-{\bfseries NB\+\_\+\+Distribution} (double p, int k)
+\mbox{\hyperlink{classNB__Distribution_af9905972e56a9ea0cba919c5a7387f7e}{NB\+\_\+\+Distribution}} (double p, int k)
 \item 
 \mbox{\Hypertarget{classNB__Distribution_aaf335f65eeff23298fb1e5022d351b82}\label{classNB__Distribution_aaf335f65eeff23298fb1e5022d351b82}} 
 double {\bfseries get\+\_\+p} () const
@@ -12,22 +20,70 @@ double {\bfseries get\+\_\+p} () const
 \mbox{\Hypertarget{classNB__Distribution_a05c1c5217bb91629e4260a54726ee2ba}\label{classNB__Distribution_a05c1c5217bb91629e4260a54726ee2ba}} 
 int {\bfseries get\+\_\+k} () const
 \item 
-\mbox{\Hypertarget{classNB__Distribution_a0405d20aafd97c4110ec3f016ff3e4a2}\label{classNB__Distribution_a0405d20aafd97c4110ec3f016ff3e4a2}} 
-std\+::vector$<$ double $>$ {\bfseries get\+\_\+density} ()
+std\+::vector$<$ double $>$ \mbox{\hyperlink{classNB__Distribution_a3cf0b6b683f81dbccb1be2d79255a4c9}{get\+\_\+probabilities}} ()
 \item 
 \mbox{\Hypertarget{classNB__Distribution_afd5b4fdb8568ad5b7aed9dd8c46501ce}\label{classNB__Distribution_afd5b4fdb8568ad5b7aed9dd8c46501ce}} 
 std\+::string {\bfseries get\+\_\+name} () const
 \item 
-\mbox{\Hypertarget{classNB__Distribution_a916741f470eb997825c8c1ba6b6c6462}\label{classNB__Distribution_a916741f470eb997825c8c1ba6b6c6462}} 
-int {\bfseries get\+\_\+size} () const
+\mbox{\Hypertarget{classNB__Distribution_a3be5c093471d942dde8d90948989df5c}\label{classNB__Distribution_a3be5c093471d942dde8d90948989df5c}} 
+int {\bfseries get\+\_\+probabilities\+\_\+size} () const
 \item 
-\mbox{\Hypertarget{classNB__Distribution_a62d363b66ee6ba78e224de5c8043074e}\label{classNB__Distribution_a62d363b66ee6ba78e224de5c8043074e}} 
-void {\bfseries Extend\+Density} (int len=0)
+void \mbox{\hyperlink{classNB__Distribution_a0b44824cb684b1b77719698cb8e1c700}{Extend\+Probabilities}} (int len=0)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+Calculates the probability function of negative binomial distribution for given parameters. 
+
+\begin{DoxyAuthor}{Author}
+Egor Tkachenko \href{mailto:tkachenko.egor.a@gmail.com}{\texttt{ tkachenko.\+egor.\+a@gmail.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
 \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{main_8cpp-example}{main.\+cpp}}.\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNB__Distribution_af9905972e56a9ea0cba919c5a7387f7e}\label{classNB__Distribution_af9905972e56a9ea0cba919c5a7387f7e}} 
+\index{NB\_Distribution@{NB\_Distribution}!NB\_Distribution@{NB\_Distribution}}
+\index{NB\_Distribution@{NB\_Distribution}!NB\_Distribution@{NB\_Distribution}}
+\doxysubsubsection{\texorpdfstring{NB\_Distribution()}{NB\_Distribution()}}
+{\footnotesize\ttfamily NB\+\_\+\+Distribution\+::\+NB\+\_\+\+Distribution (\begin{DoxyParamCaption}\item[{double}]{p,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & probability of success in Bernoulli trails. \\
+\hline
+{\em k} & predefined number of successes. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNB__Distribution_a0b44824cb684b1b77719698cb8e1c700}\label{classNB__Distribution_a0b44824cb684b1b77719698cb8e1c700}} 
+\index{NB\_Distribution@{NB\_Distribution}!ExtendProbabilities@{ExtendProbabilities}}
+\index{ExtendProbabilities@{ExtendProbabilities}!NB\_Distribution@{NB\_Distribution}}
+\doxysubsubsection{\texorpdfstring{ExtendProbabilities()}{ExtendProbabilities()}}
+{\footnotesize\ttfamily void NB\+\_\+\+Distribution\+::\+Extend\+Probabilities (\begin{DoxyParamCaption}\item[{int}]{len = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Calculates the probabilities for the following len values or until the probability of the remaining ones is less than 10$^\wedge$-\/6. 
+\begin{DoxyParams}{Parameters}
+{\em len} & indicates how many next probabilities to calculate. If 0, calculate until the probability of the remaining ones is less than 10$^\wedge$-\/6. \\
+\hline
+\end{DoxyParams}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{main_8cpp-example}{main.\+cpp}}.\end{Desc}
+\mbox{\Hypertarget{classNB__Distribution_a3cf0b6b683f81dbccb1be2d79255a4c9}\label{classNB__Distribution_a3cf0b6b683f81dbccb1be2d79255a4c9}} 
+\index{NB\_Distribution@{NB\_Distribution}!get\_probabilities@{get\_probabilities}}
+\index{get\_probabilities@{get\_probabilities}!NB\_Distribution@{NB\_Distribution}}
+\doxysubsubsection{\texorpdfstring{get\_probabilities()}{get\_probabilities()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ NB\+\_\+\+Distribution\+::get\+\_\+probabilities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return calculated probabilities. If no probabilities have been calculated, calls \mbox{\hyperlink{classNB__Distribution_a0b44824cb684b1b77719698cb8e1c700}{Extend\+Probabilities()}}. \begin{Desc}
 \item[Examples]\par
 \mbox{\hyperlink{main_8cpp-example}{main.\+cpp}}.\end{Desc}
 

@@ -12,21 +12,21 @@ using namespace std;
 int main() {
     std::mt19937 rand_gen(time(nullptr));
     
-    vector<double> density;
+    vector<double> probabilities;
     // How to get negative binomial distribution
     NB_Distribution distribution_0(0.3, 10);
-    density = distribution_0.get_probabilities();
+    probabilities = distribution_0.get_probabilities();
     
     // How to get first k probabilities of negative binomial distribution
     int k = 10;
     NB_Distribution distribution_1(0.2, 10);
     distribution_1.ExtendProbabilities(k);
-    density = distribution_1.get_probabilities();
-    cout << density.size() << endl; // 10
-    // To get full density call ExtendDensity() without args
+    probabilities = distribution_1.get_probabilities();
+    cout << probabilities.size() << endl; // 10
+    // To get full probabilities call ExtendDensity() without args
     distribution_1.ExtendProbabilities();
-    density = distribution_1.get_probabilities();
-    cout << density.size() << endl; // 144 
+    probabilities = distribution_1.get_probabilities();
+    cout << probabilities.size() << endl; // 144 
 
     // How to generate sample
     NB_Generator *generator;

@@ -9,23 +9,22 @@
 \DoxyCodeLine{5 \textcolor{preprocessor}{\#include <cstdlib>}}
 \DoxyCodeLine{6 \textcolor{preprocessor}{\#include <random>}}
 \DoxyCodeLine{7 }
-\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{classNB__Generator}{NB\_Generator}}}
-\DoxyCodeLine{9 \{}
-\DoxyCodeLine{10 \textcolor{keyword}{public}:}
-\DoxyCodeLine{11     \mbox{\hyperlink{classNB__Generator}{NB\_Generator}}(\textcolor{keywordtype}{int} sample\_size, std::mt19937\& rand\_gen);}
-\DoxyCodeLine{12     \textcolor{keyword}{virtual} \mbox{\hyperlink{classNB__Generator}{\string~NB\_Generator}}();}
-\DoxyCodeLine{13 }
-\DoxyCodeLine{14     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} Generate()=0;}
-\DoxyCodeLine{15     \textcolor{keywordtype}{int}* GenerateSample();}
-\DoxyCodeLine{16     \textcolor{keywordtype}{int}* get\_sample() \textcolor{keyword}{const};}
-\DoxyCodeLine{17     \textcolor{keywordtype}{int} get\_sample\_size() \textcolor{keyword}{const};}
-\DoxyCodeLine{18 }
-\DoxyCodeLine{19 \textcolor{keyword}{protected}:}
-\DoxyCodeLine{20     std::mt19937\& rand\_gen\_;}
-\DoxyCodeLine{21     \textcolor{keywordtype}{int}* sample\_;}
-\DoxyCodeLine{22     \textcolor{keywordtype}{int} sample\_size\_;}
-\DoxyCodeLine{23 \};}
-\DoxyCodeLine{24 }
-\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// NB\_GENERATOR\_H}}
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{classNB__Generator}{NB\_Generator}}}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{22     \mbox{\hyperlink{classNB__Generator_ac36855b4295d94d5a2f3d49b6653660c}{NB\_Generator}}(\textcolor{keywordtype}{int} sample\_size, std::mt19937\& rand\_gen);}
+\DoxyCodeLine{23     \textcolor{keyword}{virtual} \mbox{\hyperlink{classNB__Generator}{\string~NB\_Generator}}();}
+\DoxyCodeLine{27     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classNB__Generator_ab413dd0a549a08cea2631d7ea0472b1e}{Generate}}()=0;}
+\DoxyCodeLine{31     \textcolor{keywordtype}{int}* \mbox{\hyperlink{classNB__Generator_ac89cbe98ba3e21188f3170008cb3dd8f}{GenerateSample}}();}
+\DoxyCodeLine{32     \textcolor{keywordtype}{int}* get\_sample() \textcolor{keyword}{const};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} get\_sample\_size() \textcolor{keyword}{const};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{36     std::mt19937\& rand\_gen\_;}
+\DoxyCodeLine{37     \textcolor{keywordtype}{int}* sample\_;}
+\DoxyCodeLine{38     \textcolor{keywordtype}{int} sample\_size\_;}
+\DoxyCodeLine{39 \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// NB\_GENERATOR\_H}}
 
 \end{DoxyCode}

@@ -30,7 +30,7 @@ std::string NB_Distribution::get_name() const
     return "Negative Binomial distribution";
 }
 
-int NB_Distribution::get_size() const
+int NB_Distribution::get_probabilities_size() const
 {
     return probabilities_.size();
 }

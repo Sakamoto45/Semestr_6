@@ -1,37 +1,56 @@
 \begin{theindex}
 
   \item {ChiSquare}, \hyperpage{7}
-    \subitem {ChiSquare}, \hyperpage{8}
+    \subitem {ChiSquare}, \hyperpage{7}
     \subitem {set\_data}, \hyperpage{8}
+
+  \indexspace
+
+  \item {ExtendProbabilities}
+    \subitem {NB\_Distribution}, \hyperpage{11}
 
   \indexspace
 
   \item {Generate}
     \subitem {NB\_Bernoulli}, \hyperpage{9}
-    \subitem {NB\_Inverse}, \hyperpage{11}
-    \subitem {NB\_Table}, \hyperpage{12}
+    \subitem {NB\_Generator}, \hyperpage{13}
+    \subitem {NB\_Inverse}, \hyperpage{14}
+    \subitem {NB\_Table}, \hyperpage{17}
+  \item {GenerateSample}
+    \subitem {NB\_Generator}, \hyperpage{13}
+  \item {get\_probabilities}
+    \subitem {NB\_Distribution}, \hyperpage{11}
 
   \indexspace
 
-  \item {NB\_Bernoulli}, \hyperpage{9}
+  \item {NB\_Bernoulli}, \hyperpage{8}
     \subitem {Generate}, \hyperpage{9}
-  \item {NB\_Distribution}, \hyperpage{9}
-  \item {NB\_Generator}, \hyperpage{10}
-  \item {NB\_Inverse}, \hyperpage{11}
-    \subitem {Generate}, \hyperpage{11}
-  \item {NB\_Table}, \hyperpage{11}
-    \subitem {Generate}, \hyperpage{12}
+    \subitem {NB\_Bernoulli}, \hyperpage{9}
+  \item {NB\_Distribution}, \hyperpage{10}
+    \subitem {ExtendProbabilities}, \hyperpage{11}
+    \subitem {get\_probabilities}, \hyperpage{11}
+    \subitem {NB\_Distribution}, \hyperpage{10}
+  \item {NB\_Generator}, \hyperpage{12}
+    \subitem {Generate}, \hyperpage{13}
+    \subitem {GenerateSample}, \hyperpage{13}
+    \subitem {NB\_Generator}, \hyperpage{12}
+  \item {NB\_Inverse}, \hyperpage{13}
+    \subitem {Generate}, \hyperpage{14}
+    \subitem {NB\_Inverse}, \hyperpage{14}
+  \item {NB\_Table}, \hyperpage{15}
+    \subitem {Generate}, \hyperpage{17}
+    \subitem {NB\_Table}, \hyperpage{16}
 
   \indexspace
 
   \item {set\_data}
     \subitem {ChiSquare}, \hyperpage{8}
-  \item {src/chisquare.h}, \hyperpage{13}
-  \item {src/nb\_bernoulli.h}, \hyperpage{13}
-  \item {src/nb\_distribution.h}, \hyperpage{14}
-  \item {src/nb\_generator.h}, \hyperpage{14}
-  \item {src/nb\_inverse.h}, \hyperpage{14}
-  \item {src/nb\_table.h}, \hyperpage{15}
-  \item {src/probdist.h}, \hyperpage{15}
+  \item {src/chisquare.h}, \hyperpage{19}
+  \item {src/nb\_bernoulli.h}, \hyperpage{19}
+  \item {src/nb\_distribution.h}, \hyperpage{20}
+  \item {src/nb\_generator.h}, \hyperpage{20}
+  \item {src/nb\_inverse.h}, \hyperpage{20}
+  \item {src/nb\_table.h}, \hyperpage{21}
+  \item {src/probdist.h}, \hyperpage{21}
 
 \end{theindex}

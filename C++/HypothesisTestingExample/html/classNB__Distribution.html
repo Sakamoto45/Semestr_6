@@ -68,11 +68,15 @@ $(function() {
   <div class="headertitle"><div class="title">NB_Distribution Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Calculates the probability function of negative binomial distribution for given parameters.  
+ <a href="classNB__Distribution.html#details">More...</a></p>
+
+<p><code>#include &quot;<a class="el" href="nb__distribution_8h_source.html">src/nb_distribution.h</a>&quot;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af9905972e56a9ea0cba919c5a7387f7e"><td class="memItemLeft" align="right" valign="top"><a id="af9905972e56a9ea0cba919c5a7387f7e" name="af9905972e56a9ea0cba919c5a7387f7e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NB_Distribution</b> (double p, int k)</td></tr>
+<tr class="memitem:af9905972e56a9ea0cba919c5a7387f7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNB__Distribution.html#af9905972e56a9ea0cba919c5a7387f7e">NB_Distribution</a> (double p, int k)</td></tr>
 <tr class="separator:af9905972e56a9ea0cba919c5a7387f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf335f65eeff23298fb1e5022d351b82"><td class="memItemLeft" align="right" valign="top"><a id="aaf335f65eeff23298fb1e5022d351b82" name="aaf335f65eeff23298fb1e5022d351b82"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>get_p</b> () const</td></tr>
@@ -80,23 +84,107 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>get_p</b> () const<
 <tr class="memitem:a05c1c5217bb91629e4260a54726ee2ba"><td class="memItemLeft" align="right" valign="top"><a id="a05c1c5217bb91629e4260a54726ee2ba" name="a05c1c5217bb91629e4260a54726ee2ba"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>get_k</b> () const</td></tr>
 <tr class="separator:a05c1c5217bb91629e4260a54726ee2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0405d20aafd97c4110ec3f016ff3e4a2"><td class="memItemLeft" align="right" valign="top"><a id="a0405d20aafd97c4110ec3f016ff3e4a2" name="a0405d20aafd97c4110ec3f016ff3e4a2"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_density</b> ()</td></tr>
-<tr class="separator:a0405d20aafd97c4110ec3f016ff3e4a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cf0b6b683f81dbccb1be2d79255a4c9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNB__Distribution.html#a3cf0b6b683f81dbccb1be2d79255a4c9">get_probabilities</a> ()</td></tr>
+<tr class="separator:a3cf0b6b683f81dbccb1be2d79255a4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd5b4fdb8568ad5b7aed9dd8c46501ce"><td class="memItemLeft" align="right" valign="top"><a id="afd5b4fdb8568ad5b7aed9dd8c46501ce" name="afd5b4fdb8568ad5b7aed9dd8c46501ce"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_name</b> () const</td></tr>
 <tr class="separator:afd5b4fdb8568ad5b7aed9dd8c46501ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a916741f470eb997825c8c1ba6b6c6462"><td class="memItemLeft" align="right" valign="top"><a id="a916741f470eb997825c8c1ba6b6c6462" name="a916741f470eb997825c8c1ba6b6c6462"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>get_size</b> () const</td></tr>
-<tr class="separator:a916741f470eb997825c8c1ba6b6c6462"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62d363b66ee6ba78e224de5c8043074e"><td class="memItemLeft" align="right" valign="top"><a id="a62d363b66ee6ba78e224de5c8043074e" name="a62d363b66ee6ba78e224de5c8043074e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ExtendDensity</b> (int len=0)</td></tr>
-<tr class="separator:a62d363b66ee6ba78e224de5c8043074e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3be5c093471d942dde8d90948989df5c"><td class="memItemLeft" align="right" valign="top"><a id="a3be5c093471d942dde8d90948989df5c" name="a3be5c093471d942dde8d90948989df5c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>get_probabilities_size</b> () const</td></tr>
+<tr class="separator:a3be5c093471d942dde8d90948989df5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b44824cb684b1b77719698cb8e1c700"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNB__Distribution.html#a0b44824cb684b1b77719698cb8e1c700">ExtendProbabilities</a> (int len=0)</td></tr>
+<tr class="separator:a0b44824cb684b1b77719698cb8e1c700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="main_8cpp-example.html#_a0">main.cpp</a>.</dd>
+<div class="textblock"><p >Calculates the probability function of negative binomial distribution for given parameters. </p>
+<dl class="section author"><dt>Author</dt><dd>Egor Tkachenko <a href="#" onclick="location.href='mai'+'lto:'+'tka'+'ch'+'enk'+'o.'+'ego'+'r.'+'a@g'+'ma'+'il.'+'co'+'m'; return false;">tkach<span class="obfuscator">.nosp@m.</span>enko<span class="obfuscator">.nosp@m.</span>.egor<span class="obfuscator">.nosp@m.</span>.a@g<span class="obfuscator">.nosp@m.</span>mail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="main_8cpp-example.html#_a0">main.cpp</a>.</dd>
 </dl>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af9905972e56a9ea0cba919c5a7387f7e" name="af9905972e56a9ea0cba919c5a7387f7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9905972e56a9ea0cba919c5a7387f7e">&#9670;&nbsp;</a></span>NB_Distribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NB_Distribution::NB_Distribution </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>probability of success in Bernoulli trails. </td></tr>
+    <tr><td class="paramname">k</td><td>predefined number of successes. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0b44824cb684b1b77719698cb8e1c700" name="a0b44824cb684b1b77719698cb8e1c700"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b44824cb684b1b77719698cb8e1c700">&#9670;&nbsp;</a></span>ExtendProbabilities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NB_Distribution::ExtendProbabilities </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Calculates the probabilities for the following len values or until the probability of the remaining ones is less than 10^-6. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">len</td><td>indicates how many next probabilities to calculate. If 0, calculate until the probability of the remaining ones is less than 10^-6. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="main_8cpp-example.html#a2">main.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a3cf0b6b683f81dbccb1be2d79255a4c9" name="a3cf0b6b683f81dbccb1be2d79255a4c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cf0b6b683f81dbccb1be2d79255a4c9">&#9670;&nbsp;</a></span>get_probabilities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; NB_Distribution::get_probabilities </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Return calculated probabilities. If no probabilities have been calculated, calls <a class="el" href="classNB__Distribution.html#a0b44824cb684b1b77719698cb8e1c700">ExtendProbabilities()</a>. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="main_8cpp-example.html#a1">main.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="nb__distribution_8h_source.html">nb_distribution.h</a></li>
 <li>src/nb_distribution.cpp</li>
 </ul>

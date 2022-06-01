@@ -1,5 +1,14 @@
 \hypertarget{classNB__Inverse}{}\doxysection{NB\+\_\+\+Inverse Class Reference}
 \label{classNB__Inverse}\index{NB\_Inverse@{NB\_Inverse}}
+
+
+Derived class for generating a negative binomial random value using the inverse CDF method.  
+
+
+
+
+{\ttfamily \#include \char`\"{}src/nb\+\_\+inverse.\+h\char`\"{}}
+
 Inheritance diagram for NB\+\_\+\+Inverse\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,8 +18,7 @@ Inheritance diagram for NB\+\_\+\+Inverse\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classNB__Inverse_aa569dfd809be66a1aa406d1a44ab09f1}\label{classNB__Inverse_aa569dfd809be66a1aa406d1a44ab09f1}} 
-{\bfseries NB\+\_\+\+Inverse} (\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} $\ast$distribution, int sample\+\_\+size, std\+::mt19937 \&rand\+\_\+gen)
+\mbox{\hyperlink{classNB__Inverse_aa569dfd809be66a1aa406d1a44ab09f1}{NB\+\_\+\+Inverse}} (\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} $\ast$distribution, int sample\+\_\+size, std\+::mt19937 \&rand\+\_\+gen)
 \item 
 int \mbox{\hyperlink{classNB__Inverse_ae054ae4c6f0ddb253f0d7ff9ca34032a}{Generate}} () override
 \end{DoxyCompactItemize}
@@ -18,9 +26,35 @@ int \mbox{\hyperlink{classNB__Inverse_ae054ae4c6f0ddb253f0d7ff9ca34032a}{Generat
 
 
 \doxysubsection{Detailed Description}
+Derived class for generating a negative binomial random value using the inverse CDF method. 
+
+\begin{DoxyAuthor}{Author}
+Egor Tkachenko \href{mailto:tkachenko.egor.a@gmail.com}{\texttt{ tkachenko.\+egor.\+a@gmail.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
 \begin{Desc}
 \item[Examples]\par
 \mbox{\hyperlink{main_8cpp-example}{main.\+cpp}}.\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNB__Inverse_aa569dfd809be66a1aa406d1a44ab09f1}\label{classNB__Inverse_aa569dfd809be66a1aa406d1a44ab09f1}} 
+\index{NB\_Inverse@{NB\_Inverse}!NB\_Inverse@{NB\_Inverse}}
+\index{NB\_Inverse@{NB\_Inverse}!NB\_Inverse@{NB\_Inverse}}
+\doxysubsubsection{\texorpdfstring{NB\_Inverse()}{NB\_Inverse()}}
+{\footnotesize\ttfamily NB\+\_\+\+Inverse\+::\+NB\+\_\+\+Inverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} $\ast$}]{distribution,  }\item[{int}]{sample\+\_\+size,  }\item[{std\+::mt19937 \&}]{rand\+\_\+gen }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em distribution} & pointer to the \mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} object to get from it parameters for generation. \\
+\hline
+{\em sample\+\_\+size} & size of the sample to be generated. \\
+\hline
+{\em rand\+\_\+gen} & mt19937 random number generator. \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -30,9 +64,9 @@ int \mbox{\hyperlink{classNB__Inverse_ae054ae4c6f0ddb253f0d7ff9ca34032a}{Generat
 \doxysubsubsection{\texorpdfstring{Generate()}{Generate()}}
 {\footnotesize\ttfamily int NB\+\_\+\+Inverse\+::\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
+Overridden method that implements generation using inverse CDF method. 
 
-
-Implements \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}}.
+Implements \mbox{\hyperlink{classNB__Generator_ab413dd0a549a08cea2631d7ea0472b1e}{NB\+\_\+\+Generator}}.
 
 
 

@@ -8,7 +8,7 @@
 
 /**
  * @class ChiSquare chisquare.h "src/chisquare.h"
- * @author  Egor Tkachenko <tkachenko.egor.a@gmail.com>
+ * @author Egor Tkachenko <tkachenko.egor.a@gmail.com>
  * @version 1.0
  * @brief Provides methods for calculating P-value for a given distribution and sample.
  * @example main.cpp
@@ -17,14 +17,14 @@ class ChiSquare
 {
 public:
     /**
-     * @param distribution The NB_Distribution object stores distribution function
-     * @param generator The NB_Generator object stores sample
+     * @param distribution NB_Distribution object stores probability function.
+     * @param generator NB_Generator object stores sample.
      */
     ChiSquare(NB_Distribution& distribution, const NB_Generator& generator);
     /**
-     * Set new distribution and sample
-     * @param distribution The NB_Distribution object stores distribution function
-     * @param generator The NB_Generator object stores sample
+     * Set new distribution and sample.
+     * @param distribution NB_Distribution object stores probability function.
+     * @param generator NB_Generator object stores sample.
      */
     void set_data(NB_Distribution& distribution, const NB_Generator& generator);
 

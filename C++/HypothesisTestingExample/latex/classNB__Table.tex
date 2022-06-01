@@ -1,5 +1,14 @@
 \hypertarget{classNB__Table}{}\doxysection{NB\+\_\+\+Table Class Reference}
 \label{classNB__Table}\index{NB\_Table@{NB\_Table}}
+
+
+Derived class for generating a negative binomial random value using the table method.  
+
+
+
+
+{\ttfamily \#include \char`\"{}src/nb\+\_\+table.\+h\char`\"{}}
+
 Inheritance diagram for NB\+\_\+\+Table\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,8 +18,7 @@ Inheritance diagram for NB\+\_\+\+Table\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classNB__Table_afff6b629e3cf0aed60e5e3581b0b076c}\label{classNB__Table_afff6b629e3cf0aed60e5e3581b0b076c}} 
-{\bfseries NB\+\_\+\+Table} (\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} $\ast$distribution, int sample\+\_\+size, std\+::mt19937 \&rand\+\_\+gen)
+\mbox{\hyperlink{classNB__Table_afff6b629e3cf0aed60e5e3581b0b076c}{NB\+\_\+\+Table}} (\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} $\ast$distribution, int sample\+\_\+size, std\+::mt19937 \&rand\+\_\+gen)
 \item 
 int \mbox{\hyperlink{classNB__Table_aadc615c2aae782ec0d29a9ab41421015}{Generate}} () override
 \end{DoxyCompactItemize}
@@ -18,9 +26,35 @@ int \mbox{\hyperlink{classNB__Table_aadc615c2aae782ec0d29a9ab41421015}{Generate}
 
 
 \doxysubsection{Detailed Description}
+Derived class for generating a negative binomial random value using the table method. 
+
+\begin{DoxyAuthor}{Author}
+Egor Tkachenko \href{mailto:tkachenko.egor.a@gmail.com}{\texttt{ tkachenko.\+egor.\+a@gmail.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
 \begin{Desc}
 \item[Examples]\par
 \mbox{\hyperlink{main_8cpp-example}{main.\+cpp}}.\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNB__Table_afff6b629e3cf0aed60e5e3581b0b076c}\label{classNB__Table_afff6b629e3cf0aed60e5e3581b0b076c}} 
+\index{NB\_Table@{NB\_Table}!NB\_Table@{NB\_Table}}
+\index{NB\_Table@{NB\_Table}!NB\_Table@{NB\_Table}}
+\doxysubsubsection{\texorpdfstring{NB\_Table()}{NB\_Table()}}
+{\footnotesize\ttfamily NB\+\_\+\+Table\+::\+NB\+\_\+\+Table (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} $\ast$}]{distribution,  }\item[{int}]{sample\+\_\+size,  }\item[{std\+::mt19937 \&}]{rand\+\_\+gen }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em distribution} & pointer to the \mbox{\hyperlink{classNB__Distribution}{NB\+\_\+\+Distribution}} object to get from it parameters for generation. \\
+\hline
+{\em sample\+\_\+size} & size of the sample to be generated. \\
+\hline
+{\em rand\+\_\+gen} & mt19937 random number generator. \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -30,9 +64,9 @@ int \mbox{\hyperlink{classNB__Table_aadc615c2aae782ec0d29a9ab41421015}{Generate}
 \doxysubsubsection{\texorpdfstring{Generate()}{Generate()}}
 {\footnotesize\ttfamily int NB\+\_\+\+Table\+::\+Generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
+Overridden method that implements generation using table method. 
 
-
-Implements \mbox{\hyperlink{classNB__Generator}{NB\+\_\+\+Generator}}.
+Implements \mbox{\hyperlink{classNB__Generator_ab413dd0a549a08cea2631d7ea0472b1e}{NB\+\_\+\+Generator}}.
 
 
 

@@ -15,21 +15,21 @@
 \DoxyCodeLine{\textcolor{keywordtype}{int} main() \{}
 \DoxyCodeLine{    std::mt19937 rand\_gen(time(\textcolor{keyword}{nullptr}));}
 \DoxyCodeLine{    }
-\DoxyCodeLine{    vector<double> density;}
+\DoxyCodeLine{    vector<double> probabilities;}
 \DoxyCodeLine{    \textcolor{comment}{// How to get negative binomial distribution}}
 \DoxyCodeLine{    \mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}} distribution\_0(0.3, 10);}
-\DoxyCodeLine{    density = distribution\_0.get\_density();}
+\DoxyCodeLine{    probabilities = distribution\_0.\mbox{\hyperlink{classNB__Distribution_a3cf0b6b683f81dbccb1be2d79255a4c9}{get\_probabilities}}();}
 \DoxyCodeLine{    }
 \DoxyCodeLine{    \textcolor{comment}{// How to get first k probabilities of negative binomial distribution}}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} k = 10;}
 \DoxyCodeLine{    \mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}} distribution\_1(0.2, 10);}
-\DoxyCodeLine{    distribution\_1.ExtendDensity(k);}
-\DoxyCodeLine{    density = distribution\_1.get\_density();}
-\DoxyCodeLine{    cout << density.size() << endl; \textcolor{comment}{// 10}}
-\DoxyCodeLine{    \textcolor{comment}{// To get full density call ExtendDensity() without args}}
-\DoxyCodeLine{    distribution\_1.ExtendDensity();}
-\DoxyCodeLine{    density = distribution\_1.get\_density();}
-\DoxyCodeLine{    cout << density.size() << endl; \textcolor{comment}{// 144 }}
+\DoxyCodeLine{    distribution\_1.\mbox{\hyperlink{classNB__Distribution_a0b44824cb684b1b77719698cb8e1c700}{ExtendProbabilities}}(k);}
+\DoxyCodeLine{    probabilities = distribution\_1.\mbox{\hyperlink{classNB__Distribution_a3cf0b6b683f81dbccb1be2d79255a4c9}{get\_probabilities}}();}
+\DoxyCodeLine{    cout << probabilities.size() << endl; \textcolor{comment}{// 10}}
+\DoxyCodeLine{    \textcolor{comment}{// To get full probabilities call ExtendDensity() without args}}
+\DoxyCodeLine{    distribution\_1.\mbox{\hyperlink{classNB__Distribution_a0b44824cb684b1b77719698cb8e1c700}{ExtendProbabilities}}();}
+\DoxyCodeLine{    probabilities = distribution\_1.\mbox{\hyperlink{classNB__Distribution_a3cf0b6b683f81dbccb1be2d79255a4c9}{get\_probabilities}}();}
+\DoxyCodeLine{    cout << probabilities.size() << endl; \textcolor{comment}{// 144 }}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{comment}{// How to generate sample}}
 \DoxyCodeLine{    \mbox{\hyperlink{classNB__Generator}{NB\_Generator}} *generator;}
@@ -52,7 +52,7 @@
 \DoxyCodeLine{        generator = \textcolor{keyword}{new} \mbox{\hyperlink{classNB__Inverse}{NB\_Inverse}}(\&distribution\_1, 100, rand\_gen);}
 \DoxyCodeLine{        \textcolor{keywordflow}{break};}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{    generator-\/>GenerateSample();}
+\DoxyCodeLine{    generator-\/>\mbox{\hyperlink{classNB__Generator_ac89cbe98ba3e21188f3170008cb3dd8f}{GenerateSample}}();}
 \DoxyCodeLine{    \textcolor{comment}{// get sample}}
 \DoxyCodeLine{    \textcolor{comment}{// shallow copy}}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} *sample = generator-\/>get\_sample();}
@@ -71,7 +71,7 @@
 \DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}p-\/value = "{}} << chi\_square.get\_p\_value() << endl;}
 \DoxyCodeLine{    \textcolor{comment}{// reuse object}}
 \DoxyCodeLine{    chi\_square.\mbox{\hyperlink{classChiSquare_a2eaceded972facb7988dbac788c12d52}{set\_data}}(distribution\_1, *generator);}
-\DoxyCodeLine{    generator-\/>GenerateSample();}
+\DoxyCodeLine{    generator-\/>\mbox{\hyperlink{classNB__Generator_ac89cbe98ba3e21188f3170008cb3dd8f}{GenerateSample}}();}
 \DoxyCodeLine{    cout << \textcolor{stringliteral}{"{}p-\/value = "{}} << chi\_square.get\_p\_value() << endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{delete} generator;}

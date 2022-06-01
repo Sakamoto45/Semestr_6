@@ -69,28 +69,30 @@ $(function() {
   <div class="headertitle"><div class="title">NB_Generator Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base class for generating a sample of negative binomial distribution.  
+ <a href="classNB__Generator.html#details">More...</a></p>
+
+<p><code>#include &quot;<a class="el" href="nb__generator_8h_source.html">src/nb_generator.h</a>&quot;</code></p>
 <div class="dynheader">
 Inheritance diagram for NB_Generator:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classNB__Generator.png" usemap="#NB_5FGenerator_map" alt=""/>
   <map id="NB_5FGenerator_map" name="NB_5FGenerator_map">
-<area href="classNB__Bernoulli.html" alt="NB_Bernoulli" shape="rect" coords="0,56,93,80"/>
-<area href="classNB__Inverse.html" alt="NB_Inverse" shape="rect" coords="103,56,196,80"/>
-<area href="classNB__Table.html" alt="NB_Table" shape="rect" coords="206,56,299,80"/>
+<area href="classNB__Bernoulli.html" title="Derived class for generating a negative binomial random value using the Bernoulli method." alt="NB_Bernoulli" shape="rect" coords="0,56,93,80"/>
+<area href="classNB__Inverse.html" title="Derived class for generating a negative binomial random value using the inverse CDF method." alt="NB_Inverse" shape="rect" coords="103,56,196,80"/>
+<area href="classNB__Table.html" title="Derived class for generating a negative binomial random value using the table method." alt="NB_Table" shape="rect" coords="206,56,299,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac36855b4295d94d5a2f3d49b6653660c"><td class="memItemLeft" align="right" valign="top"><a id="ac36855b4295d94d5a2f3d49b6653660c" name="ac36855b4295d94d5a2f3d49b6653660c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NB_Generator</b> (int sample_size, std::mt19937 &amp;rand_gen)</td></tr>
+<tr class="memitem:ac36855b4295d94d5a2f3d49b6653660c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNB__Generator.html#ac36855b4295d94d5a2f3d49b6653660c">NB_Generator</a> (int sample_size, std::mt19937 &amp;rand_gen)</td></tr>
 <tr class="separator:ac36855b4295d94d5a2f3d49b6653660c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab413dd0a549a08cea2631d7ea0472b1e"><td class="memItemLeft" align="right" valign="top"><a id="ab413dd0a549a08cea2631d7ea0472b1e" name="ab413dd0a549a08cea2631d7ea0472b1e"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>Generate</b> ()=0</td></tr>
+<tr class="memitem:ab413dd0a549a08cea2631d7ea0472b1e"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNB__Generator.html#ab413dd0a549a08cea2631d7ea0472b1e">Generate</a> ()=0</td></tr>
 <tr class="separator:ab413dd0a549a08cea2631d7ea0472b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac89cbe98ba3e21188f3170008cb3dd8f"><td class="memItemLeft" align="right" valign="top"><a id="ac89cbe98ba3e21188f3170008cb3dd8f" name="ac89cbe98ba3e21188f3170008cb3dd8f"></a>
-int *&#160;</td><td class="memItemRight" valign="bottom"><b>GenerateSample</b> ()</td></tr>
+<tr class="memitem:ac89cbe98ba3e21188f3170008cb3dd8f"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNB__Generator.html#ac89cbe98ba3e21188f3170008cb3dd8f">GenerateSample</a> ()</td></tr>
 <tr class="separator:ac89cbe98ba3e21188f3170008cb3dd8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2b5adc80ae5425f7cfa3a675530a483"><td class="memItemLeft" align="right" valign="top"><a id="af2b5adc80ae5425f7cfa3a675530a483" name="af2b5adc80ae5425f7cfa3a675530a483"></a>
 int *&#160;</td><td class="memItemRight" valign="bottom"><b>get_sample</b> () const</td></tr>
@@ -112,9 +114,97 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>sample_size_</b></td><
 <tr class="separator:a2a9f6d82117593578c4e01c75b3c1c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="main_8cpp-example.html#_a3">main.cpp</a>.</dd>
+<div class="textblock"><p >Base class for generating a sample of negative binomial distribution. </p>
+<dl class="section author"><dt>Author</dt><dd>Egor Tkachenko <a href="#" onclick="location.href='mai'+'lto:'+'tka'+'ch'+'enk'+'o.'+'ego'+'r.'+'a@g'+'ma'+'il.'+'co'+'m'; return false;">tkach<span class="obfuscator">.nosp@m.</span>enko<span class="obfuscator">.nosp@m.</span>.egor<span class="obfuscator">.nosp@m.</span>.a@g<span class="obfuscator">.nosp@m.</span>mail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="main_8cpp-example.html#_a3">main.cpp</a>.</dd>
 </dl>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac36855b4295d94d5a2f3d49b6653660c" name="ac36855b4295d94d5a2f3d49b6653660c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac36855b4295d94d5a2f3d49b6653660c">&#9670;&nbsp;</a></span>NB_Generator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NB_Generator::NB_Generator </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sample_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::mt19937 &amp;&#160;</td>
+          <td class="paramname"><em>rand_gen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sample_size</td><td>size of the sample to be generated. </td></tr>
+    <tr><td class="paramname">rand_gen</td><td>mt19937 random number generator. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab413dd0a549a08cea2631d7ea0472b1e" name="ab413dd0a549a08cea2631d7ea0472b1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab413dd0a549a08cea2631d7ea0472b1e">&#9670;&nbsp;</a></span>Generate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int NB_Generator::Generate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Virtual method for different implementations of random value generation. </p>
+
+<p>Implemented in <a class="el" href="classNB__Bernoulli.html#acdefe486379e0023d481ee54dfcff53e">NB_Bernoulli</a>, <a class="el" href="classNB__Inverse.html#ae054ae4c6f0ddb253f0d7ff9ca34032a">NB_Inverse</a>, and <a class="el" href="classNB__Table.html#aadc615c2aae782ec0d29a9ab41421015">NB_Table</a>.</p>
+
+</div>
+</div>
+<a id="ac89cbe98ba3e21188f3170008cb3dd8f" name="ac89cbe98ba3e21188f3170008cb3dd8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac89cbe98ba3e21188f3170008cb3dd8f">&#9670;&nbsp;</a></span>GenerateSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * NB_Generator::GenerateSample </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Method generating sample with <a class="el" href="classNB__Generator.html#ab413dd0a549a08cea2631d7ea0472b1e">Generate()</a>. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="main_8cpp-example.html#a7">main.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="nb__generator_8h_source.html">nb_generator.h</a></li>
 <li>src/nb_generator.cpp</li>
 </ul>

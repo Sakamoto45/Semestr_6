@@ -9,28 +9,27 @@
 \DoxyCodeLine{5 \textcolor{preprocessor}{\#include <string>}}
 \DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}math.h"{}}}
 \DoxyCodeLine{7 }
-\DoxyCodeLine{8 }
-\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}}}
-\DoxyCodeLine{10 \{}
-\DoxyCodeLine{11 \textcolor{keyword}{public}:}
-\DoxyCodeLine{12     \mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}}(\textcolor{keywordtype}{double} p, \textcolor{keywordtype}{int} k);}
-\DoxyCodeLine{13     \mbox{\hyperlink{classNB__Distribution}{\string~NB\_Distribution}}();}
-\DoxyCodeLine{14     \textcolor{keywordtype}{double} get\_p() \textcolor{keyword}{const};}
-\DoxyCodeLine{15     \textcolor{keywordtype}{int} get\_k() \textcolor{keyword}{const};}
-\DoxyCodeLine{16     std::vector<double> get\_density();}
-\DoxyCodeLine{17     std::string get\_name() \textcolor{keyword}{const};}
-\DoxyCodeLine{18     \textcolor{keywordtype}{int} get\_size() \textcolor{keyword}{const};}
-\DoxyCodeLine{19     \textcolor{keywordtype}{void} ExtendDensity(\textcolor{keywordtype}{int} len = 0);}
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21 \textcolor{keyword}{private}:}
-\DoxyCodeLine{22     \textcolor{keywordtype}{double} p\_;}
-\DoxyCodeLine{23     \textcolor{keywordtype}{int} k\_;}
-\DoxyCodeLine{24     std::vector<double> density\_;}
-\DoxyCodeLine{25     \textcolor{keywordtype}{double} residual\_;}
-\DoxyCodeLine{26     \textcolor{comment}{// 10\string^6 = max sample\_size, EPS * sample\_size < 5}}
-\DoxyCodeLine{27     \textcolor{keyword}{const} \textcolor{keywordtype}{double} EPS = 1e-\/6;}
-\DoxyCodeLine{28 \};}
-\DoxyCodeLine{29 }
-\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// NB\_DISTRIBUTION\_H}}
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{classNB__Distribution}{NB\_Distribution}}}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{22     \mbox{\hyperlink{classNB__Distribution_af9905972e56a9ea0cba919c5a7387f7e}{NB\_Distribution}}(\textcolor{keywordtype}{double} p, \textcolor{keywordtype}{int} k);}
+\DoxyCodeLine{23     \mbox{\hyperlink{classNB__Distribution}{\string~NB\_Distribution}}();}
+\DoxyCodeLine{24     \textcolor{keywordtype}{double} get\_p() \textcolor{keyword}{const};}
+\DoxyCodeLine{25     \textcolor{keywordtype}{int} get\_k() \textcolor{keyword}{const};}
+\DoxyCodeLine{30     std::vector<double> \mbox{\hyperlink{classNB__Distribution_a3cf0b6b683f81dbccb1be2d79255a4c9}{get\_probabilities}}();}
+\DoxyCodeLine{31     std::string get\_name() \textcolor{keyword}{const};}
+\DoxyCodeLine{32     \textcolor{keywordtype}{int} get\_probabilities\_size() \textcolor{keyword}{const};}
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} \mbox{\hyperlink{classNB__Distribution_a0b44824cb684b1b77719698cb8e1c700}{ExtendProbabilities}}(\textcolor{keywordtype}{int} len = 0);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{private}:}
+\DoxyCodeLine{42     \textcolor{keywordtype}{double} p\_;}
+\DoxyCodeLine{43     \textcolor{keywordtype}{int} k\_;}
+\DoxyCodeLine{44     std::vector<double> probabilities\_;}
+\DoxyCodeLine{45     \textcolor{keywordtype}{double} residual\_;}
+\DoxyCodeLine{46     \textcolor{comment}{// 10\string^6 = max sample\_size, EPS * sample\_size < 5}}
+\DoxyCodeLine{47     \textcolor{keyword}{const} \textcolor{keywordtype}{double} EPS = 1e-\/6;}
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// NB\_DISTRIBUTION\_H}}
 
 \end{DoxyCode}
