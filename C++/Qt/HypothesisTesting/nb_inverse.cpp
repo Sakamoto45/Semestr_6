@@ -10,15 +10,17 @@ NB_Inverse::~NB_Inverse()
 
 int NB_Inverse::Generate()
 {
+//    std::vector<double> density = distribution_->get_density();
+
     int i = 0;
-    if (distribution_->get_size() < 1) {
+    if (distribution_->get_probabilities_size() < 1) {
         distribution_->ExtendProbabilities(1);
     }
     double t = distribution_->get_probabilities()[0];
     double value = rand_gen_() / (double)rand_gen_.max();
     while (value > t) {
         ++i;
-        if (distribution_->get_size() < i + 1) {
+        if (distribution_->get_probabilities_size() < i + 1) {
             distribution_->ExtendProbabilities(1);
         }
         t += distribution_->get_probabilities()[i];
