@@ -20,7 +20,7 @@ library(abind)
 # l_known - length of "known" signal
 # l_forecast - length of forecast
 # l_window - length of window
-repeats <- 100
+repeats <- 50
 
 MAX_LEN <- 150
 
@@ -28,23 +28,26 @@ MAX_LEN <- 150
 
 MSE <- function(a, b) mean((a - b)^2)
 
-
 exp_ <- function(base, len = MAX_LEN) exp(base * (1:len))
 cos_ <- function(period, phase = 0, len = 150) cospi(2 * ((1:len) / period + phase))
 
 
-
-
 exps <- lapply(c(0, 0.005, 0.015, 0.025), exp_)
-coses <- lapply(c(8, 8.01, 8.02, 8.03), cos_)
+# periods <- c(8, 8.01, 8.02, 8.03, 8.04, 8.05, 8.06)
+periods <- c(8, 8.02, 8.03, 8.04, 8.05, 8.06, 8.08, 8.1, 8.2)
+coses <- lapply(periods, cos_)
 signals <- coses
 
-# signals <- mapply(rep, c(1, 2, 3, 4), rep(MAX_LEN, 4), SIMPLIFY = FALSE)
 noises <- list(
     lapply(rep(MAX_LEN, repeats), rnorm),
     lapply(rep(MAX_LEN, repeats), rnorm))
 
-groups <- list(list(1), list(1:2), list(1:4))
+groups <- list(list(1), list(1:2), list(1:3), list(1:4))
+
+```
+
+## Getters
+```{r}
 
 get_signal1 <- function(x) signals[[x$signal_id1]][1:(x$l_known + x$l_forecast)]
 get_signal2 <- function(x) signals[[x$signal_id2]][1:(x$l_known + x$l_forecast)]
@@ -61,28 +64,30 @@ get_series_mult2 <- function(x) get_signal2(x) * get_noise_mult2(x) * x$norm2
 get_series1 <- get_series_add1
 get_series2 <- get_series_add2
 
-get_ssa_error_reconstruct <- function(x)
+get_ssa_error_reconstruct <- function(x) {
     MSE(get_signal1(x)[1:x$l_known] * x$norm1,
         reconstruct(ssa(get_series1(x)[1:x$l_known], L = x$l_window),
                     groups = groups[[x$group_ssa_id]])$F1)
-get_ssa_error_forecast <- function(x)
+}
+get_ssa_error_forecast <- function(x) {
     MSE(get_signal1(x)[x$l_known + (1:x$l_forecast)] * x$norm1,
         rforecast(ssa(get_series1(x)[1:x$l_known], L = x$l_window),
                   groups = groups[[x$group_ssa_id]], len = x$l_forecast))
-get_mssa_error_reconstruct <- function(x)
+}
+get_mssa_error_reconstruct <- function(x) {
     MSE(get_signal1(x)[1:x$l_known] * x$norm1,
         reconstruct(ssa(cbind(get_series1(x)[1:x$l_known],
                               get_series2(x)[1:x$l_known]),
                         L = x$l_window, kind = "mssa"),
                     groups = groups[[x$group_mssa_id]])$F1[, 1])
-
-get_mssa_error_forecast <- function(x)
+}
+get_mssa_error_forecast <- function(x) {
     MSE(get_signal1(x)[x$l_known + (1:x$l_forecast)] * x$norm1,
         rforecast(ssa(cbind(get_series1(x)[1:x$l_known],
                             get_series2(x)[1:x$l_known]),
                       L = x$l_window, kind = "mssa"),
                   groups = groups[[x$group_mssa_id]], len = x$l_forecast)[, 1])
-
+}
 get_relative_error_reconstruct <- function(x) {
     (x$ssa_error_reconstruct - x$mssa_error_reconstruct) /
     (x$ssa_error_reconstruct + x$mssa_error_reconstruct)
@@ -108,27 +113,31 @@ get_errors <- function(df) {
 
     return(df)
 }
+```
+
+```{r}
 
 
 df <- get_errors(expand.grid(
     signal_id1 = 1,
-    signal_id2 = 2,
+    signal_id2 = 1:length(signals),
     noise_id = 1:repeats,
-    noise_norm1 = 0.1,
-    noise_norm2 = 0.1,
+    noise_norm1 = c(0.4),
+    noise_norm2 = 0.0,
     norm_relative = c(1),
     l_known = 100,
     l_forecast = 20,
     l_window = c(50),
     group_ssa_id = 2,
-    group_mssa_id = c(2, 3),
+    group_mssa_id = c(2, 4),
     crutch = list(1)
 ))
+
 tmp <- max(c(df$ssa_error_reconstruct, df$mssa_error_reconstruct))
 ggplot(df) +
     geom_point(aes(x = ssa_error_reconstruct,
                    y = mssa_error_reconstruct),
-               alpha = 0.5,
+               alpha = 0.9,
                size = 5) +
     scale_color_brewer(palette = "Spectral") +
     theme_dark() +
@@ -144,35 +153,35 @@ ggplot(df) +
     theme_dark() +
     xlim(0, tmp) + ylim(0, tmp)
 
-ggplot(df) +
-    geom_boxplot(aes(x = relative_error_reconstruct,
-                     y = as.factor(norm_relative))) +
-    xlim(-1, 1)
+# ggplot(df) +
+#     geom_boxplot(aes(x = relative_error_reconstruct,
+#                      y = as.factor(norm_relative))) +
+#     xlim(-1, 1)
                    
-ggplot(df) +
-    geom_boxplot(aes(x = as.factor(norm_relative),
-                     y = relative_error_forecast)) +
-    ylim(-1, 1)
+# ggplot(df) +
+#     geom_boxplot(aes(x = as.factor(norm_relative),
+#                      y = relative_error_forecast)) +
+#     ylim(-1, 1)
 
-ggplot(df) +
-    geom_point(aes(x = relative_error_reconstruct,
-                   y = relative_error_forecast,
-                   color = as.factor(norm_relative)),
-               alpha = 0.5,
-               size = 5) +
-    scale_color_brewer(palette = "Spectral") +
-    theme_dark() +
-    xlim(-1, 1) + ylim(-1, 1)
+# ggplot(df) +
+#     geom_point(aes(x = relative_error_reconstruct,
+#                    y = relative_error_forecast,
+#                    color = as.factor(norm_relative)),
+#                alpha = 0.5,
+#                size = 5) +
+#     scale_color_brewer(palette = "Spectral") +
+#     theme_dark() +
+#     xlim(-1, 1) + ylim(-1, 1)
 
-ggplot(df) +
-    geom_point(aes(x = relative_error_reconstruct,
-                   y = relative_error_forecast,
-                   color = as.factor(l_window)),
-               alpha = 0.5,
-               size = 5) +
-    scale_color_brewer(palette = "Spectral") +
-    theme_dark() +
-    xlim(-1, 1) + ylim(-1, 1)
+# ggplot(df) +
+#     geom_point(aes(x = relative_error_reconstruct,
+#                    y = relative_error_forecast,
+#                    color = as.factor(l_window)),
+#                alpha = 0.5,
+#                size = 5) +
+#     scale_color_brewer(palette = "Spectral") +
+#     theme_dark() +
+#     xlim(-1, 1) + ylim(-1, 1)
 
 # ggplot(df) +
 #     geom_point(aes(x = relative_error_forecast,
@@ -183,267 +192,86 @@ ggplot(df) +
 #     scale_color_gradientn(colours = c("green", "yellow", "red")) +
 #     theme_dark()
 
+# ggplot(df) +
+#     geom_point(aes(x = relative_error_reconstruct,
+#                    y = relative_error_forecast,
+#                    color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
+#                alpha = 0.5,
+#                size = 5) +
+#     scale_color_manual(values = c("red", "blue")) +
+#     theme_dark() +
+#     xlim(-1, 1) + ylim(-1, 1)
+
+
+# periods <- c(8, 8.02, 8.03, 8.04, 8.05, 8.06, 8.08, 8.1, 8.2)
+# df <- get_errors(expand.grid(
+#     signal_id1 = 1,
+#     signal_id2 = 1:length(signals),
+#     noise_id = 1:repeats,
+#     noise_norm1 = c(0.1),
+#     noise_norm2 = 0.1,
+#     norm_relative = c(1),
+#     l_known = 100,
+#     l_forecast = 20,
+#     l_window = c(50),
+#     group_ssa_id = 2,
+#     group_mssa_id = c(2, 4),
+#     crutch = list(1)
+# ))
 ggplot(df) +
     geom_point(aes(x = relative_error_reconstruct,
                    y = relative_error_forecast,
-                   color = as.factor(c("1", "1:2", "1:4")[group_mssa_id])),
+                   color = as.factor(periods[signal_id2]),
+                   shape = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
                alpha = 0.5,
                size = 5) +
-    scale_color_manual(values = c("red", "blue")) +
+    scale_color_brewer(palette = "Spectral") +
     theme_dark() +
-    xlim(-1, 1) + ylim(-1, 1)
-
-
-
-
+    xlim(-1, 1) + ylim(-1, 1) +
+    labs(title = "relative errors, different periods and mssa group",
+    color = "2nd signal period",
+    shape = "mssa groups")
 
 ggplot(df) +
     geom_point(aes(x = relative_error_reconstruct,
                    y = relative_error_forecast,
-                   color = as.factor(paste(signal_id1, signal_id2))),
+                   color = as.factor(noise_norm1)),
                alpha = 0.5,
                size = 5) +
     scale_color_brewer(palette = "Set1") +
     theme_dark() +
     xlim(-1, 1) + ylim(-1, 1)
-               
-
-
-
-# signal <- (0.1 * (1:20) + 50)
-# # signal$name <- "slope0.1"
-# signal_ssa <- ssa(signal, kind = "mssa")
-
-
-```
-
-
-```{r}
-# N <- 96
-# Ls <- c(12, 24, 36, 48, 60)
-# forecast_len <- 24
-# R <- 1
-# group <- 1:2
-```
-
-```{r}
-
-
-# # forecast_MSE <- function(a, b) MSE()
-
-# ssa_forecast_error <- function(signal, noise, L, N = length(noise),
-#     forecast_len = length(signal) - N) {
-
-# }
-
-# mssa_forecast_error <- function(signals, noises, L, N = length(noise),
-#     forecast_len = length(signal) - N) {
-
-# }
-
-# errors <- function(signals, noises, group) {
-
-#     Ls_len <- length(Ls)
-#     sig_len <- length(signals)
-#     len <- Ls_len * sig_len
-#     err.mssa <- array(numeric(len), dim = c(Ls_len, sig_len, 1))
-#     dimnames(err.mssa) <- list(Ls, seq_along(signals), "MSSA")
-#     err.ssa <- array(numeric(length(Ls) * length(signals)),
-#         dim = c(length(Ls), length(signals), 1))
-#     dimnames(err.ssa) <- list(Ls, seq_along(signals), "SSA")
-#     base_first <- array(numeric(length(Ls) * length(signals)),
-#         dim = c(length(Ls), length(signals), 1))
-#     dimnames(base_first) <- list(Ls, seq_along(signals), "base_first")
-#     part_second <- array(numeric(length(Ls) * length(signals)),
-#         dim = c(length(Ls), length(signals), 1))
-#     dimnames(part_second) <- list(Ls, seq_along(signals), "part_second")
-
-#     for (l in seq_along(Ls)) {
-#         for (i in seq_along(signals)) {
-#             signal1 <- signals[[1]]
-#             signal2 <- signals[[i]]
-#             clear_signal <- cbind(signal1, signal2)
-#             signal <- cbind(signal1[1:N] * noises[[1]],
-#                             signal2[1:N] * noises[[2]])
-
-#             mssa_ <- ssa(signal, L = Ls[l], kind = "mssa")
-#             err.mssa[l, i, ] <- MSE(rforecast(mssa_,
-#                 groups = list(group), direction = "row", len = forecast_len)[, 1],
-#                 clear_signal[- (1:N), 1])
-#             err.ssa[l, i, ] <- MSE(rforecast(ssa(signal[, 1], L = Ls[l]),
-#                 groups = list(group), direction = "row", len = forecast_len),
-#                 clear_signal[- (1:N), 1])
-
-
-#             base_first[l, i, ] <- parestimate(mssa_,
-#                 groups = list(1:10))$rates[1]
-#             sigma <- mssa_$sigma
-#             part_second[l, i, ] <- sigma[2] / sum(sigma)
-#         }
-#     }
-
-#     abind(err.mssa, err.ssa, base_first, part_second, along = 3)
-
-
-# }
-
-# best <- function(res) {
-#     res <- apply(res, c(1, 2, 3), mean)
-# data.frame(
-#     SSA_L = apply(res, 2, function(x) Ls[which.min(x[, "SSA"])]),
-#     SSA_error = apply(res, 2, function(x) min(x[, "SSA"])),
-#     MSSA_L = apply(res, 2, function(x) Ls[which.min(x[, "MSSA"])]),
-#     MSSA_error = apply(res, 2, function(x) min(x[, "MSSA"])),
-#     base_first = apply(res, 2, function(x)
-#         x[as.character(Ls[which.min(x[, "MSSA"])]), "base_first"]),
-#     part_second = apply(res, 2, function(x)
-#         x[as.character(Ls[which.min(x[, "MSSA"])]), "part_second"])
-#     )
-# }
-```
-
-
-периодограммы шума и сигнала (spectrum)
-отдельно разложить сигнал и шум, посмотреть на собственные числа
-лучше выбрать шум
-
-```{r}
-
-
-
-# dif <- function(x, base, const) MSE(x, exp_(base, const))
-
-# exp_approx <- function(x, base = 1, const = 100, d_base = 0.00001, d_const = 0.1) {
-#     # x <- as.numeric(x)
-#     while (TRUE) {
-#         tmp1 <- dif(x, base, const) - dif(x, base + d_base, const)
-#         tmp2 <- dif(x, base, const) - dif(x, base, const + d_const)
-#         if (abs(tmp1) < 0.001 && abs(tmp2) < 0.001) {
-#             break
-#         }
-#         base <- base + d_base * tmp1
-#         const <- const + d_const * tmp2
-#         # print(base)
-#         # print(const)
-#     }
-#     return(c(base, const))
-# }
-
-# exp__ <- function(param, n = N + forecast_len) param[2] * param[1] ** (1:n)
-
-
-
-
-```
-
-
-
-```{r}
-# get_linear_signal <- function(len, slope = 0, start = 10) {
-#     ts(slope * (1:len) + start)
-# }
-
-# get_first_comp_signal <- function(signal) {
-#     ts(reconstruct(ssa(signal), groups = 1)$F1)
-# }
-
-# get_first_approx_signal <- function(signal) {
-#     ts(exp__(exp_approx(signal,
-#         base = parestimate(ssa(signal), groups = 1)$moduli[1], d_base = 0)))
-# }
-
-# get_approx_signal <- function(signal) {
-#     ts(exp__(exp_approx(signal)))
-# }
-
-# get_noise_signal <- function(len, mean = 0, sd = 1) {
-#     return(ts(rnorm(len, mean, sd)))
-# }
-```
-
-
-```{r}
-# slope <- c(0.1, 0.2, 0.3, 0.4)
-# # slope <- c(0.1, 0.05, -0.05, -0.1, -0.2, -0.5)
-# start <- 100 - slope * N / 2
-
-
-
-# linear_signals <- mapply(get_linear_signal, SIMPLIFY = FALSE,
-#     len = N + forecast_len, slope = slope, start = start)
-
-# first_comp_signals <- mapply(get_first_comp_signal, SIMPLIFY = FALSE,
-#     linear_signals)
-
-# first_approx_signals <- mapply(get_first_approx_signal, SIMPLIFY = FALSE,
-#     linear_signals)
-
-# approx_signals <- mapply(get_approx_signal, SIMPLIFY = FALSE,
-#     linear_signals)
-
-# noises <- mapply(get_noise_signal, SIMPLIFY = FALSE,
-#     len = N, mean = c(1, 1), sd = c(0.001, 0.001))
- 
-# plot(linear_signals[[1]], col="black")
-# lines(first_comp_signals[[1]], col="red")
-# lines(first_approx_signals[[1]], col="blue")
-# lines(approx_signals[[1]], col="green")
 
 ```
 
 ```{r}
-# res <- replicate(R, errors(linear_signals, noises, 1:2))
-# print("linear_signals")
-# print(best(res))
+# periods <- c(8, 8.01, 8.02, 8.03, 8.04, 8.05, 8.06)
 
-# res <- replicate(R, errors(first_comp_signals, noises, 1:2))
-# print("first_comp_signals")
-# print(best(res))
+# df <- get_errors(expand.grid(
+#     signal_id1 = 1,
+#     signal_id2 = 2:length(signals),
+#     noise_id = 1:repeats,
+#     noise_norm1 = c(0, 0.1, 0.2, 0.3, 0.4),
+#     noise_norm2 = 0.1,
+#     norm_relative = c(1),
+#     l_known = 100,
+#     l_forecast = 20,
+#     l_window = c(50),
+#     group_ssa_id = 2,
+#     group_mssa_id = c(2),
+#     crutch = list(1)
+# ))
 
-# res <- replicate(R, errors(first_approx_signals, noises, 1:2))
-# print("first_approx_signals")
-# print(best(res))
-
-# res <- replicate(R, errors(approx_signals, noises, 1:2))
-# print("approx_signals")
-# print(best(res))
-```
-
-
-```{r}
-# signal <- linear_signals[[1]]
-# noise <- noises[[1]]
-# signal_noise <- signal + noise
-
-# msignal <- cbind(linear_signals[[1]] * noises[[1]], linear_signals[[2]] * noises[[2]])
-
-# signal_mssa <- ssa(msignal, kind = "mssa")
+# ggplot(df) +
+#     geom_line(aes(x = noise_norm1,
+#                   y = ssa_error_forecast)) +
+#     geom_line(aes(x = noise_norm1,
+#                   y = mssa_error_forecast,
+#                   color = as.factor(periods[signal_id2]))) +
+#     labs(title = "forecast MSSA vs SSA, different periods and 1st noise",
+#     y = "forecast error",
+#     color = "2nd signal period")
 
 
-# plot(signal)
-# plot(noise)
-# plot(signal_noise)
 
-# # spec <-spectrum(noise, detrend = FALSE, log = "no")
-# # plot(sss <- spectrum(signal, detrend = FALSE, log = "no"), type = "b", symbols = "o")
-# # # plot(spectrum(signal, ))
-# # lines(spec$freq, spec$spec, log = "no")
-# # # plot(spectrum(signal_noise))
-
-# signal_ssa <- ssa(signal)
-# noise_ssa <- ssa(noise)
-# signal_noise_ssa <- ssa(signal_noise)
-
-# signal_ssa$sigma
-# noise_ssa$sigma
-# signal_noise_ssa$sigma
-
-# plot(linear_signals[[1]] * noises[[1]], col="red")
-# lines(linear_signals[[2]] * noises[[2]], col="blue")
-
-# plot(signal_mssa, type = "vectors", idx = 1:15)
-
-# plot(signal_noise_ssa, type = "wcor")
-# plot(signal_noise_ssa, type = "vectors", idx = 1:15)
-# plot(reconstruct(signal_noise_ssa, group = list(1, 2:15)))
 ```
