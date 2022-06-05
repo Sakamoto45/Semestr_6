@@ -1,0 +1,407 @@
+---
+title: "22_06_04_experiments"
+output: html_document
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.width = 8, fig.height = 8)
+library(Rssa)
+library(tidyr)
+library(dplyr)
+library(lattice)
+library(rlist)
+library(ggplot2)
+library(RColorBrewer)
+# library(plotrix) # for draw.ellipse()
+library(abind)
+library(Hmisc)
+```
+
+```{r, include=FALSE}
+
+get_signal1 <- function(x) signals[[x$signal_id1]][1:(x$l_known + x$l_forecast)]
+get_signal2 <- function(x) signals[[x$signal_id2]][1:(x$l_known + x$l_forecast)]
+get_noise_add1 <- function(x) (x$noise_norm1 * noises[[1]][[x$noise_id]])[1:(x$l_known + x$l_forecast)]
+get_noise_add2 <- function(x) (x$noise_norm2 * noises[[2]][[x$noise_id]])[1:(x$l_known + x$l_forecast)]
+get_noise_mult1 <- function(x) (1 + x$noise_norm1 * noises[[1]][[x$noise_id]])[1:(x$l_known + x$l_forecast)]
+get_noise_mult2 <- function(x) (1 + x$noise_norm2 * noises[[2]][[x$noise_id]])[1:(x$l_known + x$l_forecast)]
+get_norm1 <- function(x) 1 / mean(abs(get_signal1(x)[1:x$l_known]))
+get_norm2 <- function(x) x$norm_relative / mean(abs(get_signal2(x)[1:x$l_known]))
+get_series_add1 <- function(x) get_signal1(x) * x$norm1 + get_noise_add1(x)
+get_series_add2 <- function(x) get_signal2(x) * x$norm2 + get_noise_add2(x)
+get_series_mult1 <- function(x) get_signal1(x) * get_noise_mult1(x) * x$norm1
+get_series_mult2 <- function(x) get_signal2(x) * get_noise_mult2(x) * x$norm2
+
+get_ssa_error_reconstruct <- function(x) {
+    MSE(get_signal1(x)[1:x$l_known] * x$norm1,
+        reconstruct(ssa(get_series1(x)[1:x$l_known], L = x$l_window),
+                    groups = groups[[x$group_ssa_id]])$F1)
+}
+get_ssa_error_forecast <- function(x) {
+    MSE(get_signal1(x)[x$l_known + (1:x$l_forecast)] * x$norm1,
+        rforecast(ssa(get_series1(x)[1:x$l_known], L = x$l_window),
+                  groups = groups[[x$group_ssa_id]], len = x$l_forecast))
+}
+get_mssa_error_reconstruct <- function(x) {
+    MSE(get_signal1(x)[1:x$l_known] * x$norm1,
+        reconstruct(ssa(cbind(get_series1(x)[1:x$l_known],
+                              get_series2(x)[1:x$l_known]),
+                        L = x$l_window, kind = "mssa"),
+                    groups = groups[[x$group_mssa_id]])$F1[, 1])
+}
+get_mssa_error_forecast <- function(x) {
+    MSE(get_signal1(x)[x$l_known + (1:x$l_forecast)] * x$norm1,
+        rforecast(ssa(cbind(get_series1(x)[1:x$l_known],
+                            get_series2(x)[1:x$l_known]),
+                      L = x$l_window, kind = "mssa"),
+                  groups = groups[[x$group_mssa_id]], len = x$l_forecast)[, 1])
+}
+get_relative_error_reconstruct <- function(x) {
+    (x$ssa_error_reconstruct - x$mssa_error_reconstruct) /
+    (x$ssa_error_reconstruct + x$mssa_error_reconstruct)
+}
+get_relative_error_forecast <- function(x) {
+    (x$ssa_error_forecast - x$mssa_error_forecast) /
+    (x$ssa_error_forecast + x$mssa_error_forecast)
+}
+
+get_errors <- function(df) {
+    df$norm1 <- apply(df, 1, get_norm1)
+    df$norm2 <- apply(df, 1, get_norm2)
+    df$ssa_error_reconstruct <- apply(df, 1, get_ssa_error_reconstruct)
+    df$ssa_error_forecast <- apply(df, 1, get_ssa_error_forecast)
+    df$mssa_error_reconstruct <- apply(df, 1, get_mssa_error_reconstruct)
+    df$mssa_error_forecast <- apply(df, 1, get_mssa_error_forecast)
+    df <- df %>%
+        select(-noise_id) %>%
+        group_by(across(-contains("error"))) %>%
+        summarise_all(mean) %>%
+        ungroup()
+    df$relative_error_reconstruct <- apply(df, 1, get_relative_error_reconstruct)
+    df$relative_error_forecast <- apply(df, 1, get_relative_error_forecast)
+
+    return(df)
+}
+```
+
+```{r}
+# l_known - length of "known" signal
+# l_forecast - length of forecast
+# l_window - length of window
+repeats <- 1
+
+MAX_LEN <- 150
+
+
+MSE <- function(a, b) mean((a - b)^2)
+normalize <- function(x) x / mean(abs(x))
+
+exp_ <- function(base, len = MAX_LEN) normalize(exp(base * (1:len)))
+cos_ <- function(period, phase = 0, len = MAX_LEN) cospi(2 * ((1:len) / period + phase))
+line_ <- function(slope, b = 1 - slope * len / 2, len = MAX_LEN) normalize(slope * (1:len) + b)
+exp_approx_ <- function(slope, len = MAX_LEN, base = slope, d_base = 0.0001) {
+    # while (TRUE) {
+        # ideal <- line_(slope)
+    #     tmp <- MSE(ideal, exp_(base))
+    #     d_MSE <- MSE(ideal, exp_(base + d_base)) - tmp
+    #     if (abs(d_MSE) < 1e-4) break
+    #     base <- base - 0.0000001 * d_MSE / d_base
+    #     print("base in process")
+    #     print(base)
+
+    # }
+    # print("finished")
+    # print(base)
+    # print(MSE(ideal, exp_(base)))
+    return(exp_(base))
+}
+first_comp_ <- function(slope, len = MAX_LEN) {
+    return(reconstruct(ssa(line_(slope, len = len)), group = list(1))$F1)
+}
+
+noises <- list(
+    lapply(rep(MAX_LEN, repeats), rnorm),
+    lapply(rep(MAX_LEN, repeats), rnorm))
+
+groups <- list(list(1), list(1:2), list(1:3), list(1:4))
+```
+
+# Эксперименты с экспонентным и линейным трендом
+
+```{r}
+get_series1 <- get_series_mult1
+get_series2 <- get_series_mult2
+# get_series1 <- get_series_add1
+# get_series2 <- get_series_add2
+
+slopes <- c(0.0001, 0.0002, 0.0005, 0.001, 0.002, 0.005, 0.01)
+signals <- cbind(lapply(slopes, line_), lapply(slopes, exp_approx_))
+names(signals) <- c(paste("line", as.character(slopes)), paste("exp", as.character(slopes)))
+```
+
+### Линейные сигналы и их аппроксимация экспонентой
+```{r}
+ggplot(do.call(cbind.data.frame, signals) %>%
+        gather() %>%
+        separate(col = key, into = c("type", "slope"), sep = " ") %>%
+        mutate(slope = as.factor(as.numeric(slope)))) +
+    geom_line(aes(x = rep(1:MAX_LEN, length(slopes)*2),
+                  y = value,
+                  color = slope,
+                  linetype = type)) +
+    labs(title = "Signals",
+         x = "time") +
+    ylim(0, NA)
+
+# plot(signals[[1]] + (0.001 * noises[[1]][[1]]), type="l")
+# plot(signals[[1]], type="l")
+# plot(reconstruct(ssa(ts(signals[[1]])), group = list(1, 2)))
+# plot(reconstruct(ssa(ts(signals[[7]])), group = list(1, 2)))
+# plot(reconstruct(ssa(ts(signals[[1]] + (1e-5 * noises[[1]][[1]]))), group = list(1, 2)))
+# plot(reconstruct(ssa(ts(signals[[7]] + (1e-2 * noises[[1]][[1]]))), group = list(1, 2)))
+```
+
+### Какая зависимость вклада второй компоненты от угла наклона сигнала?
+
+```{r}
+
+line_signals <- lapply(slopes, line_)
+names(line_signals) <- paste("line", as.character(slopes))
+
+
+df <- expand.grid(
+    signal_id = 1:length(slopes),
+    crutch = list(1)
+)
+df$signal_slope <- factor(slopes[df$signal_id])
+
+
+df$second_component_part <- apply(df, 1, function(x) {
+    sigma <- ssa(line_signals[[x$signal_id]])$sigma
+    return(sigma[2] / sum(sigma))
+})
+
+ggplot(df) +
+    geom_path(aes(x = signal_slope,
+                   y = second_component_part,
+                   group = 1)) +
+    labs(title = "Dependence of the second component part on the signal slope"
+
+    )
+```
+
+похоже на экспоненту, логарифмирую 
+```{r}
+
+ggplot(df) +
+    geom_path(aes(x = signal_slope,
+                   y = log(second_component_part),
+                   group = 1))
+```
+
+График стал линейным, значит зависимость экспоненциальная.
+
+Доля второй компоненты зависит от наклона сигнала экспоненциально
+
+
+### При каком шуме для данного угла наклона вторая компонента теряется
+
+план:
+
+взять линейный сигнал
+
+добавить шум
+
+восстановить 2 компоненты
+
+смотреть на ошибку
+
+пока 2 компонента не теряется в шуме, ошибка восстановления не должна меняться, а когда 2 компонента потерялось, вместо нее берется часть шума и ошибка должна расти
+
+повторить для каждого угла наклона
+
+```{r}
+line_signals <- lapply(slopes, line_)
+names(line_signals) <- paste("line", as.character(slopes))
+
+df <- expand.grid(
+    signal_id = 1:length(slopes),
+    noise_id = 1:repeats,
+    noise_norm = 10**c(-20:1),
+    group_id = c(1, 2),
+    crutch = list(1)
+)
+df$signal_slope <- factor(slopes[df$signal_id])
+df$log10_error <- apply(df, 1, function(x) {
+    return(log10(MSE(line_signals[[x$signal_id]], 
+               reconstruct(ssa(line_signals[[x$signal_id]] + x$noise_norm * noises[[1]][[x$noise_id]]),
+                           group = groups[[x$group_id]])$F1)))
+})
+df <- df %>%
+    select(-noise_id) %>%
+    group_by(across(-contains("error"))) %>%
+    summarise_all(mean) %>%
+    ungroup()
+
+ggplot(df) +
+    geom_line(aes(x = 2*log10(noise_norm),
+                  y = log10_error,
+                  color = as.factor(slopes[signal_id]),
+                  linetype = as.factor(c("1", "1:2", "1:3", "1:4")[group_id]))) +
+    geom_abline(intercept = 0, slope = 1, alpha = 0.5) +
+    labs(title = "At which noise the second component is lost",
+         x = "log10 noise variance",
+         y = "log10 ssa reconstruct error",
+         color = "signal slope",
+         linetype = "reconstruct components")
+
+ggplot(df %>% filter(noise_norm > 10**-8)) +
+    geom_line(aes(x = 2*log10(noise_norm),
+                  y = log10_error,
+                  color = as.factor(slopes[signal_id]),
+                  linetype = as.factor(c("1", "1:2", "1:3", "1:4")[group_id]))) +
+    geom_abline(intercept = 0, slope = 1, alpha = 0.5) +
+    labs(title = "At which noise the second component is lost, closer",
+         x = "log10 noise variance",
+         y = "log10 ssa reconstruct error",
+         color = "signal slope",
+         linetype = "reconstruct components")
+
+
+
+
+```
+
+Скачок ошибки при восстановлении двумя компонентами оказался не там где я ожидал, поэтому добавил восстановление одной компонентой и тогда скачок ошибки оказался там где я ожидал (в ручную смотрел для разных шумов когда вторая компонента теряется).
+
+Как я понял, вторая компонента теряется при шуме, при котором восстановление двумя компонентами хуже восстановления одной. Это точки пересечения пунктирных и сплошных линий одного цвета.
+
+Отношение логарифмов линейно и параллельно прямой x=y, значит отношение дисперсии шума к ошибке линейно.
+```{r}
+approxmy <- function(x, y) {
+    pos = which(x<0)[1]
+    pos = c(pos - 1, pos)
+    return(approx(x = x[pos], y = y[pos], xout = 0))
+}
+
+
+df <- df %>%
+    pivot_wider(names_from = group_id, values_from = log10_error) %>%
+    group_by(signal_id) %>%
+    mutate(noise_border = approxmy(x = `1` - `2`,
+                                 y = noise_norm)$y) %>%
+    ungroup() %>%
+    select(signal_id,  noise_border) %>%
+    distinct()
+
+ggplot(df) +
+    geom_path(aes(x = 2*log10(noise_border),
+                  y = log10(slopes[signal_id]),
+                  group = 1)) +
+    labs(title = "At which noise the second component is lost",
+         x = "log10 noise variance",
+         y = "log10 signal slope")
+
+```
+
+Если это линейный график, то дисперсия ошибки при которой теряется вторая компонента пропорциональна квадрату наклона сигнала.
+
+
+
+### Линия без второй компоненты просто экспонента?
+```{r}
+slopes <- c(0.0001, 0.0002, 0.0005, 0.001, 0.002, 0.005, 0.01)
+signals <- cbind(lapply(slopes, first_comp_), lapply(slopes, exp_approx_))
+names(signals) <- c(paste("first_comp", as.character(slopes)), paste("exp", as.character(slopes)))
+
+ggplot(do.call(cbind.data.frame, signals) %>%
+        gather() %>%
+        separate(col = key, into = c("type", "slope"), sep = " ") %>%
+        mutate(slope = as.factor(as.numeric(slope)))) +
+    geom_line(aes(x = rep(1:MAX_LEN, length(slopes)*2),
+                  y = value,
+                  color = slope,
+                  linetype = type)) +
+    labs(title = "Signals",
+         x = "time",
+         color = "signal slope")
+```
+
+Нет, линейный сигнал без второй компоненты не экспонента.
+<!-- 
+### mssa
+
+первый ряд - линейный
+второй ряд - линейный или экспонента есть ли разница?
+если второй ряд линейный, важен ли наклон?
+а если экспонента?
+сколько компонент брать?
+
+```{r}
+
+
+
+# df <- get_errors(expand.grid(
+#     signal_id1 = 1:length(signals),
+#     signal_id2 = 1,
+#     noise_id = 1:repeats,
+#     noise_norm1 = c(0, 1e-5, 1e-4),
+#     noise_norm2 = 0.0,
+#     norm_relative = c(1),
+#     l_known = 100,
+#     l_forecast = 20,
+#     l_window = c(50),
+#     group_ssa_id = c(1, 2),
+#     group_mssa_id = c(1),
+#     crutch = list(1)
+# ))
+
+
+# ggplot(df) +
+#     geom_point(aes(x = as.factor(names(signals)[signal_id1]),
+#                    y = ssa_error_reconstruct,
+#                    color = as.factor(c("1", "1:2", "1:3", "1:4")[group_ssa_id]),
+#                    shape = as.factor(noise_norm1))) +
+#     labs(title = "Signals",
+#          x = "time")
+
+
+
+# ggplot(df, aes(x = relative_error_reconstruct,
+#                y = relative_error_forecast)) +
+#     geom_point(aes(color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id]),
+#                    shape = as.factor(c("1", "1:2", "1:3", "1:4")[group_ssa_id])),
+#                size = 5) +
+#     geom_point(aes(shape = as.factor(c("1", "1:2", "1:3", "1:4")[group_ssa_id])),
+#                color = "white",
+#                size = 4) +
+#     geom_point(aes(alpha = as.factor(names(signals)[signal_id2]),
+#                    color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id]),
+#                    shape = as.factor(c("1", "1:2", "1:3", "1:4")[group_ssa_id])),
+#                size = 4) +
+#     # scale_color_gradientn(colours = c("#FF0000", "#FFFFFF")) +
+#     scale_color_manual(values = c("red", "blue")) +
+#     # theme_dark() +
+#     geom_hline(yintercept = 0) +
+#     geom_vline(xintercept = 0) +
+#     xlim(-1, 1) + ylim(-1, 1) +
+#     labs(title = "Relative errors, different periods and mssa group",
+#     alpha = "2nd signal",
+#     color = "mssa groups")
+
+
+
+
+```
+
+
+В какой-то момент я подумал, если у линейного ряда вторая компонента такая маленькая, почему бы не считать ее шумом. Это бы решило проблему, какая разница между линейной функцией и ее аппроксимацией.
+
+Потом понял что к этому надо относиться как к косинусу, который раскладывается на 2 компоненты. просто значимость компонент разная. -->
+
+
+
+
+
+
+
