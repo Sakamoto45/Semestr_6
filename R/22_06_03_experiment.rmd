@@ -191,6 +191,8 @@ df <- get_errors(expand.grid(
     group_mssa_id = c(2, 4),
     crutch = list(1)
 ))
+
+pdf(file = "experiment_1_cos.pdf")
 ggplot(df, aes(x = relative_error_reconstruct,
                y = relative_error_forecast)) +
     geom_point(aes(color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
@@ -209,6 +211,7 @@ ggplot(df, aes(x = relative_error_reconstruct,
     labs(title = "Relative errors, different periods and mssa group",
     alpha = "2nd signal period",
     color = "mssa groups")
+dev.off()
 ```
 
 ## Сравнение ошибки прогноза для mssa и ssa при разных периодах второго сигнала и разных шумах первого ряда.
@@ -292,6 +295,8 @@ df <- get_errors(expand.grid(
     group_mssa_id = c(1, 2),
     crutch = list(1)
 ))
+
+pdf(file = "experiment_1_exp.pdf")
 ggplot(df, aes(x = relative_error_reconstruct,
                y = relative_error_forecast)) +
     geom_point(aes(color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
@@ -310,6 +315,7 @@ ggplot(df, aes(x = relative_error_reconstruct,
     labs(title = "Relative errors, different bases and mssa group",
     alpha = "2nd signal base",
     color = "mssa groups")
+dev.off()
 ```
 
 ## Сравнение ошибки прогноза для mssa и ssa при разных основаниях второго сигнала и разных шумах первого ряда.
