@@ -88,7 +88,7 @@ get_errors <- function(df) {
 # l_known - length of "known" signal
 # l_forecast - length of forecast
 # l_window - length of window
-repeats <- 1
+repeats <- 10
 
 MAX_LEN <- 150
 
@@ -141,6 +141,7 @@ names(signals) <- c(paste("line", as.character(slopes)), paste("exp", as.charact
 
 ### Линейные сигналы и их аппроксимация экспонентой
 ```{r}
+pdf(file = "experiment_3_expline.pdf")
 ggplot(do.call(cbind.data.frame, signals) %>%
         gather() %>%
         separate(col = key, into = c("type", "slope"), sep = " ") %>%
@@ -149,9 +150,10 @@ ggplot(do.call(cbind.data.frame, signals) %>%
                   y = value,
                   color = slope,
                   linetype = type)) +
-    labs(title = "Signals",
+    labs(title = "Approximations of linear functions",
          x = "time") +
     ylim(0, NA)
+dev.off()
 
 # plot(signals[[1]] + (0.001 * noises[[1]][[1]]), type="l")
 # plot(signals[[1]], type="l")
@@ -180,6 +182,7 @@ df$second_component_part <- apply(df, 1, function(x) {
     sigma <- ssa(line_signals[[x$signal_id]])$sigma
     return(sigma[2] / sum(sigma))
 })
+pdf(file = "experiment_3_linefirstcomp.pdf")
 
 ggplot(df) +
     geom_path(aes(x = signal_slope,
@@ -192,11 +195,14 @@ ggplot(df) +
 
 похоже на экспоненту, логарифмирую 
 ```{r}
-
+pdf(file = "experiment_3_secondpart.pdf")
 ggplot(df) +
     geom_path(aes(x = signal_slope,
                    y = log(second_component_part),
-                   group = 1))
+                   group = 1)) +
+    labs(title = "Dependence of the second component part on the signal slope"
+    )
+dev.off()
 ```
 
 График стал линейным, значит зависимость экспоненциальная.
@@ -294,17 +300,19 @@ df <- df %>%
     select(signal_id,  noise_border) %>%
     distinct()
 
-ggplot(df) +
-    geom_path(aes(x = 2*log10(noise_border),
-                  y = log10(slopes[signal_id]),
-                  group = 1)) +
+ggplot(df,
+       aes(x = 2*log10(noise_border),
+           y = log10(slopes[signal_id]))) +
+    geom_point() +
+    geom_path(aes(group = 1)) +
+    geom_abline(intercept = -2, slope = 1/4, linetype = 2) +
     labs(title = "At which noise the second component is lost",
          x = "log10 noise variance",
          y = "log10 signal slope")
 
 ```
 
-Если это линейный график, y = x/4 - 2 то дисперсия ошибки при которой теряется вторая компонента пропорциональна четвертой степени наклона сигнала т.е.  noise_variance * 100 = signal_slope.
+Если это линейный график, y = x/4 - 2 (пунктирная линия) то дисперсия ошибки при которой теряется вторая компонента пропорциональна четвертой степени наклона сигнала т.е.  noise_variance * 100 = signal_slope.
 
 
 
@@ -313,6 +321,8 @@ ggplot(df) +
 slopes <- c(0.0001, 0.0002, 0.0005, 0.001, 0.002, 0.005, 0.01)
 signals <- cbind(lapply(slopes, first_comp_), lapply(slopes, exp_approx_))
 names(signals) <- c(paste("first_comp", as.character(slopes)), paste("exp", as.character(slopes)))
+
+pdf(file = "experiment_3_linefirstcomp.pdf")
 
 ggplot(do.call(cbind.data.frame, signals) %>%
         gather() %>%
@@ -325,6 +335,7 @@ ggplot(do.call(cbind.data.frame, signals) %>%
     labs(title = "Signals",
          x = "time",
          color = "signal slope")
+dev.off()
 ```
 
 Нет, линейный сигнал без второй компоненты не экспонента.

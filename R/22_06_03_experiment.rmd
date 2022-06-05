@@ -15,6 +15,7 @@ library(RColorBrewer)
 # library(plotrix) # for draw.ellipse()
 library(abind)
 library(Hmisc)
+library(latex2exp)
 ```
 
 # Getters
@@ -236,17 +237,23 @@ df <- get_errors(expand.grid(
     group_mssa_id = c(2),
     crutch = list(1)
 ))
+```
 
+```{r}
+pdf(file = "experiment_2_cos1.pdf")
 ggplot(df) +
     geom_line(aes(x = noise_norm1,
                   y = ssa_error_forecast)) +
     geom_line(aes(x = noise_norm1,
                   y = mssa_error_forecast,
                   color = as.factor(periods[signal_id2]))) +
-    labs(title = "Forecast MSSA vs SSA, different periods and 1st noise",
+    labs(title = TeX("Forecast MSSA vs SSA, different periods and $\\sigma_1$"),
+    x = TeX("$\\sigma_1$"),
     y = "forecast error",
     color = "2nd signal period")
+dev.off()
 
+pdf(file = "experiment_2_cos2.pdf")
 ggplot(df %>%
     group_by(signal_id2) %>%
     mutate(
@@ -261,8 +268,10 @@ ggplot(df %>%
     geom_point() +
     geom_path() +
     labs(title = "Dependence of the boundary noise norm and the 2nd signal period",
-    y = "1st noise norm ",
-    color = "2nd signal period")
+    y = TeX("$\\sigma_1$"),
+    x = "2nd signal period")
+dev.off()
+
 ```
 
 Тут очень интересный результат: зависимость граничного значения шума (максимальная дисперсия шума, при котором ssa не хуже mssa) от периода второго ряда линейная.
@@ -402,6 +411,7 @@ df <- get_errors(expand.grid(
     group_mssa_id = c(2, 4),
     crutch = list(1)
 ))
+pdf(file = "experiment_1_expcos1.pdf")
 ggplot(df, aes(x = relative_error_reconstruct,
                y = relative_error_forecast)) +
     geom_point(aes(color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
@@ -412,7 +422,7 @@ ggplot(df, aes(x = relative_error_reconstruct,
                    color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
                size = 4) +
     # scale_color_gradientn(colours = c("#FF0000", "#FFFFFF")) +
-    # scale_color_manual(values = c("red", "blue")) +
+    scale_color_manual(values = c("red", "blue")) +
     # theme_dark() +
     geom_hline(yintercept = 0) +
     geom_vline(xintercept = 0) +
@@ -420,6 +430,7 @@ ggplot(df, aes(x = relative_error_reconstruct,
     labs(title = "Relative errors, different bases and mssa group",
     alpha = "2nd signal base",
     color = "mssa groups")
+dev.off()
 ```
 
 ## Сравнение ошибки прогноза для mssa и ssa при разных основаниях второго сигнала и разных шумах первого ряда.
@@ -484,6 +495,49 @@ ggplot(df %>%
 ## Сравнение ошибки прогноза для mssa и ssa при разных периодах второго сигнала и разных шумах первого ряда.
 
 Второй сигнал отличается периодом.
+
+```{r}
+# periods <- c(8, 8.02, 8.04, 8.07, 8.1, 8.15, 8.2)
+periods <- c(8, 8.02, 8.04, 8.06, 8.08, 8.1, 8.15)
+
+signals <- lapply(periods, function(x) exp_(0.02) * cos_(x))
+plot((signals[[1]] / mean(abs(signals[[1]])) *(1+  0.1 * noises[[1]][[1]])), type="l")
+
+df <- get_errors(expand.grid(
+    signal_id1 = 1,
+    signal_id2 = 1:length(signals),
+    noise_id = 1:repeats,
+    noise_norm1 = c(0.2),
+    noise_norm2 = 0.0,
+    norm_relative = c(1),
+    l_known = 100,
+    l_forecast = 20,
+    l_window = c(50),
+    group_ssa_id = 2,
+    group_mssa_id = c(2, 4),
+    crutch = list(1)
+))
+pdf(file = "experiment_1_expcos2.pdf")
+ggplot(df, aes(x = relative_error_reconstruct,
+               y = relative_error_forecast)) +
+    geom_point(aes(color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
+               size = 5) +
+    geom_point(color = "white",
+               size = 4) +
+    geom_point(aes(alpha = (periods[signal_id2]),
+                   color = as.factor(c("1", "1:2", "1:3", "1:4")[group_mssa_id])),
+               size = 4) +
+    # scale_color_gradientn(colours = c("#FF0000", "#FFFFFF")) +
+    scale_color_manual(values = c("red", "blue")) +
+    # theme_dark() +
+    geom_hline(yintercept = 0) +
+    geom_vline(xintercept = 0) +
+    xlim(-1, 1) + ylim(-1, 1) +
+    labs(title = "Relative errors, different periods and mssa group",
+    alpha = "2nd signal period",
+    color = "mssa groups")
+dev.off()
+```
 
 Меняется шум первого ряда.
 
