@@ -228,7 +228,10 @@ plot(signal_mssa, type = "vectors", idx = 1:15)
 
 plot(signal_noise_ssa, type = "wcor")
 plot(signal_noise_ssa, type = "vectors", idx = 1:15)
-plot(reconstruct(signal_noise_ssa, group = list(1, 2:15)))
+plot(reconstruct(signal_noise_ssa, group = list(1, 2, 3:6, 7, 8, 9)))
+
+plot(reconstruct(signal_ssa, group = list(1, 2)))
+
 ```
 
 

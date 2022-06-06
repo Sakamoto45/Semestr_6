@@ -341,7 +341,7 @@ df <- get_errors(expand.grid(
     signal_id1 = 1,
     signal_id2 = 1:length(signals),
     noise_id = 1:repeats,
-    noise_norm1 = c(0, 0.5, 1, 1.5, 2),
+    noise_norm1 = c(0, 0.3, 0.6, 1, 1.5, 2),
     noise_norm2 = 0.0,
     norm_relative = c(1),
     l_known = 100,
@@ -351,7 +351,10 @@ df <- get_errors(expand.grid(
     group_mssa_id = c(1),
     crutch = list(1)
 ))
+```
 
+```{r}
+pdf(file = "experiment_2_exp1.pdf")
 ggplot(df) +
     geom_line(aes(x = noise_norm1,
                   y = ssa_error_forecast)) +
@@ -361,7 +364,9 @@ ggplot(df) +
     labs(title = "Forecast MSSA vs SSA, different bases and 1st noise",
     y = "forecast error",
     color = "2nd signal base")
+dev.off()
 
+pdf(file = "experiment_2_exp2.pdf")
 ggplot(df %>%
     group_by(signal_id2) %>%
     mutate(
@@ -379,6 +384,7 @@ ggplot(df %>%
     labs(title = "Dependence of the boundary noise norm and the 2nd signal base",
     y = "1st noise norm ",
     color = "2nd signal base")
+dev.off()
 ```
 
 Для экспонент результат аналогичный: зависимость линейная.
