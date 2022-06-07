@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.27)  7 JUN 2022 14:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.27)  7 JUN 2022 15:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -826,135 +826,80 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] [12
 
-] [13
-
 ]
-LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 263.
- (/usr/share/texmf-dist/tex/latex/base/ts1cmss.fd
-File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-Overfull \vbox (14.21484pt too high) detected at line 263
- []
-
-[14
-
-] [15
-
-]
-Overfull \vbox (34.48079pt too high) detected at line 283
- []
-
-[16
-
-]
-<images//experiment_1_cos.pdf, id=299, 505.89pt x 505.89pt>
+<images//experiment_1_cos.pdf, id=268, 505.89pt x 505.89pt>
 File: images//experiment_1_cos.pdf Graphic file (type pdf)
 <use images//experiment_1_cos.pdf>
 Package pdftex.def Info: images//experiment_1_cos.pdf  used on input line 300.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [17
+ [13
 
- <./images//experiment_1_cos.pdf>] [18
-
-]
-<images//experiment_1_exp.pdf, id=334, 505.89pt x 505.89pt>
+ <./images//experiment_1_cos.pdf>]
+<images//experiment_1_exp.pdf, id=298, 505.89pt x 505.89pt>
 File: images//experiment_1_exp.pdf Graphic file (type pdf)
 <use images//experiment_1_exp.pdf>
 Package pdftex.def Info: images//experiment_1_exp.pdf  used on input line 317.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [19
+ [14
 
- <./images//experiment_1_exp.pdf>] [20
-
-]
-<images//experiment_1_expcos1.pdf, id=371, 505.89pt x 505.89pt>
+ <./images//experiment_1_exp.pdf>]
+<images//experiment_1_expcos1.pdf, id=327, 505.89pt x 505.89pt>
 File: images//experiment_1_expcos1.pdf Graphic file (type pdf)
 <use images//experiment_1_expcos1.pdf>
 Package pdftex.def Info: images//experiment_1_expcos1.pdf  used on input line 334.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [21
+ [15
 
- <./images//experiment_1_expcos1.pdf>] [22
-
-]
-<images//experiment_1_expcos2.pdf, id=406, 505.89pt x 505.89pt>
+ <./images//experiment_1_expcos1.pdf>]
+<images//experiment_1_expcos2.pdf, id=357, 505.89pt x 505.89pt>
 File: images//experiment_1_expcos2.pdf Graphic file (type pdf)
 <use images//experiment_1_expcos2.pdf>
 Package pdftex.def Info: images//experiment_1_expcos2.pdf  used on input line 351.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [23
+ [16
 
- <./images//experiment_1_expcos2.pdf>] [24
+ <./images//experiment_1_expcos2.pdf>] [17
 
-] [25
-
-] [26
+] [18
 
 ]
-Underfull \hbox (badness 3989) in paragraph at lines 374--374
-[]\T2A/cmss/m/n/10 Никита Фе-до-ров в свей вы-пуск-ной ква-ли-фи-ка-ци-он-ной ра-бо-те
- []
-
-
-Underfull \hbox (badness 1442) in paragraph at lines 374--374
-\T2A/cmss/m/n/10 изу-чал вли-я-ние ве-ли-чи-ны вто-ро-го шу-ма на ре-зуль-та-ты ра-бо-ты
- []
-
-
-Overfull \vbox (39.13947pt too high) detected at line 374
- []
-
-[27
-
-]
-<images//experiment_2_cos1.pdf, id=463, 505.89pt x 505.89pt>
+<images//experiment_2_cos1.pdf, id=398, 505.89pt x 505.89pt>
 File: images//experiment_2_cos1.pdf Graphic file (type pdf)
 <use images//experiment_2_cos1.pdf>
 Package pdftex.def Info: images//experiment_2_cos1.pdf  used on input line 400.
 (pdftex.def)             Requested size: 153.64493pt x 153.64394pt.
-<images//experiment_2_cos2.pdf, id=464, 505.89pt x 505.89pt>
+<images//experiment_2_cos2.pdf, id=399, 505.89pt x 505.89pt>
 File: images//experiment_2_cos2.pdf Graphic file (type pdf)
 <use images//experiment_2_cos2.pdf>
 Package pdftex.def Info: images//experiment_2_cos2.pdf  used on input line 400.
 (pdftex.def)             Requested size: 153.64493pt x 153.64394pt.
- [28
+ [19
 
  <./images//experiment_2_cos1.pdf> <./images//experiment_2_cos2.pdf>]
-Underfull \hbox (badness 1762) in paragraph at lines 400--400
-\OML/cmm/m/it/10 T[] \OT1/cmr/m/n/10 = 8$\T2A/cmss/m/n/10 , $\OML/cmm/m/it/10 T[] \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/10 8$\T2A/cmss/m/n/10 , $\OT1/cmr/m/n/10 8\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 02$\T2A/cmss/m/n/10 , $\OT1/cmr/m/n/10 8\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 04$\T2A/cmss/m/n/10 , $\OT1/cmr/m/n/10 8\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 06$\T2A/cmss/m/n/10 , $\OT1/cmr/m/n/10 8\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 08$\T2A/cmss/m/n/10 , $\OT1/cmr/m/n/10 8\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 1$\T2A/cmss/m/n/10 , $\OT1/cmr/m/n/10 8\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 15\OMS/cmsy/m/n/10 g$\T2A/cmss/m/n/10 , $\OML/cmm/m/it/10 ^^[[] \OMS/cmsy/m/n/10 2
- []
-
-[29
-
-]
-<images//experiment_2_exp1.pdf, id=490, 505.89pt x 505.89pt>
+<images//experiment_2_exp1.pdf, id=420, 505.89pt x 505.89pt>
 File: images//experiment_2_exp1.pdf Graphic file (type pdf)
 <use images//experiment_2_exp1.pdf>
 Package pdftex.def Info: images//experiment_2_exp1.pdf  used on input line 426.
 (pdftex.def)             Requested size: 153.64493pt x 153.64394pt.
-<images//experiment_2_exp2.pdf, id=491, 505.89pt x 505.89pt>
+<images//experiment_2_exp2.pdf, id=421, 505.89pt x 505.89pt>
 File: images//experiment_2_exp2.pdf Graphic file (type pdf)
 <use images//experiment_2_exp2.pdf>
 Package pdftex.def Info: images//experiment_2_exp2.pdf  used on input line 426.
 (pdftex.def)             Requested size: 153.64493pt x 153.64394pt.
- [30
+ [20
 
- <./images//experiment_2_exp1.pdf> <./images//experiment_2_exp2.pdf>] [31
-
-] [32
+ <./images//experiment_2_exp1.pdf> <./images//experiment_2_exp2.pdf>] [21
 
 ]
-<images//experiment_3_expline.pdf, id=522, 505.89pt x 505.89pt>
+<images//experiment_3_expline.pdf, id=445, 505.89pt x 505.89pt>
 File: images//experiment_3_expline.pdf Graphic file (type pdf)
 <use images//experiment_3_expline.pdf>
 Package pdftex.def Info: images//experiment_3_expline.pdf  used on input line 446.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [33
+ [22
 
- <./images//experiment_3_expline.pdf>] [34
-
-]
-<images//experiment_3_linefirstcomp.pdf, id=540, 505.89pt x 505.89pt>
+ <./images//experiment_3_expline.pdf>]
+<images//experiment_3_linefirstcomp.pdf, id=457, 505.89pt x 505.89pt>
 File: images//experiment_3_linefirstcomp.pdf Graphic file (type pdf)
 <use images//experiment_3_linefirstcomp.pdf>
 Package pdftex.def Info: images//experiment_3_linefirstcomp.pdf  used on input line 460.
@@ -963,68 +908,47 @@ Package pdftex.def Info: images//experiment_3_linefirstcomp.pdf  used on input l
 Overfull \vbox (17.34286pt too high) detected at line 460
  []
 
-[35
+[23
 
- <./images//experiment_3_linefirstcomp.pdf>] [36
-
-]
-<images//experiment_3_secondpart1.pdf, id=558, 505.89pt x 505.89pt>
+ <./images//experiment_3_linefirstcomp.pdf>]
+<images//experiment_3_secondpart1.pdf, id=470, 505.89pt x 505.89pt>
 File: images//experiment_3_secondpart1.pdf Graphic file (type pdf)
 <use images//experiment_3_secondpart1.pdf>
 Package pdftex.def Info: images//experiment_3_secondpart1.pdf  used on input line 484.
 (pdftex.def)             Requested size: 153.64493pt x 153.64394pt.
-<images//experiment_3_secondpart2.pdf, id=559, 505.89pt x 505.89pt>
+<images//experiment_3_secondpart2.pdf, id=471, 505.89pt x 505.89pt>
 File: images//experiment_3_secondpart2.pdf Graphic file (type pdf)
 <use images//experiment_3_secondpart2.pdf>
 Package pdftex.def Info: images//experiment_3_secondpart2.pdf  used on input line 484.
 (pdftex.def)             Requested size: 153.64493pt x 153.64394pt.
- [37
+ [24
 
- <./images//experiment_3_secondpart1.pdf> <./images//experiment_3_secondpart2.pdf>] [38
-
-]
-<images//experiment_3_lost1.pdf, id=583, 505.89pt x 505.89pt>
+ <./images//experiment_3_secondpart1.pdf> <./images//experiment_3_secondpart2.pdf>]
+<images//experiment_3_lost1.pdf, id=488, 505.89pt x 505.89pt>
 File: images//experiment_3_lost1.pdf Graphic file (type pdf)
 <use images//experiment_3_lost1.pdf>
 Package pdftex.def Info: images//experiment_3_lost1.pdf  used on input line 501.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [39
+ [25
 
  <./images//experiment_3_lost1.pdf>]
-
-LaTeX Warning: Reference `fig:exp3_lost1' on page 40 undefined on input line 501.
-
-
-LaTeX Warning: Reference `fig:exp3_lost2' on page 40 undefined on input line 501.
-
-[40
-
-]
-<images//experiment_3_lost2.pdf, id=610, 505.89pt x 505.89pt>
+<images//experiment_3_lost2.pdf, id=504, 505.89pt x 505.89pt>
 File: images//experiment_3_lost2.pdf Graphic file (type pdf)
 <use images//experiment_3_lost2.pdf>
 Package pdftex.def Info: images//experiment_3_lost2.pdf  used on input line 518.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [41
+ [26
 
- <./images//experiment_3_lost2.pdf>] [42
-
-]
-<images//experiment_3_lost3.pdf, id=631, 505.89pt x 505.89pt>
+ <./images//experiment_3_lost2.pdf>]
+<images//experiment_3_lost3.pdf, id=519, 505.89pt x 505.89pt>
 File: images//experiment_3_lost3.pdf Graphic file (type pdf)
 <use images//experiment_3_lost3.pdf>
 Package pdftex.def Info: images//experiment_3_lost3.pdf  used on input line 529.
 (pdftex.def)             Requested size: 215.10196pt x 215.1046pt.
- [43
+ [27
 
  <./images//experiment_3_lost3.pdf>]
-
-LaTeX Warning: Reference `fig:exp3_lost3' on page 44 undefined on input line 529.
-
-[44
-
-]
-<images//experiment_3_mssa2.pdf, id=654, 505.89pt x 505.89pt>
+<images//experiment_3_mssa2.pdf, id=532, 505.89pt x 505.89pt>
 File: images//experiment_3_mssa2.pdf Graphic file (type pdf)
 <use images//experiment_3_mssa2.pdf>
 Package pdftex.def Info: images//experiment_3_mssa2.pdf  used on input line 546.
@@ -1033,12 +957,10 @@ Package pdftex.def Info: images//experiment_3_mssa2.pdf  used on input line 546.
 Overfull \vbox (1.97385pt too high) detected at line 546
  []
 
-[45
+[28
 
- <./images//experiment_3_mssa2.pdf>] [46
-
-]
-<images//experiment_3_mssa1.pdf, id=687, 505.89pt x 505.89pt>
+ <./images//experiment_3_mssa2.pdf>]
+<images//experiment_3_mssa1.pdf, id=559, 505.89pt x 505.89pt>
 File: images//experiment_3_mssa1.pdf Graphic file (type pdf)
 <use images//experiment_3_mssa1.pdf>
 Package pdftex.def Info: images//experiment_3_mssa1.pdf  used on input line 557.
@@ -1047,21 +969,15 @@ Package pdftex.def Info: images//experiment_3_mssa1.pdf  used on input line 557.
 Overfull \vbox (1.97385pt too high) detected at line 557
  []
 
-[47
+[29
 
- <./images//experiment_3_mssa1.pdf>] [48
+ <./images//experiment_3_mssa1.pdf>] [30
 
-] [49
+] [31
 
-] [50
+] (./slides.bbl) [32
 
-] [51
-
-] (./slides.bbl) [52
-
- </usr/share/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>] [53
-
-]
+ </usr/share/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>]
 \tf@nav=\write6
 \openout6 = `slides.nav'.
 
@@ -1072,34 +988,22 @@ Overfull \vbox (1.97385pt too high) detected at line 557
 \openout8 = `slides.snm'.
 
  (./slides.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `slides.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29516 strings out of 478238
- 573990 string characters out of 5850456
- 841526 words of memory out of 5000000
- 47038 multiletter control sequences out of 15000+600000
- 486987 words of font info for 76 fonts, out of 8000000 for 9000
+ 29428 strings out of 478238
+ 572540 string characters out of 5850456
+ 841399 words of memory out of 5000000
+ 47004 multiletter control sequences out of 15000+600000
+ 482307 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,122p,899b,923s stack positions out of 5000i,500n,10000p,200000b,80000s
-
-pdfTeX warning (dest): name{fig:exp3_lost3} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{fig:exp3_lost2} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{fig:exp3_lost1} has been referenced but does not exist, replaced by a fixed one
-
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb>
-Output written on slides.pdf (53 pages, 465201 bytes).
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb>
+Output written on slides.pdf (32 pages, 362429 bytes).
 PDF statistics:
- 890 PDF objects out of 1000 (max. 8388607)
- 654 compressed objects within 7 object streams
- 112 named destinations out of 1000 (max. 500000)
+ 712 PDF objects out of 1000 (max. 8388607)
+ 509 compressed objects within 6 object streams
+ 67 named destinations out of 1000 (max. 500000)
  614 words of extra memory for PDF output out of 10000 (max. 10000000)
 
