@@ -25,6 +25,8 @@ Golyandina~N, Korobeynikov~A, Zhigljavsky~A. Singular Spectrum Analysis with R.
 \selectlanguageifdefined{russian}
 Федоров~Н. Поддерживающие временные ряды в
   анализе сингулярного спектра. \BibDash
-\newblock 2020.
+\newblock 2020. \BibDash
+\newblock выпускная квалификационная работа
+  магистра, СПбГУ, СПб.
 
 \end{thebibliography}
