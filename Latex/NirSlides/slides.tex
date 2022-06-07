@@ -1,0 +1,122 @@
+\documentclass[ucs, notheorems, handout]{beamer}
+
+\usetheme[numbers,totalnumbers,compress, nologo]{Statmod}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{navigation symbols}{}
+
+\mode<handout> {
+    \usepackage{pgfpages}
+    \setbeameroption{show notes}
+    \pgfpagesuselayout{2 on 1}[a4paper, border shrink=5mm]
+    \setbeamercolor{note page}{bg=white}
+    \setbeamercolor{note title}{bg=gray!10}
+    \setbeamercolor{note date}{fg=gray!10}
+}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{tikz}
+\usepackage{ragged2e}
+
+\newtheorem{theorem}{Теорема}
+
+\newcommand{\rank}{\mathsf{rank}\ }
+\newcommand{\Lrank}{\mathsf{rank}_L\ }
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\F}{\mathsf{F}}
+\newcommand{\MF}{\vec{\F}}
+\newcommand{\sfS}{\mathsf{S}}
+\newcommand{\sfR}{\mathsf{R}}
+\newcommand{\MS}{\vec{\sfS}}
+\newcommand{\MSE}{\mathsf{MSE}}
+\newcommand{\SSA}{\mathsf{SSA}}
+\newcommand{\MSSA}{\mathsf{MSSA}}
+\newcommand{\ProjSSA}{\mathsf{ProjSSA}}
+\newcommand{\mean}{\mathsf{mean}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\wX}{\overset{\wedge}{\X}}
+
+
+\title[Поддерживающие ряды MSSA]{Исследование условий для поддерживающих временных рядов в MSSA}
+
+\author{Ткаченко Егор Андреевич, гр.19.Б04-мм}
+
+\institute[Санкт-Петербургский Государственный Университет]{%
+    \small
+    Санкт-Петербургский государственный университет\\
+    Прикладная математика и информатика\\
+    Вычислительная стохастика и статистические модели\\
+    \vspace{1.25cm}
+    Отчет по производственной практике (семестр 6)}
+
+\date[Зачет]{Санкт-Петербург, 2022}
+
+\subject{Talks}
+
+\begin{document}
+
+\begin{frame}[plain]
+    \titlepage
+
+    \note{Научный руководитель  к.ф.-м.н., доцент Голяндина Нина Эдуардовна,\\
+    кафедра статистического моделирования}
+\end{frame}
+
+
+%\section{Короткая тема}
+%\subsection{Общие слова}
+
+\setbeameroption{show notes}
+
+\begin{frame}{Введение}
+    Тут какое-то введение.
+    Что за задача решается, какое метод используется, какая цель работы.
+
+    \note{
+        Полезность умения строить прогнозы не нуждается в доказательстве. Прогноз временных рядов может использоваться в прогнозе погоды, приливов, спроса на товары и многом другом.
+         
+        С помощью книги \cite{SSA_with_R} был изучен базовый $\SSA$, разложение рядов, заполнение пропусков в данных, прогноз и базовый $\MSSA$. Для работы с временными рядами и их прогнозом использовался пакет Rssa. Проведены эксперименты с простейшими моделями сигналов для изучения связи между согласованностью сигналов и поддерживающими рядами. 
+        Исследовано, при каких отклонениях, сигналы с одинаковой структурой перестают быть согласованными. Проведено сравнение линейных рядов и их аппроксимаций экспонентой как поддерживающих.
+    }
+\end{frame}
+
+\begin{frame}{Обозначения и известные результаты}
+    Обозначения, нужные понятия и нужные известные результаты.
+
+    \note{
+        Текст про это
+    }
+\end{frame}
+
+\begin{frame}{Полученные результаты}
+    Тут ваши личные результаты
+
+    \note{
+        Текст про это
+    }
+\end{frame}
+
+\begin{frame}{Заключение}
+    Тут какое-то заключение.
+    Что сделано, резюме по результатам.
+
+    \note{
+        Текст про заключение
+    }
+\end{frame}
+
+\begin{frame}{Список литературы}
+    \bibliographystyle{ugost2008}
+	\bibliography{references}
+% \begin{thebibliography}{3}
+% \bibitem{main}Самая главная работ
+% \bibitem{another} Еще одна
+% \end{thebibliography}    
+
+    \note{
+        На данном слайде представлен список основных источников, используемых в моей работе.
+    }
+\end{frame}
+
+\end{document}

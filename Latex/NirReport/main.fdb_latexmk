@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1654515046 "main.aux" "main.bbl" "main" 1654515251
+["bibtex main"] 1654587440 "main.aux" "main.bbl" "main" 1654587621
   "./ugost2008.bst" 1640166390 60164 b85a42b3567d4e9f2b117d0cc07b7ae6 ""
-  "main.aux" 1654515250 11970 4bb9e5b53ff6349d892d6ad2e386f63a "pdflatex"
-  "references.bib" 1640271799 233 0f39440373b755d264de2271400a5e54 ""
+  "main.aux" 1654587620 13726 5fd6bd71f2fd5d2195c7d93f7871d41f "pdflatex"
+  "references.bib" 1654535964 486 3a67147ff4e850a8307a9d429e0835d1 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1654515250 "/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex" "main.pdf" "main" 1654515251
+["pdflatex"] 1654587620 "/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex" "main.pdf" "main" 1654587621
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labi1200.tfm" 1639994445 3592 9415307df98650ffeddaa22e262436dc ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1633082937 3308 eee81981029f67083258db36df06e523 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm" 1633082934 3304 6a543c07045572737981351171e0505e ""
@@ -19,7 +19,7 @@
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati0600.tfm" 1640327872 3528 d301f5141277b5cf2d3e1e47a41a7d24 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati0800.tfm" 1640327870 3528 34d5b03fb0a23b3c8d81225e326c0140 ""
   "/home/user/.texlive/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm" 1639993601 3512 f3a56cfe95a159371df20f73d1eb107d ""
-  "/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex" 1654515249 42679 69922c7c5fc3b3be4eee1aed94e63fea ""
+  "/home/user/Projects/SPBU/Semestr_6/Latex/NirReport/main.tex" 1654587619 43438 1505b13adc13f1f881480a22aa096050 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1650183167 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1650183167 3141 82d5616418ed8d5de703b3951bedecb4 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1650183167 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -170,13 +170,15 @@
   "images//experiment_3_lost1.pdf" 1654491168 6739 b0836b6f6cbb68acd05da456bf591e61 ""
   "images//experiment_3_lost2.pdf" 1654491168 6091 dea9348075b8bdd6bcb438f77efabe7b ""
   "images//experiment_3_lost3.pdf" 1654491410 4890 83eacd8a0476aa2dd0191a735f859dab ""
+  "images//experiment_3_mssa1.pdf" 1654562756 8702 3ecc8e24645e7a43d29992b139f2ed6b ""
+  "images//experiment_3_mssa2.pdf" 1654562790 8704 b7ad9b62cc6e57438d14a530b9349af7 ""
   "images//experiment_3_secondpart1.pdf" 1654487141 4676 f73974077fc245ab78315156d2476ab9 ""
   "images//experiment_3_secondpart2.pdf" 1654487124 4667 7fbb0854891b10bfda6388d827c85c64 ""
-  "main.aux" 1654515250 11970 4bb9e5b53ff6349d892d6ad2e386f63a "pdflatex"
-  "main.bbl" 1654515046 813 137a864c7aae1d74bee55e80fc654cd6 "bibtex main"
-  "main.out" 1654515250 3001 bdaca88265fb473d47c6b9780c8672e1 "pdflatex"
-  "main.tex" 1654515249 42679 69922c7c5fc3b3be4eee1aed94e63fea ""
-  "main.toc" 1654515250 3381 e63a80f80d6cb9fff23653ea3366e2a4 "pdflatex"
+  "main.aux" 1654587620 13726 5fd6bd71f2fd5d2195c7d93f7871d41f "pdflatex"
+  "main.bbl" 1654587440 1036 6a7d9e813755b7096c3d19328f6d4e73 "bibtex main"
+  "main.out" 1654587620 3001 d659338e3cbe11ba0ba69fa96b26485c "pdflatex"
+  "main.tex" 1654587619 43438 1505b13adc13f1f881480a22aa096050 ""
+  "main.toc" 1654587620 3795 d1beb5331a114e7421c0a3df3aeb9d95 "pdflatex"
   "spbureport.rtx" 1639992843 1608 621c9633cb9ae1ccc5a8a0005b5dae3c ""
   (generated)
   "main.aux"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.27)  6 JUN 2022 14:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.27)  7 JUN 2022 10:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -737,18 +737,18 @@ Package hyperref Warning: Glyph not defined in PU encoding,
 <images//experiment_1_cos.pdf, id=125, 505.89pt x 505.89pt>
 File: images//experiment_1_cos.pdf Graphic file (type pdf)
 <use images//experiment_1_cos.pdf>
-Package pdftex.def Info: images//experiment_1_cos.pdf  used on input line 220.
+Package pdftex.def Info: images//experiment_1_cos.pdf  used on input line 221.
 (pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
  [8 <./images//experiment_1_cos.pdf>]
 <images//experiment_1_exp.pdf, id=158, 505.89pt x 505.89pt>
 File: images//experiment_1_exp.pdf Graphic file (type pdf)
 <use images//experiment_1_exp.pdf>
-Package pdftex.def Info: images//experiment_1_exp.pdf  used on input line 236.
+Package pdftex.def Info: images//experiment_1_exp.pdf  used on input line 237.
 (pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
 <images//experiment_1_expcos1.pdf, id=160, 505.89pt x 505.89pt>
 File: images//experiment_1_expcos1.pdf Graphic file (type pdf)
 <use images//experiment_1_expcos1.pdf>
-Package pdftex.def Info: images//experiment_1_expcos1.pdf  used on input line 252.
+Package pdftex.def Info: images//experiment_1_expcos1.pdf  used on input line 253.
 (pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
 
 
@@ -758,137 +758,155 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <images//experiment_1_expcos2.pdf, id=192, 505.89pt x 505.89pt>
 File: images//experiment_1_expcos2.pdf Graphic file (type pdf)
 <use images//experiment_1_expcos2.pdf>
-Package pdftex.def Info: images//experiment_1_expcos2.pdf  used on input line 268.
+Package pdftex.def Info: images//experiment_1_expcos2.pdf  used on input line 269.
 (pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [10 <./images//experiment_1_expcos1.pdf>] [11 <./images//experiment_1_expcos2.pdf>]
-<images//experiment_2_cos1.pdf, id=249, 505.89pt x 505.89pt>
+<images//experiment_2_cos1.pdf, id=251, 505.89pt x 505.89pt>
 File: images//experiment_2_cos1.pdf Graphic file (type pdf)
 <use images//experiment_2_cos1.pdf>
-Package pdftex.def Info: images//experiment_2_cos1.pdf  used on input line 302.
+Package pdftex.def Info: images//experiment_2_cos1.pdf  used on input line 303.
 (pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
-<images//experiment_2_cos2.pdf, id=250, 505.89pt x 505.89pt>
+<images//experiment_2_cos2.pdf, id=252, 505.89pt x 505.89pt>
 File: images//experiment_2_cos2.pdf Graphic file (type pdf)
 <use images//experiment_2_cos2.pdf>
-Package pdftex.def Info: images//experiment_2_cos2.pdf  used on input line 308.
+Package pdftex.def Info: images//experiment_2_cos2.pdf  used on input line 309.
 (pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
-<images//experiment_2_exp1.pdf, id=253, 505.89pt x 505.89pt>
+<images//experiment_2_exp1.pdf, id=255, 505.89pt x 505.89pt>
 File: images//experiment_2_exp1.pdf Graphic file (type pdf)
 <use images//experiment_2_exp1.pdf>
-Package pdftex.def Info: images//experiment_2_exp1.pdf  used on input line 326.
+Package pdftex.def Info: images//experiment_2_exp1.pdf  used on input line 327.
 (pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
-<images//experiment_2_exp2.pdf, id=254, 505.89pt x 505.89pt>
+<images//experiment_2_exp2.pdf, id=256, 505.89pt x 505.89pt>
 File: images//experiment_2_exp2.pdf Graphic file (type pdf)
 <use images//experiment_2_exp2.pdf>
-Package pdftex.def Info: images//experiment_2_exp2.pdf  used on input line 332.
+Package pdftex.def Info: images//experiment_2_exp2.pdf  used on input line 333.
 (pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [12 <./images//experiment_2_cos1.pdf> <./images//experiment_2_cos2.pdf>]
-<images//experiment_3_expline.pdf, id=280, 505.89pt x 505.89pt>
+<images//experiment_3_expline.pdf, id=282, 505.89pt x 505.89pt>
 File: images//experiment_3_expline.pdf Graphic file (type pdf)
 <use images//experiment_3_expline.pdf>
-Package pdftex.def Info: images//experiment_3_expline.pdf  used on input line 349.
+Package pdftex.def Info: images//experiment_3_expline.pdf  used on input line 350.
 (pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images//experiment_3_linefirstcomp.pdf, id=282, 505.89pt x 505.89pt>
+<images//experiment_3_linefirstcomp.pdf, id=284, 505.89pt x 505.89pt>
 File: images//experiment_3_linefirstcomp.pdf Graphic file (type pdf)
 <use images//experiment_3_linefirstcomp.pdf>
-Package pdftex.def Info: images//experiment_3_linefirstcomp.pdf  used on input line 361.
+Package pdftex.def Info: images//experiment_3_linefirstcomp.pdf  used on input line 362.
 (pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images//experiment_3_secondpart1.pdf, id=284, 505.89pt x 505.89pt>
+<images//experiment_3_secondpart1.pdf, id=286, 505.89pt x 505.89pt>
 File: images//experiment_3_secondpart1.pdf Graphic file (type pdf)
 <use images//experiment_3_secondpart1.pdf>
-Package pdftex.def Info: images//experiment_3_secondpart1.pdf  used on input line 377.
+Package pdftex.def Info: images//experiment_3_secondpart1.pdf  used on input line 378.
 (pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
-<images//experiment_3_secondpart2.pdf, id=285, 505.89pt x 505.89pt>
+<images//experiment_3_secondpart2.pdf, id=287, 505.89pt x 505.89pt>
 File: images//experiment_3_secondpart2.pdf Graphic file (type pdf)
 <use images//experiment_3_secondpart2.pdf>
-Package pdftex.def Info: images//experiment_3_secondpart2.pdf  used on input line 383.
+Package pdftex.def Info: images//experiment_3_secondpart2.pdf  used on input line 384.
 (pdftex.def)             Requested size: 217.66211pt x 217.66739pt.
 [13 <./images//experiment_2_exp1.pdf> <./images//experiment_2_exp2.pdf>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [14 <./images//experiment_3_expline.pdf>]
-<images//experiment_3_lost1.pdf, id=321, 505.89pt x 505.89pt>
+<images//experiment_3_lost1.pdf, id=323, 505.89pt x 505.89pt>
 File: images//experiment_3_lost1.pdf Graphic file (type pdf)
 <use images//experiment_3_lost1.pdf>
-Package pdftex.def Info: images//experiment_3_lost1.pdf  used on input line 409.
+Package pdftex.def Info: images//experiment_3_lost1.pdf  used on input line 412.
 (pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images//experiment_3_lost2.pdf, id=322, 505.89pt x 505.89pt>
+<images//experiment_3_lost2.pdf, id=324, 505.89pt x 505.89pt>
 File: images//experiment_3_lost2.pdf Graphic file (type pdf)
 <use images//experiment_3_lost2.pdf>
-Package pdftex.def Info: images//experiment_3_lost2.pdf  used on input line 416.
+Package pdftex.def Info: images//experiment_3_lost2.pdf  used on input line 419.
 (pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images//experiment_3_lost3.pdf, id=325, 505.89pt x 505.89pt>
+<images//experiment_3_lost3.pdf, id=327, 505.89pt x 505.89pt>
 File: images//experiment_3_lost3.pdf Graphic file (type pdf)
 <use images//experiment_3_lost3.pdf>
-Package pdftex.def Info: images//experiment_3_lost3.pdf  used on input line 425.
+Package pdftex.def Info: images//experiment_3_lost3.pdf  used on input line 428.
 (pdftex.def)             Requested size: 386.95897pt x 386.96597pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[15 <./images//experiment_3_linefirstcomp.pdf>] [16 <./images//experiment_3_secondpart1.pdf> <./images//experiment_3_secondpart2.pdf> <./images//experiment_3_lost1.pdf>] [17 <./images//experiment_3_lost2.pdf>] [18 <./images//experiment_3_lost3.pdf>]
+[15 <./images//experiment_3_linefirstcomp.pdf>]
+<images//experiment_3_mssa2.pdf, id=341, 505.89pt x 505.89pt>
+File: images//experiment_3_mssa2.pdf Graphic file (type pdf)
+<use images//experiment_3_mssa2.pdf>
+Package pdftex.def Info: images//experiment_3_mssa2.pdf  used on input line 442.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images//experiment_3_mssa1.pdf, id=342, 505.89pt x 505.89pt>
+File: images//experiment_3_mssa1.pdf Graphic file (type pdf)
+<use images//experiment_3_mssa1.pdf>
+Package pdftex.def Info: images//experiment_3_mssa1.pdf  used on input line 449.
+(pdftex.def)             Requested size: 386.96597pt x 312.9847pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16 <./images//experiment_3_secondpart1.pdf> <./images//experiment_3_secondpart2.pdf>] [17 <./images//experiment_3_lost1.pdf>] [18 <./images//experiment_3_lost2.pdf>] [19 <./images//experiment_3_lost3.pdf>] [20 <./images//experiment_3_mssa2.pdf>] [21 <./images//experiment_3_mssa1.pdf>]
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\CYRZ' on input line 474.
-
-
-Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyra' on input line 474.
-
-
-Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrk' on input line 474.
-
-
-Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrl' on input line 474.
-
-
-Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyryu' on input line 474.
-
-
-Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrch' on input line 474.
+(hyperref)                removing `\CYRZ' on input line 468.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 474.
+(hyperref)                removing `\cyra' on input line 468.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyrn' on input line 474.
+(hyperref)                removing `\cyrk' on input line 468.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyri' on input line 474.
+(hyperref)                removing `\cyrl' on input line 468.
 
 
 Package hyperref Warning: Glyph not defined in PU encoding,
-(hyperref)                removing `\cyre' on input line 474.
+(hyperref)                removing `\cyryu' on input line 468.
 
-(./main.bbl [19
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrch' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyre' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyrn' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyri' on input line 468.
+
+
+Package hyperref Warning: Glyph not defined in PU encoding,
+(hyperref)                removing `\cyre' on input line 468.
+
+(./main.bbl [22
 
 ]
 
@@ -955,25 +973,25 @@ Package hyperref Warning: Glyph not defined in PU encoding,
 Package hyperref Warning: Glyph not defined in PU encoding,
 (hyperref)                removing `\cyrery' on input line 1.
 
-) [20
+) [23
 
 ] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BDACA88265FB473D47C6B9780C8672E1;3001.
+(rerunfilecheck)             Checksum: D659338E3CBE11BA0BA69FA96B26485C;3001.
  ) 
 Here is how much of TeX's memory you used:
- 13705 strings out of 478238
- 222443 string characters out of 5850456
- 510956 words of memory out of 5000000
- 31610 multiletter control sequences out of 15000+600000
+ 13732 strings out of 478238
+ 223181 string characters out of 5850456
+ 512477 words of memory out of 5000000
+ 31627 multiletter control sequences out of 15000+600000
  490225 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,77p,1205b,444s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on main.pdf (20 pages, 428884 bytes).
+Output written on main.pdf (23 pages, 448933 bytes).
 PDF statistics:
- 495 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
- 60 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 559 PDF objects out of 1000 (max. 8388607)
+ 462 compressed objects within 5 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 198 words of extra memory for PDF output out of 10000 (max. 10000000)
 
